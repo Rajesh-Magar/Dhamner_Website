@@ -18,7 +18,7 @@ export default function Population() {
 
     
     <p className="max-w-4xl mx-auto text-sm md:text-lg mb-12">
-      धामणेर गावाची एकूण लोकसंख्या २६५० आहे. ज्यामध्ये १२९७ पुरुष आणि १३५३ महिला आहेत.
+      धामणेर गावाची एकूण लोकसंख्या २७२२ आहे. ज्यामध्ये १४०७ पुरुष आणि १३१५ महिला आहेत.
       
     </p>
 
@@ -27,17 +27,17 @@ export default function Population() {
 
       
       <div className="bg-white/10 backdrop-blur-md p-8 rounded-lg border border-white/20">
-        <h3 className="text-4xl font-bold">2650+</h3>
+        <h3 className="text-4xl font-bold">२७२२+</h3>
         <p className="mt-2 text-lg">एकूण लोकसंख्या</p>
       </div>
 
       <div className="bg-white/10 backdrop-blur-md p-8 rounded-lg border border-white/20">
-        <h3 className="text-4xl font-bold">1297+</h3>
+        <h3 className="text-4xl font-bold">१४०७+</h3>
         <p className="mt-2 text-lg">पुरुष</p>
       </div>
 
       <div className="bg-white/10 backdrop-blur-md p-8 rounded-lg border border-white/20">
-        <h3 className="text-4xl font-bold">1353+</h3>
+        <h3 className="text-4xl font-bold">१३१५+</h3>
         <p className="mt-2 text-lg">महिला</p>
       </div>
 

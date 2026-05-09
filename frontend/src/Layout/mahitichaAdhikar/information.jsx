@@ -9,13 +9,17 @@ pdfjs.GlobalWorkerOptions.workerSrc = worker;
 
 const Information = () => {
 
-  // 🔷 PDF 1 (dhamner.pdf)
+  // 🔷 PDF 1
   const [numPages1, setNumPages1] = useState(0);
   const [pageNumber1, setPageNumber1] = useState(1);
 
-  // 🔷 PDF 2 (जमा खर्च)
+  // 🔷 PDF 2
   const [numPages2, setNumPages2] = useState(0);
   const [pageNumber2, setPageNumber2] = useState(1);
+
+  // 🔷 PDF 3 (NEW PDF)
+  const [numPages3, setNumPages3] = useState(0);
+  const [pageNumber3, setPageNumber3] = useState(1);
 
   const [pdfWidth, setPdfWidth] = useState(600);
   const [imgScale, setImgScale] = useState(1);
@@ -34,6 +38,7 @@ const Information = () => {
 
     updateWidth();
     window.addEventListener("resize", updateWidth);
+
     return () => window.removeEventListener("resize", updateWidth);
   }, []);
 
@@ -44,6 +49,10 @@ const Information = () => {
   // 🔷 PDF 2 controls
   const goPrev2 = () => setPageNumber2((p) => Math.max(p - 1, 1));
   const goNext2 = () => setPageNumber2((p) => Math.min(p + 1, numPages2));
+
+  // 🔷 PDF 3 controls
+  const goPrev3 = () => setPageNumber3((p) => Math.max(p - 1, 1));
+  const goNext3 = () => setPageNumber3((p) => Math.min(p + 1, numPages3));
 
   return (
     <div className="w-full min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 flex flex-col items-center py-6 px-3">
@@ -126,6 +135,45 @@ const Information = () => {
         </div>
       </div>
 
+      {/* 🔷 NEW PDF TITLE */}
+      <h1 className="text-lg sm:text-2xl md:text-3xl font-bold mb-6 text-green-700 text-center mt-10">
+        GP माहिती पत्रक
+      </h1>
+
+      {/* 🔷 NEW PDF */}
+      <div className="w-full flex flex-col items-center">
+        <div className="bg-white rounded-xl shadow-2xl p-2 sm:p-4">
+          <Document
+            file="/Pdfs/GP mahiti patrak.pdf"
+            onLoadSuccess={({ numPages }) => setNumPages3(numPages)}
+          >
+            <Page pageNumber={pageNumber3} width={pdfWidth} />
+          </Document>
+        </div>
+
+        <div className="flex items-center justify-center gap-6 mt-4">
+          <button
+            onClick={goPrev3}
+            disabled={pageNumber3 <= 1}
+            className="px-4 py-2 bg-gray-700 text-white rounded-lg disabled:opacity-40"
+          >
+            ⬅ Prev
+          </button>
+
+          <div className="px-4 py-2 bg-white rounded-lg shadow font-semibold text-sm">
+            Page {pageNumber3} / {numPages3 || "--"}
+          </div>
+
+          <button
+            onClick={goNext3}
+            disabled={pageNumber3 >= numPages3}
+            className="px-4 py-2 bg-gray-700 text-white rounded-lg disabled:opacity-40"
+          >
+            Next ➡
+          </button>
+        </div>
+      </div>
+
       {/* 🔷 IMAGE */}
       <h2 className="text-lg sm:text-2xl font-bold mt-10 mb-4 text-green-700 text-center">
         १५ वित्त आयोग जमा खर्च
@@ -140,7 +188,7 @@ const Information = () => {
         />
       </div>
 
-      {/* IMAGE CONTROLS */}
+      {/* 🔷 IMAGE CONTROLS */}
       <div className="flex items-center gap-4 mt-4">
         <button
           onClick={() => setImgScale((prev) => Math.max(prev - 0.2, 0.6))}
@@ -156,6 +204,7 @@ const Information = () => {
           +
         </button>
       </div>
+
     </div>
   );
 };
