@@ -22,6 +22,19 @@ const galleryData = {
     "/gallery/GramSabha/1758123139446.jpg.jpeg",
     " /gallery/GramSabha/1758123139453.jpg.jpeg",
   ],
+  AI_Lab:[
+    "/gallery/AiLab/61ea6974-d6ea-4196-9c32-e90397712c80.jpg",
+    "/gallery/AiLab/91dc6a14-c6c8-4b8a-9535-43caedf9e6ce.jpg",
+    "/gallery/AiLab/0830d196-9224-48ea-b3f0-53861510456b.jpg",
+    "/gallery/AiLab/914a199e-e84c-438d-92b0-4716bd9b3528.jpg",
+    "/gallery/AiLab/1052c72b-feb7-4830-916d-4cfc7106a0f4.jpg",
+    "/gallery/AiLab/be1e893a-c767-493a-8d44-7324bd83f55e.jpg",
+    "/gallery/AiLab/c43637f0-f409-46dd-ae52-0d4300a3f80a.jpg",
+    "/gallery/AiLab/cb11436f-1e2b-44d6-b3ad-27a57b70d618.jpg",
+    "/gallery/AiLab/d15a405a-614f-4c04-bd1a-0d58b72a8381.jpg",
+    "/gallery/AiLab/d6301155-d92e-45a9-ace7-c78f9235effc.jpg",
+    "/gallery/AiLab/ed13d09d-9367-4770-9cda-d619283c69b4.jpg",
+  ],
   आरोग्यशिबीर: [
     "/gallery/tapasani/1.jpeg",
     "/gallery/tapasani/WhatsApp .jpeg",
@@ -131,6 +144,10 @@ const galleryData = {
   "/gallery/audioSys/WhatsApp Image 2026-03-21 at 5.48.09 PM.jpeg",
   "/gallery/audioSys/WhatsApp Image 2026-03-21 at 5.48.10 PM.jpeg",
   "/gallery/audioSys/WhatsApp Image 2026-03-21 at 5.48.13 PM.jpeg",
+ ],
+ वनराई_बंधारे :[
+"/gallery/vanrai/d794094a-256c-4f26-aaa9-ea6dabbffce3.jpg",
+"/gallery/vanrai/f87cace9-fc65-43da-b895-799a3c19d9f0.jpg",
  ]
 };
 

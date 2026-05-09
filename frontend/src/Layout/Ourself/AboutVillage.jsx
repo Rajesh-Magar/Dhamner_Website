@@ -36,6 +36,10 @@ export default function AboutVillage() {
           धडपड यामुळे हे गाव इतर गावांसाठी प्रेरणादायी ठरत आहे.
         </p>
 
+                <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-green-700 mb-6 text-center">
+          पूर्ण झालेली कामे 
+        </h2>
+
         {/* Section 2 */}
         <h3 className="text-lg sm:text-xl md:text-2xl font-semibold mb-3 sm:mb-4">
           पायाभूत सुविधा: विकासाचा भक्कम आधार
@@ -269,6 +273,22 @@ export default function AboutVillage() {
             क्षेत्रात संधी मिळते.
           </li>
         </ul>
+
+         <br />
+
+    <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-green-700 mb-6 text-center">
+          सुरू असलेली कामे 
+     </h2>
+
+        <ul className="list-disc pl-5 sm:pl-6 space-y-3 sm:space-y-4 text-gray-700 leading-7 text-sm sm:text-base md:text-lg">
+          <li>
+            <strong> वॉर्ड क्रमांक 3 मध्ये गटर बांधकाम काम सुरू </strong>
+          </li>
+          <li>
+            <strong>बेघर वसाहत मध्ये पाण्याची टाकी बांधणे काम सुरू </strong>
+          </li>
+        </ul>
+
       </div>
     </div>
   );
