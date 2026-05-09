@@ -137,7 +137,7 @@ const Information = () => {
 
       {/* 🔷 NEW PDF TITLE */}
       <h1 className="text-lg sm:text-2xl md:text-3xl font-bold mb-6 text-green-700 text-center mt-10">
-        GP माहिती पत्रक
+        ग्रामपंचायती विषयी सर्वसाधरण माहिती 
       </h1>
 
       {/* 🔷 NEW PDF */}
