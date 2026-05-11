@@ -88,6 +88,7 @@ export default function Navbar() {
       ],
     },
 
+   { name: "GIS पोर्टल ", link: "https://gis.grampanchayatdhamner.in/admin/login" },
     { name: "नकाशा", link: "/map" },
     { name: " माहितीचा अधिकार  ", link: "/information" },
     { name: "संपर्क ", link: "/help" },
