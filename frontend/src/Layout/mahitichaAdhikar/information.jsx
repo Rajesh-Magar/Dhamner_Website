@@ -57,6 +57,45 @@ const Information = () => {
   return (
     <div className="w-full min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 flex flex-col items-center py-6 px-3">
 
+        {/* 🔷 PDF 1 TITLE */}
+      <h1 className="text-lg sm:text-2xl md:text-3xl font-bold mb-6 text-green-700 text-center mt-10">
+        RTI4(1) ख 1ते 17मुद्दे माहिती
+      </h1>
+
+      {/* 🔷 PDF 1 */}
+      <div className="w-full flex flex-col items-center">
+        <div className="bg-white rounded-xl shadow-2xl p-2 sm:p-4">
+          <Document
+            file="/Pdfs/Pg माहितीचा अधिकार1 ते 17.pdf"
+            onLoadSuccess={({ numPages }) => setNumPages2(numPages)}
+          >
+            <Page pageNumber={pageNumber2} width={pdfWidth} />
+          </Document>
+        </div>
+
+        <div className="flex items-center justify-center gap-6 mt-4">
+          <button
+            onClick={goPrev2}
+            disabled={pageNumber2 <= 1}
+            className="px-4 py-2 bg-gray-700 text-white rounded-lg disabled:opacity-40"
+          >
+            ⬅ Prev
+          </button>
+
+          <div className="px-4 py-2 bg-white rounded-lg shadow font-semibold text-sm">
+            Page {pageNumber2} / {numPages2 || "--"}
+          </div>
+
+          <button
+            onClick={goNext2}
+            disabled={pageNumber2 >= numPages2}
+            className="px-4 py-2 bg-gray-700 text-white rounded-lg disabled:opacity-40"
+          >
+            Next ➡
+          </button>
+        </div>
+      </div>
+
 
       {/* 🔷 PDF 2 TITLE */}
       <h1 className="text-lg sm:text-2xl md:text-3xl font-bold mb-6 text-green-700 text-center mt-10">
@@ -97,12 +136,12 @@ const Information = () => {
         </div>
       </div>
 
-      {/* 🔷 PDF 2 TITLE */}
+      {/* 🔷 PDF 3 TITLE */}
       <h1 className="text-lg sm:text-2xl md:text-3xl font-bold mb-6 text-green-700 text-center mt-10">
         जमा खर्च सन २०२४/२५
       </h1>
 
-      {/* 🔷 PDF 2 */}
+      {/* 🔷 PDF 3 */}
       <div className="w-full flex flex-col items-center">
         <div className="bg-white rounded-xl shadow-2xl p-2 sm:p-4">
           <Document
