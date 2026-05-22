@@ -44,6 +44,15 @@ import Health from "./Layout/Division/health.jsx";
 import Yashogatha from "./Layout/Ourself/yashogatha.jsx";
 import MahitichaAdhikar from "./Layout/mahitichaAdhikar/information.jsx";
 
+// ✅ New Framework Modules
+import DashboardPage from "./Layout/Dashboard/DashboardPage.jsx";
+import ProjectsPage from "./Layout/Projects/ProjectsPage.jsx";
+import AnnouncementsPage from "./Layout/Announcements/AnnouncementsPage.jsx";
+import BudgetPage from "./Layout/Budget/BudgetPage.jsx";
+import EmploymentPage from "./Layout/Employment/EmploymentPage.jsx";
+import EducationPage from "./Layout/Education/EducationPage.jsx";
+import EnvironmentPage from "./Layout/Environment/EnvironmentPage.jsx";
+
 import { Routes, Route } from "react-router-dom";
 
 function App() {
@@ -100,6 +109,15 @@ function App() {
         <Route path='/health' element={<Health />} />
         <Route path='/yashogatha' element={<Yashogatha />} />
         <Route path='/information' element={<MahitichaAdhikar />} />
+
+        {/* ✅ New Framework Module Routes */}
+        <Route path='/dashboard' element={<DashboardPage />} />
+        <Route path='/projects' element={<ProjectsPage />} />
+        <Route path='/announcements' element={<AnnouncementsPage />} />
+        <Route path='/budget' element={<BudgetPage />} />
+        <Route path='/employment' element={<EmploymentPage />} />
+        <Route path='/education' element={<EducationPage />} />
+        <Route path='/environment' element={<EnvironmentPage />} />
       </Routes>
 
       <Footer />

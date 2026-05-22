@@ -1,7 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useLang } from "../context/LanguageContext";
 
 export default function Footer() {
+  const { lang, t } = useLang();
+
   return (
     <footer className="relative bg-gradient-to-b from-green-800 to-green-950 text-white pt-16 pb-10 overflow-hidden">
       
@@ -13,66 +16,71 @@ export default function Footer() {
       />
 
       <div className="max-w-7xl mx-auto grid md:grid-cols-4 gap-10 px-6 relative z-10">
-        
+
         {/* Important Links */}
         <div>
-          <h3 className="text-xl font-bold mb-4 font-devanagari">महत्वाच्या लिंक</h3>
+          <h3 className="text-xl font-bold mb-4 font-devanagari">{t.importantLinks}</h3>
           <div className="w-10 h-1 bg-amber-500 mb-6 rounded-full"></div>
 
           <ul className="space-y-3 font-devanagari text-sm">
-            <li><Link to="/about" className="hover:underline hover:text-amber-300 transition-colors">आमच्याबद्दल</Link></li>
-            <li><Link to="/officers" className="hover:underline hover:text-amber-300 transition-colors">अधिकारी/पदाधिकारी</Link></li>
-            <li><Link to="/gallery" className="hover:underline hover:text-amber-300 transition-colors">फोटो गॅलरी</Link></li>
+            <li><Link to="/about" className="hover:underline hover:text-amber-300 transition-colors">{t.aboutVillage}</Link></li>
+            <li><Link to="/officers" className="hover:underline hover:text-amber-300 transition-colors">{t.officers}</Link></li>
+            <li><Link to="/gallery" className="hover:underline hover:text-amber-300 transition-colors">{t.photoGallery}</Link></li>
+            <li><Link to="/dashboard" className="hover:underline hover:text-amber-300 transition-colors">{t.dashboard}</Link></li>
+            <li><Link to="/projects" className="hover:underline hover:text-amber-300 transition-colors">{t.projects}</Link></li>
+            <li><Link to="/budget" className="hover:underline hover:text-amber-300 transition-colors">{t.budget}</Link></li>
           </ul>
         </div>
 
         {/* Certificates */}
         <div>
-          <h3 className="text-xl font-bold mb-4 font-devanagari">दाखले</h3>
+          <h3 className="text-xl font-bold mb-4 font-devanagari">{t.documents}</h3>
           <div className="w-10 h-1 bg-amber-500 mb-6 rounded-full"></div>
 
           <ul className="space-y-3 font-devanagari text-sm">
-            <li><Link to="/birth" className="hover:underline hover:text-amber-300 transition-colors">जन्म प्रमाणपत्र</Link></li>
-            <li><Link to="/death" className="hover:underline hover:text-amber-300 transition-colors">मृत्यु प्रमाणपत्र</Link></li>
-            <li><Link to="/marriage" className="hover:underline hover:text-amber-300 transition-colors">विवाह प्रमाणपत्र</Link></li>
-            <li><Link to="/business" className="hover:underline hover:text-amber-300 transition-colors">व्यवसाय परवाना</Link></li>
-            <li><Link to="/property" className="hover:underline hover:text-amber-300 transition-colors">मालमत्ता प्रमाणपत्र</Link></li>
-            <li><Link to="/construction" className="hover:underline hover:text-amber-300 transition-colors">बांधकाम परवानगी</Link></li>
+            <li><Link to="/birth" className="hover:underline hover:text-amber-300 transition-colors">{t.birthCert}</Link></li>
+            <li><Link to="/death" className="hover:underline hover:text-amber-300 transition-colors">{t.deathCert}</Link></li>
+            <li><Link to="/marriage" className="hover:underline hover:text-amber-300 transition-colors">{t.marriageCert}</Link></li>
+            <li><Link to="/business" className="hover:underline hover:text-amber-300 transition-colors">{t.businessCert}</Link></li>
+            <li><Link to="/property" className="hover:underline hover:text-amber-300 transition-colors">{t.propertyCert}</Link></li>
+            <li><Link to="/construction" className="hover:underline hover:text-amber-300 transition-colors">{t.buildingPerm}</Link></li>
           </ul>
         </div>
 
         {/* Services */}
         <div>
-          <h3 className="text-xl font-bold mb-4 font-devanagari">सोई सुविधा</h3>
+          <h3 className="text-xl font-bold mb-4 font-devanagari">{t.services}</h3>
           <div className="w-10 h-1 bg-amber-500 mb-6 rounded-full"></div>
 
           <ul className="space-y-3 font-devanagari text-sm">
-            <li><Link to="/tax" className="hover:underline hover:text-amber-300 transition-colors">कर भरणा</Link></li>
-            <li><Link to="/self" className="hover:underline hover:text-amber-300 transition-colors">स्वयंघोषणापत्रे</Link></li>
-            <li><Link to="/links" className="hover:underline hover:text-amber-300 transition-colors">जनसुविधा महत्वाच्या लिंक</Link></li>
-            <li><Link to="/complaint" className="hover:underline hover:text-amber-300 transition-colors">तक्रार विभाग</Link></li>
+            <li><Link to="/tax" className="hover:underline hover:text-amber-300 transition-colors">{t.tax}</Link></li>
+            <li><Link to="/self" className="hover:underline hover:text-amber-300 transition-colors">{t.selfDeclaration}</Link></li>
+            <li><Link to="/links" className="hover:underline hover:text-amber-300 transition-colors">{t.importantLinks}</Link></li>
+            <li><Link to="/complaint" className="hover:underline hover:text-amber-300 transition-colors">{t.complaint}</Link></li>
+            <li><Link to="/employment" className="hover:underline hover:text-amber-300 transition-colors">{t.employment}</Link></li>
+            <li><Link to="/environment" className="hover:underline hover:text-amber-300 transition-colors">{t.environment}</Link></li>
           </ul>
         </div>
 
         {/* Contact */}
         <div>
-          <h3 className="text-xl font-bold mb-4 font-devanagari">संपर्क</h3>
+          <h3 className="text-xl font-bold mb-4 font-devanagari">{t.contact}</h3>
           <div className="w-10 h-1 bg-amber-500 mb-6 rounded-full"></div>
 
           <div className="space-y-4 text-sm font-devanagari text-green-100">
             <div>
-              <p className="font-bold text-white text-base">दूरध्वनी (ग्रामपंचायत)</p>
-              <p className="mt-1">+91 9850032987</p>
+              <p className="font-bold text-white text-base">{t.phone}</p>
+              <p className="mt-1 font-medium">+91 9850032987</p>
             </div>
 
             <div>
-              <p className="font-bold text-white text-base">ईमेल</p>
-              <p className="mt-1">dhamner189585@gmail.com</p>
+              <p className="font-bold text-white text-base">{t.email}</p>
+              <p className="mt-1 font-medium text-amber-300">dhamner189585@gmail.com</p>
             </div>
 
             <div>
-              <p className="font-bold text-white text-base">पत्ता</p>
-              <p className="mt-1">धामणेर ता. कोरेगाव , जि. सातारा</p>
+              <p className="font-bold text-white text-base">{lang === "en" ? "Address" : "पत्ता"}</p>
+              <p className="mt-1">{lang === "en" ? "Dhamner, Tal. Koregaon, Dist. Satara" : "धामणेर ता. कोरेगाव , जि. सातारा"}</p>
             </div>
           </div>
         </div>
@@ -108,9 +116,9 @@ export default function Footer() {
           </div>
 
           <div className="text-left font-devanagari">
-            <p className="font-bold text-xl text-amber-500">यशवंत ग्रामपंचायत</p>
-            <p className="font-bold text-xl text-white">धामणेर</p>
-            <p className="text-xs text-green-200 mt-1">ता. कोरेगाव, जि. सातारा</p>
+            <p className="font-bold text-xl text-amber-500">{lang === "en" ? "Yeshwant Grampanchayat" : "यशवंत ग्रामपंचायत"}</p>
+            <p className="font-bold text-xl text-white">{lang === "en" ? "Dhamner" : "धामणेर"}</p>
+            <p className="text-xs text-green-200 mt-1">{lang === "en" ? "Tal. Koregaon, Dist. Satara" : "ता. कोरेगाव, जि. सातारा"}</p>
           </div>
         </div>
       </div>

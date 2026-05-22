@@ -1,47 +1,45 @@
 import { BookOpen, Dumbbell, Trophy, Leaf, Building2, Library } from "lucide-react";
+import { useLang } from "../../context/LanguageContext";
+
+const content = {
+  mr: {
+    heading: "लोकसहभागातून समृद्धीकडे",
+    sub: "धामणेर - एक छोटंसं, तरीही स्वप्नांनी भारलेलं गाव. कधी काळी या गावाने पाण्यासाठी वनवण केली, अंधारात रात्र काढली, धुळकट रस्त्यांवर पायवाटा शोधल्या आणि मुलांना मोडकळलेल्या शाळांमध्ये शिक्षणाचं भविष्य शोधताना पाहिलं. पण हीच धामणेर आज \"कात टाकतेय.\"",
+    facilities: [
+      { icon: Trophy, title: "हिराजी अप्पाजी धामणेकर क्रीडांगण", desc: "सार्वजनिक कार्यक्रमांचे स्टेज व खेळांचे मैदान" },
+      { icon: Library, title: "जागृती वाचनालय धामणेर", desc: "कादंबरी व मासिके, सर्व वर्तमानपत्रे" },
+      { icon: BookOpen, title: "कै. इंदुमती पवार गुणवत्ता विकास वर्ग", desc: "एम. पी. एस. सी. व यू. पी. एस. सी. अभ्यासासाठी लागणारी सर्व पुस्तके" },
+      { icon: Dumbbell, title: "व्यायाम शाळा धामणेर", desc: "व्यायामाचे सर्व साहित्य आहे" },
+      { icon: Building2, title: "रमनलाल वाडीलाल शाह बालउद्यान", desc: "घसरगुंडी, झोपाळा" },
+      { icon: Leaf, title: "मारुती नाना-नानी पार्क धामणेर", desc: "ज्येष्ठ नागरिक आणि चिमुकल्यांसाठी गावामध्ये विकसित केलेले हे नाना-नानी पार्क म्हणजे विरंगुळ्याचे एक सुंदर ठिकाण आहे." },
+    ],
+  },
+  en: {
+    heading: "Towards Prosperity Through Public Participation",
+    sub: "Dhamner — a small village, yet filled with dreams. Once this village wandered for water, spent nights in darkness, searched for paths on dusty roads, and watched children look for the future of education in crumbling schools. But this very Dhamner is now \"reinventing itself.\"",
+    facilities: [
+      { icon: Trophy, title: "Hiraji Appaji Dhamnekar Sports Ground", desc: "Stage for public events and playground for sports" },
+      { icon: Library, title: "Jagruti Reading Room Dhamner", desc: "Novels, magazines and all newspapers" },
+      { icon: BookOpen, title: "Late Indumati Pawar Merit Development Class", desc: "All books required for MPSC and UPSC preparation" },
+      { icon: Dumbbell, title: "Vyayam Shala Dhamner", desc: "All exercise equipment available" },
+      { icon: Building2, title: "Ramanlal Vadilal Shah Children's Garden", desc: "Slides, swings for children" },
+      { icon: Leaf, title: "Maruti Nana-Nani Park Dhamner", desc: "This Nana-Nani Park developed in the village for senior citizens and young children is a beautiful recreational place." },
+    ],
+  },
+};
+
 export default function Progress() {
-    const facilities = [
-  {
-    icon: Trophy,
-    title: "हिराजी अप्पाजी धामणेकर क्रीडांगण",
-    desc: "सार्वजनिक कार्यक्रमांचे स्टेज व खेळांचे मैदान",
-  },
-  {
-    icon: Library,
-    title: "जागृती वाचनालय धामणेर",
-    desc: "कादंबरी व मासिके, सर्व वर्तमानपत्रे",
-  },
-  {
-    icon: BookOpen,
-    title: "कै. इंदुमती पवार गुणवत्ता विकास वर्ग",
-    desc: "एम. पी. एस. सी. व यू. पी. एस. सी. अभ्यासासाठी लागणारी सर्व पुस्तके",
-  },
-  {
-    icon: Dumbbell,
-    title: "व्यायाम शाळा धामणेर",
-    desc: "व्यायामाचे सर्व साहित्य आहे",
-  },
-  {
-    icon: Building2,
-    title: "रमनलाल वाडीलाल शाह बालउद्यान",
-    desc: "घसरगुंडी, झोपाळा",
-  },
-  {
-    icon: Leaf,
-    title: "मारुती नाना-नानी पार्क धामणेर",
-    desc: "ज्येष्ठ नागरिक आणि चिमुकल्यांसाठी गावामध्ये विकसित केलेले हे नाना-नानी पार्क म्हणजे विरंगुळ्याचे एक सुंदर ठिकाण आहे.",
-  },
-];
+  const { lang } = useLang();
+  const c = content[lang];
   return (
-    <>
-        <div className="bg-gray-100 py-16 px-4 md:px-10">
+    <div className="bg-gray-100 py-16 px-4 md:px-10">
       <div className="max-w-7xl mx-auto">
 
         {/* 🔥 Heading Section */}
         <div className="text-center mb-14">
           
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 font-devanagari">
-            लोकसहभागातून समृद्धीकडे
+            {c.heading}
           </h2>
 
           {/* Divider */}
@@ -53,9 +51,7 @@ export default function Progress() {
 
           {/* Paragraph */}
           <p className="text-gray-600 max-w-5xl mx-auto leading-relaxed text-sm md:text-base">
-            धामणेर - एक छोटंसं, तरीही स्वप्नांनी भारलेलं गाव. कधी काळी या गावाने पाण्यासाठी वनवण केली,
-            अंधारात रात्र काढली, धुळकट रस्त्यांवर पायवाटा शोधल्या आणि मुलांना मोडकळलेल्या शाळांमध्ये शिक्षणाचं
-            भविष्य शोधताना पाहिलं. पण हीच धामणेर आज "कात टाकतेय."
+            {c.sub}
           </p>
 
         </div>
@@ -63,7 +59,7 @@ export default function Progress() {
         {/* 🔥 Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
-          {facilities.map((item, index) => {
+          {c.facilities.map((item, index) => {
             const Icon = item.icon;
 
             return (
@@ -96,17 +92,12 @@ export default function Progress() {
                   <p className="text-gray-600 leading-relaxed text-sm">
                     {item.desc}
                   </p>
-
                 </div>
               </div>
             );
           })}
-
         </div>
-
       </div>
-    </div>  
-    </>
+    </div>
   );
 }
-          
