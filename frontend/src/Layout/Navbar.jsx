@@ -117,7 +117,7 @@ export default function Navbar() {
       {/* 🔝 TOP HEADER */}
       <div className="bg-white px-4 lg:px-10 py-3 flex flex-col lg:flex-row justify-between items-center gap-4 border-b border-gray-100">
 
-        <div className="flex items-center gap-2">
+        <Link to="/" className="flex items-center gap-2 hover:opacity-90 transition-opacity">
           <img src="/assets/HD-wallpaper-satyamev-jayate-bharat-civil-service-history-ias-india-indian-ips-lion-emblem-motivation-removebg-preview.png" className="hidden md:block h-[75px] md:h-[85px] w-auto object-contain" alt="Emblem" />
           <img src="/assets/Seal_of_Maharashtra.svg.png" className="hidden md:block h-[45px] md:h-[55px] ml-[-10px]" alt="Seal" />
           <img src="/assets/Gemini_Generated_Image_7qc6v97qc6v97qc6-removebg-preview.png" className="h-[55px] md:h-[65px]" alt="Logo" />
@@ -130,7 +130,7 @@ export default function Navbar() {
               {lang === "mr" ? "ध्यास विकासाचा, वेग प्रगतीचा" : "Pursuit of Development, Speed of Progress"}
             </p>
           </div>
-        </div>
+        </Link>
 
         <div className="hidden lg:flex gap-6 text-gray-700 items-center">
           <div className="flex flex-col gap-1.5 border-r border-gray-200 pr-6 py-0.5">
