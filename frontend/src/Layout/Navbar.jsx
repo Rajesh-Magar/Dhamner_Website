@@ -75,17 +75,23 @@ export default function Navbar() {
         { name: t.propertyTransfer, link: "/transfer" },
       ],
     },
-    { name: t.dashboard, link: "/dashboard" },
-    { name: t.projects, link: "/projects" },
-    { name: t.announcements, link: "/announcements" },
-    { name: t.budget, link: "/budget" },
-    { name: t.employment, link: "/employment" },
-    { name: t.education, link: "/education" },
-    { name: t.environment, link: "/environment" },
     { name: t.gis, link: "https://gis.grampanchayatdhamner.in/admin/login" },
     { name: t.map, link: "/map" },
     { name: t.rti, link: "/information" },
     { name: t.contact, link: "/help" },
+    {
+      name: t.newFeatures,
+      link: "#",
+      dropdown: [
+        { name: t.dashboard, link: "/dashboard" },
+        { name: t.projects, link: "/projects" },
+        { name: t.announcements, link: "/announcements" },
+        { name: t.budget, link: "/budget" },
+        { name: t.employment, link: "/employment" },
+        { name: t.education, link: "/education" },
+        { name: t.environment, link: "/environment" },
+      ],
+    },
   ];
 
   return (
@@ -160,14 +166,20 @@ export default function Navbar() {
         {menuItems.map((item, index) => (
           <div key={index} className="relative group pb-1">
             <div className="flex items-center gap-1 cursor-pointer py-1 px-2 rounded-lg hover:text-green-700 hover:bg-green-50/80 transition-all duration-200">
-              <Link 
-                to={item.link} 
-                className={index === 0 ? "text-green-700 font-extrabold" : ""}
-                target={item.link.startsWith("http") ? "_blank" : undefined}
-                rel={item.link.startsWith("http") ? "noopener noreferrer" : undefined}
-              >
-                {item.name}
-              </Link>
+              {item.link === "#" ? (
+                <span className={index === 0 ? "text-green-700 font-extrabold" : ""}>
+                  {item.name}
+                </span>
+              ) : (
+                <Link 
+                  to={item.link} 
+                  className={index === 0 ? "text-green-700 font-extrabold" : ""}
+                  target={item.link.startsWith("http") ? "_blank" : undefined}
+                  rel={item.link.startsWith("http") ? "noopener noreferrer" : undefined}
+                >
+                  {item.name}
+                </Link>
+              )}
               {item.dropdown && <ChevronDown size={14} className="group-hover:rotate-180 transition-transform duration-200" />}
             </div>
             {item.dropdown && (
@@ -212,15 +224,19 @@ export default function Navbar() {
                   item.dropdown ? setActiveMenu(activeMenu === index ? null : index) : null
                 }
               >
-                <Link 
-                  to={item.link} 
-                  onClick={() => !item.dropdown && setOpen(false)} 
-                  className="text-sm"
-                  target={item.link.startsWith("http") ? "_blank" : undefined}
-                  rel={item.link.startsWith("http") ? "noopener noreferrer" : undefined}
-                >
-                  {item.name}
-                </Link>
+                {item.link === "#" ? (
+                  <span className="text-sm">{item.name}</span>
+                ) : (
+                  <Link 
+                    to={item.link} 
+                    onClick={() => !item.dropdown && setOpen(false)} 
+                    className="text-sm"
+                    target={item.link.startsWith("http") ? "_blank" : undefined}
+                    rel={item.link.startsWith("http") ? "noopener noreferrer" : undefined}
+                  >
+                    {item.name}
+                  </Link>
+                )}
 
                 {item.dropdown && (
                   <ChevronDown
