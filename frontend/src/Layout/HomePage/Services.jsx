@@ -69,14 +69,14 @@ export default function Services() {
 
         {/* Heading */}
         <div className="text-center mb-14">
-          <h2 className="text-3xl md:text-5xl font-bold text-gray-800">
+          <h2 className="text-3xl md:text-5xl font-bold text-gray-900 font-devanagari">
             ऑनलाईन पोर्टलद्वारे उपलब्ध सुविधा
           </h2>
 
           <div className="flex items-center justify-center gap-3 mt-5">
-            <div className="w-20 h-[2px] bg-yellow-700"></div>
-            <div className="w-3 h-3 bg-yellow-700 rotate-45"></div>
-            <div className="w-20 h-[2px] bg-yellow-700"></div>
+            <span className="w-16 h-[2px] bg-gradient-to-r from-transparent to-green-700"></span>
+            <span className="w-3 h-3 bg-amber-600 rotate-45"></span>
+            <span className="w-16 h-[2px] bg-gradient-to-l from-transparent to-green-700"></span>
           </div>
 
           <p className="mt-6 text-gray-600 max-w-4xl mx-auto text-sm md:text-lg">
@@ -98,27 +98,27 @@ export default function Services() {
                   className="
                     h-full
                     bg-white 
-                    p-6 md:p-8 
-                    rounded-lg 
+                    p-6 
+                    rounded-xl 
+                    border border-gray-100
                     shadow-sm 
-                    hover:bg-green-600 
-                    transition duration-300 
+                    hover:bg-gradient-to-br hover:from-green-700 hover:to-green-800 
+                    transition-all duration-300 hover:shadow-lg hover:-translate-y-1
                     cursor-pointer
                   "
                 >
                   <div className="flex items-start gap-4">
 
-                    <Icon
-                      size={36}
-                      className="text-black group-hover:text-white transition"
-                    />
+                    <div className="p-3 rounded-lg bg-green-50 text-green-700 group-hover:bg-white/20 group-hover:text-white transition-all duration-300 shrink-0">
+                      <Icon size={24} />
+                    </div>
 
                     <div>
-                      <h3 className="text-lg font-semibold text-black group-hover:text-white">
+                      <h3 className="text-lg font-bold text-gray-900 group-hover:text-white transition-colors duration-300 font-devanagari">
                         {item.title}
                       </h3>
 
-                      <p className="text-gray-600 mt-2 group-hover:text-white text-sm">
+                      <p className="text-gray-500 mt-1.5 group-hover:text-green-50 transition-colors duration-300 text-sm leading-relaxed">
                         {item.desc}
                       </p>
                     </div>

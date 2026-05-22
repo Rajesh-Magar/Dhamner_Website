@@ -40,15 +40,15 @@ export default function Progress() {
         {/* 🔥 Heading Section */}
         <div className="text-center mb-14">
           
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 font-devanagari">
             लोकसहभागातून समृद्धीकडे
           </h2>
 
           {/* Divider */}
           <div className="flex items-center justify-center gap-3 mb-6">
-            <span className="w-12 h-[2px] bg-yellow-700"></span>
-            <span className="w-3 h-3 bg-yellow-700 rotate-45"></span>
-            <span className="w-12 h-[2px] bg-yellow-700"></span>
+            <span className="w-16 h-[2px] bg-gradient-to-r from-transparent to-green-700"></span>
+            <span className="w-3 h-3 bg-amber-600 rotate-45"></span>
+            <span className="w-16 h-[2px] bg-gradient-to-l from-transparent to-green-700"></span>
           </div>
 
           {/* Paragraph */}
@@ -69,25 +69,26 @@ export default function Progress() {
             return (
               <div
                 key={index}
-                className="relative bg-white rounded-lg shadow-sm p-8 text-center overflow-hidden group transition hover:shadow-md hover:scale-105"
+                className="relative bg-white rounded-xl shadow-sm border border-gray-100 p-8 text-center overflow-hidden group transition-all duration-300 hover:shadow-md hover:-translate-y-1"
               >
-                {/* ✨ Dotted Hover Background */}
-                <div
-                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-300 pointer-events-none
-                  bg-[radial-gradient(#00000022_3px,transparent_3px)] 
-                  bg-[size:30px_30px]"
-                ></div>
+                {/* Top border accent on hover */}
+                <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-green-600 to-amber-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+
+                {/* Subtle gradient bg hover */}
+                <div className="absolute inset-0 bg-gradient-to-b from-green-50/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
 
                 {/* Content */}
                 <div className="relative z-10">
                   
                   {/* Icon */}
                   <div className="flex justify-center mb-6">
-                    <Icon className="w-14 h-14 text-yellow-700" />
+                    <div className="p-4 rounded-full bg-amber-50 group-hover:bg-green-50 transition-colors duration-300">
+                      <Icon className="w-8 h-8 text-amber-600 group-hover:text-green-700 transition-colors duration-300" />
+                    </div>
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-xl font-bold text-gray-800 mb-4">
+                  <h3 className="text-xl font-bold text-gray-900 mb-4 font-devanagari">
                     {item.title}
                   </h3>
 

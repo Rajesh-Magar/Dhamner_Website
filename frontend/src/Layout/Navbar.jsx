@@ -95,68 +95,76 @@ export default function Navbar() {
   ];
 
   return (
-    <div className="w-full shadow-sm  top-0 z-50">
+    <div className="w-full shadow-md sticky top-0 z-50 bg-white/95 backdrop-blur-md transition-all duration-300">
 
       {/* 🔝 TOP HEADER */}
-      <div className="bg-white px-4 lg:px-10 py-4 flex flex-col lg:flex-row justify-between items-center gap-4">
+      <div className="bg-white px-4 lg:px-10 py-3 flex flex-col lg:flex-row justify-between items-center gap-4 border-b border-gray-100">
 
-       <div className="flex items-center">
-            <img src="/assets/HD-wallpaper-satyamev-jayate-bharat-civil-service-history-ias-india-indian-ips-lion-emblem-motivation-removebg-preview.png" className="h-[100px] w-50" />
-            <img src="/assets/Seal_of_Maharashtra.svg.png" className="h-[60px] ml-[-20px]" />
-            <img src="/assets/Gemini_Generated_Image_7qc6v97qc6v97qc6-removebg-preview.png" className="h-[70px] " />
+        <div className="flex items-center gap-2">
+          <img src="/assets/HD-wallpaper-satyamev-jayate-bharat-civil-service-history-ias-india-indian-ips-lion-emblem-motivation-removebg-preview.png" className="h-[75px] md:h-[85px] w-auto object-contain" alt="Emblem" />
+          <img src="/assets/Seal_of_Maharashtra.svg.png" className="h-[45px] md:h-[55px] ml-[-10px]" alt="Seal" />
+          <img src="/assets/Gemini_Generated_Image_7qc6v97qc6v97qc6-removebg-preview.png" className="h-[55px] md:h-[65px]" alt="Logo" />
 
-          <div>
-            <h1 className="text-lg lg:text-3xl font-bold">यशवंत ग्रामपंचायत धामणेर</h1>
-            <p className="text-sm text-orange-500">ता - कोरेगाव, जि - सातारा</p>
+          <div className="ml-2">
+            <h1 className="text-lg lg:text-2xl font-extrabold text-green-800 tracking-tight">यशवंत ग्रामपंचायत धामणेर</h1>
+            <p className="text-xs md:text-sm font-semibold text-orange-600">ता - कोरेगाव, जि - सातारा</p>
           </div>
         </div>
 
-        <div className="hidden lg:flex gap-10 text-gray-700">
+        <div className="hidden lg:flex gap-8 text-gray-700">
           <div className="flex items-center gap-2">
-            <Mail size={20} />
+            <Mail size={18} className="text-green-700" />
             <div>
-              <p className="font-semibold">ईमेल</p>
-              <p className="text-sm">dhamner189585@gmail.com</p>
+              <p className="font-semibold text-xs text-gray-500 uppercase">ईमेल</p>
+              <p className="text-xs font-medium text-gray-800">dhamner189585@gmail.com</p>
             </div>
           </div>
 
           <div className="flex items-center gap-2">
-            <Clock size={20} />
+            <Clock size={18} className="text-green-700" />
             <div>
-              <p className="font-semibold">कार्यालयीन वेळ</p>
-              <p className="text-sm">सकाळी ९.१५ ते सायंकाळी ६.१५ </p>
+              <p className="font-semibold text-xs text-gray-500 uppercase">कार्यालयीन वेळ</p>
+              <p className="text-xs font-medium text-gray-800">सकाळी ९.१५ ते सायंकाळी ६.१५</p>
             </div>
           </div>
 
           <div className="flex items-center gap-2">
-            <Phone size={20} />
+            <Phone size={18} className="text-green-700" />
             <div>
-              <p className="font-semibold">दूरध्वनी</p>
-              <p className="text-sm">+91 9850032987</p>
+              <p className="font-semibold text-xs text-gray-500 uppercase">दूरध्वनी</p>
+              <p className="text-xs font-medium text-gray-800">+91 9850032987</p>
             </div>
           </div>
         </div>
 
-        <button className="lg:hidden" onClick={() => setOpen(!open)}>
-          {open ? <X size={28} /> : <Menu size={28} />}
+        <button 
+          className="lg:hidden p-2 rounded-xl hover:bg-gray-100 transition" 
+          onClick={() => setOpen(!open)}
+          aria-label="Toggle Menu"
+        >
+          {open ? <X size={26} className="text-green-800" /> : <Menu size={26} className="text-green-800" />}
         </button>
       </div>
 
-      {/* 🔻 DESKTOP NAV (unchanged) */}
-      <div className="hidden lg:flex justify-center gap-8 py-4 bg-gray-100 text-lg font-medium">
+      {/* 🔻 DESKTOP NAV */}
+      <div className="hidden lg:flex justify-center gap-6 py-3 bg-gradient-to-r from-green-50/50 via-white to-green-50/50 border-b border-gray-100 text-sm font-semibold text-gray-700">
         {menuItems.map((item, index) => (
-          <div key={index} className="relative group pb-2">
-            <div className="flex items-center gap-1 cursor-pointer hover:text-orange-500">
-              <Link to={item.link} className={index === 0 ? "text-orange-600" : ""}>
+          <div key={index} className="relative group pb-1">
+            <div className="flex items-center gap-1 cursor-pointer py-1 px-2 rounded-lg hover:text-green-700 hover:bg-green-50/80 transition-all duration-200">
+              <Link to={item.link} className={index === 0 ? "text-green-700 font-extrabold" : ""}>
                 {item.name}
               </Link>
-              {item.dropdown && <ChevronDown size={16} />}
+              {item.dropdown && <ChevronDown size={14} className="group-hover:rotate-180 transition-transform duration-200" />}
             </div>
 
             {item.dropdown && (
-              <div className="absolute left-0 top-full w-64 max-h-80 overflow-y-auto bg-slate-800 text-white shadow-xl rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+              <div className="absolute left-0 mt-2 w-64 max-h-80 overflow-y-auto bg-white/95 backdrop-blur-md text-gray-800 shadow-2xl rounded-2xl border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 custom-scrollbar py-2">
                 {item.dropdown.map((sub, i) => (
-                  <Link key={i} to={sub.link} className="block px-4 py-3 border-b border-slate-700 hover:bg-orange-500 hover:pl-6 transition">
+                  <Link 
+                    key={i} 
+                    to={sub.link} 
+                    className="block px-5 py-2.5 hover:bg-green-50 hover:text-green-700 hover:pl-7 transition-all duration-200 text-xs font-medium border-b border-gray-50/50 last:border-b-0"
+                  >
                     {sub.name}
                   </Link>
                 ))}
@@ -168,27 +176,29 @@ export default function Navbar() {
 
       {/* 📱 MOBILE MENU WITH DROPDOWN */}
       {open && (
-        <div className="lg:hidden bg-gray-100 px-6 py-6 space-y-4 max-h-[80vh] overflow-y-auto">
+        <div className="lg:hidden bg-white/98 backdrop-blur-md border-t border-gray-100 px-6 py-4 space-y-3 max-h-[75vh] overflow-y-auto shadow-inner custom-scrollbar">
 
           {menuItems.map((item, index) => (
-            <div key={index}>
+            <div key={index} className="border-b border-gray-50 pb-2 last:border-b-0 last:pb-0">
 
               {/* MAIN */}
               <div
-                className="flex justify-between items-center font-medium cursor-pointer"
+                className="flex justify-between items-center py-2 font-semibold text-gray-800 hover:text-green-700 cursor-pointer"
                 onClick={() =>
                   item.dropdown
                     ? setActiveMenu(activeMenu === index ? null : index)
                     : null
                 }
               >
-                <Link to={item.link}>{item.name}</Link>
+                <Link to={item.link} onClick={() => !item.dropdown && setOpen(false)} className="text-sm">
+                  {item.name}
+                </Link>
 
                 {item.dropdown && (
                   <ChevronDown
-                    size={18}
-                    className={`transition-transform ${
-                      activeMenu === index ? "rotate-180" : ""
+                    size={16}
+                    className={`transition-transform duration-200 ${
+                      activeMenu === index ? "rotate-180 text-green-700" : "text-gray-500"
                     }`}
                   />
                 )}
@@ -196,12 +206,12 @@ export default function Navbar() {
 
               {/* DROPDOWN */}
               {item.dropdown && activeMenu === index && (
-                <div className="ml-4 mt-2 space-y-2 text-sm text-gray-700">
+                <div className="ml-3 mt-1 bg-green-50/40 rounded-xl p-2 space-y-1 text-xs">
                   {item.dropdown.map((sub, i) => (
                     <Link
                       key={i}
                       to={sub.link}
-                      className="block px-3 py-2 rounded hover:bg-orange-500 hover:text-white transition"
+                      className="block px-3 py-2 rounded-lg text-gray-700 hover:bg-green-100 hover:text-green-800 transition"
                       onClick={() => setOpen(false)}
                     >
                       {sub.name}

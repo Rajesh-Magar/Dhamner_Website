@@ -17,40 +17,56 @@ export default function Hero() {
         <div className="absolute inset-0 bg-black/60"></div>
 
         {/* Content */}
-        <div className="relative max-w-7xl mx-auto px-6 lg:px-10 py-16 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+        <div className="relative max-w-7xl mx-auto px-6 lg:px-10 py-20 lg:py-28 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
-          <div className="text-white text-center lg:text-left">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-             यशवंत ग्रामपंचायत धामणेर
+          <div className="text-white text-center lg:text-left z-10">
+            <span className="inline-block px-4 py-1.5 rounded-full bg-green-700/80 border border-green-500/30 text-xs md:text-sm font-bold tracking-wider uppercase mb-6 animate-pulse">
+              जिल्हा सातारा • कोरेगाव तालुका
+            </span>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight tracking-tight drop-shadow-md">
+              यशवंत ग्रामपंचायत <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-amber-300">धामणेर</span>
             </h1>
 
-            <h2 className="text-green-500 text-xl sm:text-2xl md:text-3xl mt-3 font-semibold">
+            <h2 className="text-green-400 text-xl sm:text-2xl md:text-3xl mt-4 font-bold tracking-wide drop-shadow-sm">
               ध्यास विकासाचा, वेग प्रगतीचा
             </h2>
 
-            <p className="mt-6 text-gray-200 text-sm sm:text-base md:text-lg leading-relaxed max-w-xl mx-auto lg:mx-0">
-              धामणेर सातारा जिल्ह्यातील कोरेगाव तालुक्यातील एक गाव ,
+            <p className="mt-8 text-gray-200 text-xs sm:text-sm md:text-base leading-relaxed max-w-xl mx-auto lg:mx-0 font-medium drop-shadow-sm">
+              धामणेर सातारा जिल्ह्यातील कोरेगाव तालुक्यातील एक गाव,
               कृष्णामाईच्या काठावर वसलेलं. निसर्गाचा वरदहस्त लाभलेलं. काळ्याशार
               शेतसरीनं वेढलेलं. त्याचबरोबर एक संपन्न असा आध्यात्मिक वारसा
               असलेलं. कधीकाळी इथं वैदिकांचं पुण्यक्षेत्र होतं, ज्याला धर्मपुरी
-              या नवानं ओळ्खलं जात असे. तसेच गावाच्या उत्तरेस जवळच असलेल्या निगडी
-              गांवाचे रंगनाथ स्वामी यांनी ज्ञानपीठ चालवलेलं होतं.त्या ठिकाणी
-              श्रावणात मोठी यात्रा भरत असे. धामणेरच्या जवळच कृष्णामाईच्या डोहात
-              राष्ट्रसंत श्री समर्थ रामदास स्वामींनीं आंग्लाई देवी व प्रभू
-              रामचंद्र यांच्या मूर्ती सापडल्या होत्या. याच मूर्तींची
-              प्रतिष्ठापना स्वामींनी अनुक्रमे सज्जनगड व चाफळ या क्षेत्री विविधत
-              केली , असा इतिहास आहे. म्हणजे साक्षात समर्थांचा पावन पदस्पर्श
-              इथल्या मातीत झालेला होता.
+              या नावानं ओळखलं जात असे. समर्थ रामदास स्वामींचा पावन पदस्पर्श
+              इथल्या मातीत झालेला आहे.
             </p>
+
+            <div className="mt-10 flex flex-wrap gap-4 justify-center lg:justify-start">
+              <a 
+                href="#services" 
+                className="px-8 py-3.5 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white rounded-2xl font-bold shadow-lg shadow-green-900/30 hover:shadow-green-900/50 hover:translate-y-[-2px] transition duration-200 text-sm md:text-base cursor-pointer"
+              >
+                सुविधा पहा
+              </a>
+              <a 
+                href="#about" 
+                className="px-8 py-3.5 bg-white/10 hover:bg-white/20 border border-white/20 hover:border-white/30 text-white rounded-2xl font-bold backdrop-blur-sm hover:translate-y-[-2px] transition duration-200 text-sm md:text-base cursor-pointer"
+              >
+                आमच्याबद्दल वाचा
+              </a>
+            </div>
           </div>
 
           {/* Right Logo */}
-          <div className="flex justify-center">
-            <img
-              src="/assets/Gemini_Generated_Image_7qc6v97qc6v97qc6-removebg-preview.png"
-              alt="Gram Panchayat Logo"
-              className="w-48 sm:w-64 md:w-72 lg:w-96"
-            />
+          <div className="flex justify-center items-center z-10">
+            <div className="relative group">
+              {/* Glow backdrop effect */}
+              <div className="absolute inset-0 bg-green-500/25 rounded-full blur-3xl group-hover:bg-green-500/35 transition duration-500"></div>
+              <img
+                src="/assets/Gemini_Generated_Image_7qc6v97qc6v97qc6-removebg-preview.png"
+                alt="Gram Panchayat Logo"
+                className="relative w-52 sm:w-64 md:w-80 lg:w-[420px] object-contain hover:scale-102 transition duration-500 drop-shadow-2xl"
+              />
+            </div>
           </div>
         </div>
       </section>
