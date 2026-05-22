@@ -1,12 +1,29 @@
-import { useState } from "react";
-import { Mail, Phone, Clock, Menu, X, ChevronDown, Globe } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Mail, Phone, Clock, Menu, X, ChevronDown, Globe, Search } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLang } from "../context/LanguageContext";
+import SearchModal from "../components/SearchModal";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState(null);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const { lang, t, toggleLang } = useLang();
+
+  // Keyboard shortcut listener for Ctrl+K or /
+  useEffect(() => {
+    const handleGlobalKeyDown = (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === "k") {
+        e.preventDefault();
+        setIsSearchOpen((prev) => !prev);
+      } else if (e.key === "/" && document.activeElement.tagName !== "INPUT" && document.activeElement.tagName !== "TEXTAREA") {
+        e.preventDefault();
+        setIsSearchOpen(true);
+      }
+    };
+    window.addEventListener("keydown", handleGlobalKeyDown);
+    return () => window.removeEventListener("keydown", handleGlobalKeyDown);
+  }, []);
 
   const menuItems = [
     { name: t.home, link: "/" },
@@ -140,25 +157,48 @@ export default function Navbar() {
             </div>
           </div>
 
-          {/* Language Toggle Button */}
-          <button
-            id="lang-toggle-desktop"
-            onClick={toggleLang}
-            className="flex items-center gap-2 bg-orange-500 hover:bg-orange-600 active:scale-95 text-white px-4 py-2 rounded-full text-sm font-bold transition-all shadow-md shrink-0"
-            aria-label="Toggle Language"
-          >
-            <Globe size={16} />
-            {lang === "mr" ? "English" : "मराठी"}
-          </button>
+          {/* Action Buttons Column */}
+          <div className="flex flex-col gap-2 shrink-0">
+            {/* Language Toggle Button */}
+            <button
+              id="lang-toggle-desktop"
+              onClick={toggleLang}
+              className="flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-600 active:scale-95 text-white px-4 py-2 rounded-full text-sm font-bold transition-all shadow-md w-full"
+              aria-label="Toggle Language"
+            >
+              <Globe size={16} />
+              {lang === "mr" ? "English" : "मराठी"}
+            </button>
+
+            {/* Search Trigger Button */}
+            <button
+              onClick={() => setIsSearchOpen(true)}
+              className="flex items-center justify-center gap-2 bg-green-700 hover:bg-green-800 active:scale-95 text-white px-4 py-2 rounded-full text-sm font-bold transition-all shadow-md w-full cursor-pointer"
+              aria-label="Open Search"
+            >
+              <Search size={16} />
+              {t.search}
+            </button>
+          </div>
         </div>
 
-        <button 
-          className="lg:hidden p-2 rounded-xl hover:bg-gray-100 transition" 
-          onClick={() => setOpen(!open)}
-          aria-label="Toggle Menu"
-        >
-          {open ? <X size={26} className="text-green-800" /> : <Menu size={26} className="text-green-800" />}
-        </button>
+        {/* Mobile Header Buttons */}
+        <div className="flex items-center gap-2 lg:hidden">
+          <button 
+            className="p-2 rounded-xl hover:bg-gray-100 hover:text-green-700 transition text-green-800 cursor-pointer"
+            onClick={() => setIsSearchOpen(true)}
+            aria-label="Open Search"
+          >
+            <Search size={22} />
+          </button>
+          <button 
+            className="p-2 rounded-xl hover:bg-gray-100 transition" 
+            onClick={() => setOpen(!open)}
+            aria-label="Toggle Menu"
+          >
+            {open ? <X size={26} className="text-green-800" /> : <Menu size={26} className="text-green-800" />}
+          </button>
+        </div>
       </div>
 
       {/* 🔻 DESKTOP NAV */}
@@ -267,6 +307,9 @@ export default function Navbar() {
           ))}
         </div>
       )}
+
+      {/* Search Modal Overlay */}
+      <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
     </div>
   );
 }

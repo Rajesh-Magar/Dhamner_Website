@@ -105,6 +105,10 @@ export const translations = {
     officeHoursVal: "सकाळी ९.१५ ते सायंकाळी ६.१५",
     email: "ईमेल",
     phone: "दूरध्वनी",
+    searchPlaceholder: "सेवा, प्रमाणपत्रे किंवा पाने शोधा...",
+    noResults: "तुमच्या शोधाशी जुळणारे कोणतेही निकाल आढळले नाहीत.",
+    popularPages: "लोकप्रिय पाने",
+    pressEsc: "बंद करण्यासाठी ESC दाबा",
   },
   en: {
     // ─── Navbar ───────────────────────────────────────────────
@@ -208,6 +212,10 @@ export const translations = {
     officeHoursVal: "9:15 AM – 6:15 PM",
     email: "Email",
     phone: "Phone",
+    searchPlaceholder: "Search for services, certificates, pages...",
+    noResults: "No results found matching your query.",
+    popularPages: "Popular Pages",
+    pressEsc: "Press ESC to close",
   },
 };
 
