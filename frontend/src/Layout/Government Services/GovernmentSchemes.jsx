@@ -8,56 +8,59 @@ import {
   Leaf,
   FileText,
 } from "lucide-react";
+import { useLang } from "../../context/LanguageContext";
 
 export default function GovernmentSchemes() {
+  const { t } = useLang();
+
   const schemes = [
     {
-      title: "जलजीवन मिशन",
+      title: t.jalJeevan,
       icon: Droplet,
       link: "https://water.maharashtra.gov.in/",
     },
     {
-      title: "आयुष्मान भारत योजना",
+      title: t.ayushman,
       icon: HeartPulse,
       link: "/ayushman",
     },
     {
-      title: "पेसा निधी योजना",
+      title: t.pesa,
       icon: Landmark,
       link: "/pesa",
     },
     {
-      title: "प्रधानमंत्री मातृ वंदना योजना",
+      title: t.pmmvy,
       icon: Baby,
       link: "/pmmvy",
     },
     {
-      title: "भाग्यश्री / लाडकी योजना",
+      title: t.bhagyashree,
       icon: Users,
       link: "/ladki",
     },
     {
-      title: "रमाई आवास योजना",
+      title: t.ramai,
       icon: Home,
       link: "/ramai",
     },
     {
-      title: "लाडकी बहिण योजना",
+      title: t.ladkiBahin,
       icon: Users,
       link: "/ladki-bahin",
     },
     {
-      title: "शबरी आवास योजना",
+      title: t.shabari,
       icon: Home,
       link: "/shabari",
     },
     {
-      title: "स्वच्छ भारत मिशन",
+      title: t.swachh,
       icon: Leaf,
       link: "/swachh",
     },
     {
-      title: "१५वा वित्त आयोग",
+      title: t.finance15,
       icon: FileText,
       link: "/finance15",
     },
@@ -68,7 +71,7 @@ export default function GovernmentSchemes() {
 
       {/* Heading */}
       <h2 className="text-2xl md:text-4xl font-bold text-center mb-10 text-green-700">
-        शासकीय योजना
+        {t.schemes}
       </h2>
 
       {/* Grid */}

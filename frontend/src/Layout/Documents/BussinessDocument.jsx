@@ -1,7 +1,88 @@
 import { useState } from "react";
 import axios from "axios";
+import { useLang } from "../../context/LanguageContext";
+
+const localTexts = {
+  mr: {
+    heroTitle: "व्यवसाय परवाना प्रमाणपत्र",
+    instruction: "आपण व्यवसाय परवाना प्रमाणपत्रासाठी खाली दिलेल्या ऑनलाइन फॉर्म मध्ये अर्ज करू शकता. कृपया ₹59/- फी भरून UTR नंबर व स्क्रीनशॉट अपलोड करा.",
+    placeholderOwnerName: "मालकाचे संपूर्ण नाव",
+    placeholderOwnerAddress: "मालकाचा निवास पत्ता",
+    placeholderMobile: "व्हाट्सअप मोबाईल क्रमांक",
+    placeholderEmail: "ई मेल आय डी",
+    labelBusinessType: "आस्थापनेचे वर्गवारी (उदा. दुकाने / आस्थापना / निवासी हॉटेल/ उपाहारगृहे / थिएटर / सार्वजनिक मनोरंजनाच्या किंवा करमणुकीच्या इतर जागा व इतर आस्थापना) *",
+    placeholderBusinessType: "आस्थापनाचे वर्गवारी",
+    labelBusinessCategory: "आस्थापनेचा प्रकार (मालक, भागीदारी, एलएलपी, कंपनी, वि, सहकारी संस्था, मंडळ) *",
+    placeholderBusinessCategory: "आस्थापनाचा प्रकार",
+    placeholderDistrict: "जिल्हा",
+    placeholderPincode: "पिन कोड",
+    placeholderBusinessNature: "व्यवसायाचे स्वरूप",
+    labelWorkers: "मनुष्यबळ / कामगार तपशील -",
+    placeholderMale: "पुरुष",
+    placeholderFemale: "महिला",
+    placeholderOther: "इतर",
+    placeholderTotal: "एकूण",
+    placeholderBusinessAddress: "आस्थापनाचा पत्ता",
+    placeholderBuildingName: "बिल्डिंगचे नाव",
+    placeholderRoad: "रस्ता",
+    placeholderLandmark: "ओळखीची खूण",
+    placeholderVillage: "गावाचे नाव",
+    placeholderTaluka: "तालुका",
+    docsHeader: "सोबत आवश्यक कागदपत्रे अपलोड करावीत",
+    labelAadhar: "आधार कार्ड *",
+    labelPhoto: "आस्थापनाचा फोटो *",
+    labelPaymentScreenshot: "पेमेंट स्क्रीनशॉट *",
+    paymentLabel: "₹59/- रुपये शुल्क भरल्यानंतर UTR नंबर टाका",
+    placeholderUtr: "पेमेंट UTR नंबर",
+    max10mb: "कमाल फाईल साईझ १०MB",
+    btnSubmit: "अर्ज पाठवा",
+    alertNoFiles: "कृपया सर्व आवश्यक फाईल अपलोड करा!",
+    alertSuccess: "अर्ज यशस्वीरित्या पाठवला गेला आहे ✅",
+    alertUnknownError: "अज्ञात त्रुटी"
+  },
+  en: {
+    heroTitle: "Business License Certificate",
+    instruction: "You can apply for the business license certificate using the online form below. Please pay ₹59/- fee and upload UTR number & screenshot.",
+    placeholderOwnerName: "Owner's Full Name",
+    placeholderOwnerAddress: "Owner's Residential Address",
+    placeholderMobile: "WhatsApp Mobile Number",
+    placeholderEmail: "Email ID",
+    labelBusinessType: "Category of Establishment (e.g. Shops / Establishments / Residential Hotels / Restaurants / Theaters / Other places of public amusement or entertainment and other establishments) *",
+    placeholderBusinessType: "Category of Establishment",
+    labelBusinessCategory: "Type of Establishment (Owner, Partnership, LLP, Company, Co-operative Society, Board, etc.) *",
+    placeholderBusinessCategory: "Type of Establishment",
+    placeholderDistrict: "District",
+    placeholderPincode: "Pin Code",
+    placeholderBusinessNature: "Nature of Business",
+    labelWorkers: "Manpower / Worker Details -",
+    placeholderMale: "Male",
+    placeholderFemale: "Female",
+    placeholderOther: "Other",
+    placeholderTotal: "Total",
+    placeholderBusinessAddress: "Establishment Address",
+    placeholderBuildingName: "Building Name",
+    placeholderRoad: "Road",
+    placeholderLandmark: "Landmark",
+    placeholderVillage: "Village Name",
+    placeholderTaluka: "Taluka",
+    docsHeader: "Please upload the required documents alongside",
+    labelAadhar: "Aadhaar Card *",
+    labelPhoto: "Establishment Photo *",
+    labelPaymentScreenshot: "Payment Screenshot *",
+    paymentLabel: "Pay ₹59/- fee and enter UTR number",
+    placeholderUtr: "Payment UTR Number",
+    max10mb: "Max 10MB",
+    btnSubmit: "Submit Application",
+    alertNoFiles: "Please upload all required files!",
+    alertSuccess: "Form submitted successfully ✅",
+    alertUnknownError: "Unknown Error"
+  }
+};
 
 export default function BusinessLicense() {
+  const { lang } = useLang();
+  const t = localTexts[lang] || localTexts.mr;
+
   const [formData, setFormData] = useState({
     ownerName: "",
     ownerAddress: "",
@@ -45,7 +126,7 @@ export default function BusinessLicense() {
 
     // Validate all required files are selected
     if (!files.aadhar || !files.photo || !files.payment) {
-      alert("कृपया सर्व आवश्यक फाईल अपलोड करा!");
+      alert(t.alertNoFiles);
       return;
     }
 
@@ -62,7 +143,7 @@ export default function BusinessLicense() {
 
     try {
       await axios.post("https://dhamner-website.onrender.com/api/business-form", data);
-      alert("Form submitted successfully ✅");
+      alert(t.alertSuccess);
       // Reset form
       setFormData({
         ownerName: "",
@@ -94,7 +175,7 @@ export default function BusinessLicense() {
       });
     } catch (err) {
       console.error("Full Error:", err.response?.data || err.message);
-      const errorMsg = err.response?.data?.message || err.message || "अज्ञात त्रुटी";
+      const errorMsg = err.response?.data?.message || err.message || t.alertUnknownError;
       alert(errorMsg);
     }
   };
@@ -104,7 +185,7 @@ export default function BusinessLicense() {
       {/* HERO */}
       <div className="bg-gradient-to-r from-teal-400 via-cyan-500 to-blue-600 text-white flex flex-col md:flex-row items-center justify-between p-8 md:p-16 gap-8">
         <h1 className="text-3xl md:text-5xl font-bold">
-          व्यवसाय परवाना प्रमाणपत्र
+          {t.heroTitle}
         </h1>
         <img
           src="/assets/Certificate-Logo.png"
@@ -114,9 +195,8 @@ export default function BusinessLicense() {
       </div>
 
       {/* INSTRUCTION */}
-      <div className="max-w-4xl mx-auto p-4 text-center text-gray-700">
-        आपण व्यवसाय परवाना प्रमाणपत्रासाठी खाली दिलेल्या ऑनलाइन फॉर्म मध्ये अर्ज करू शकता.
-        कृपया ₹59/- फी भरून UTR नंबर व स्क्रीनशॉट अपलोड करा.
+      <div className="max-w-4xl mx-auto p-4 text-center text-gray-700 font-semibold">
+        {t.instruction}
       </div>
 
       {/* FORM */}
@@ -126,108 +206,106 @@ export default function BusinessLicense() {
       >
         {/* Owner */}
         <div className="grid md:grid-cols-2 gap-4">
-          <input name="ownerName" placeholder="मालकाचे संपूर्ण नाव" className="input" onChange={handleChange} required />
-          <input name="ownerAddress" placeholder="मालकाचा निवास पत्ता" className="input" onChange={handleChange} required />
+          <input name="ownerName" placeholder={t.placeholderOwnerName} className="input" onChange={handleChange} required />
+          <input name="ownerAddress" placeholder={t.placeholderOwnerAddress} className="input" onChange={handleChange} required />
         </div>
 
         {/* Contact */}
         <div className="grid md:grid-cols-2 gap-4">
-          <input name="mobile" placeholder="व्हाट्सअप मोबाईल क्रमांक" className="input" onChange={handleChange} required />
-          <input name="email" placeholder="ई मेल आय डी" className="input" onChange={handleChange} />
+          <input name="mobile" placeholder={t.placeholderMobile} className="input" onChange={handleChange} required />
+          <input name="email" placeholder={t.placeholderEmail} className="input" onChange={handleChange} />
         </div>
 
         {/* Business Info */}
         <div className="grid md:grid-cols-2 gap-4">
-          <label htmlFor="businessType">आस्थापनेचे वर्गवारी (उदा. दुकाने / आस्थापना / निवासी हॉटेल/ उपाहारगृहे / थिएटर / सार्वजनिक मनोरंजनाच्या किंवा करमणुकीच्या इतर जागा व इतर आस्थापना) *
-
-          <input name="businessType" placeholder="आस्थापनाचे वर्गवारी " className="input" onChange={handleChange} required />
-          
+          <label htmlFor="businessType" className="block font-semibold text-gray-700">
+            {t.labelBusinessType}
+            <input name="businessType" placeholder={t.placeholderBusinessType} className="input mt-1" onChange={handleChange} required />
           </label>
-          <label htmlFor="businessCategory">आस्थापनेचा प्रकार (मालक, भागीदारी, एलएलपी, कंपनी, वि, सहकारी संस्था, मंडळ) *
-
-          <input name="businessCategory" placeholder="आस्थापनाचा प्रकार" className="input" onChange={handleChange} required />
+          <label htmlFor="businessCategory" className="block font-semibold text-gray-700">
+            {t.labelBusinessCategory}
+            <input name="businessCategory" placeholder={t.placeholderBusinessCategory} className="input mt-1" onChange={handleChange} required />
           </label>
         </div>
 
         {/* Location */}
         <div className="grid md:grid-cols-2 gap-4">
-          <input name="district" placeholder="जिल्हा" className="input" onChange={handleChange} required />
-          <input name="pincode" placeholder="पिन कोड" className="input" onChange={handleChange} required />
+          <input name="district" placeholder={t.placeholderDistrict} className="input" onChange={handleChange} required />
+          <input name="pincode" placeholder={t.placeholderPincode} className="input" onChange={handleChange} required />
         </div>
 
         {/* Date */}
         <div className="grid md:grid-cols-2 gap-4">
           <input type="date" name="startDate" className="input" onChange={handleChange} required />
-          <input name="businessNature" placeholder="व्यवसायाचे स्वरूप" className="input" onChange={handleChange} required />
+          <input name="businessNature" placeholder={t.placeholderBusinessNature} className="input" onChange={handleChange} required />
         </div>
         <br />
         {/* Workers */}
-        <label htmlFor="">मनुष्यबळ / कामगार तपशील -
-        <div className="grid md:grid-cols-4 gap-4">
-            
-          <input name="male" placeholder="पुरुष" className="input" onChange={handleChange} />
-          <input name="female" placeholder="महिला" className="input" onChange={handleChange} />
-          <input name="other" placeholder="इतर" className="input" onChange={handleChange} />
-          <input name="total" placeholder="एकूण" className="input" onChange={handleChange} />
-          
-        </div>
+        <label htmlFor="" className="block font-semibold text-gray-700">
+          {t.labelWorkers}
+          <div className="grid md:grid-cols-4 gap-4 mt-1">
+            <input name="male" placeholder={t.placeholderMale} className="input" onChange={handleChange} />
+            <input name="female" placeholder={t.placeholderFemale} className="input" onChange={handleChange} />
+            <input name="other" placeholder={t.placeholderOther} className="input" onChange={handleChange} />
+            <input name="total" placeholder={t.placeholderTotal} className="input" onChange={handleChange} />
+          </div>
         </label>
 
         {/* Address */}
-        <textarea name="businessAddress" placeholder="आस्थापनाचा पत्ता" className="input" onChange={handleChange} required />
+        <textarea name="businessAddress" placeholder={t.placeholderBusinessAddress} className="input" onChange={handleChange} required />
 
         <div className="grid md:grid-cols-2 gap-4">
-          <input name="buildingName" placeholder="बिल्डिंगचे नाव" className="input" onChange={handleChange} />
-          <input name="road" placeholder="रस्ता" className="input" onChange={handleChange} />
+          <input name="buildingName" placeholder={t.placeholderBuildingName} className="input" onChange={handleChange} />
+          <input name="road" placeholder={t.placeholderRoad} className="input" onChange={handleChange} />
         </div>
 
         <div className="grid md:grid-cols-2 gap-4">
-          <input name="landmark" placeholder="ओळखीची खूण" className="input" onChange={handleChange} />
-          <input name="village" placeholder="गावाचे नाव" className="input" onChange={handleChange} required />
+          <input name="landmark" placeholder={t.placeholderLandmark} className="input" onChange={handleChange} />
+          <input name="village" placeholder={t.placeholderVillage} className="input" onChange={handleChange} required />
         </div>
 
-        <input name="taluka" placeholder="तालुका" className="input" onChange={handleChange} required />
+        <input name="taluka" placeholder={t.placeholderTaluka} className="input" onChange={handleChange} required />
 
         {/* DOCUMENT UPLOAD */}
         <div className="border-t pt-6 space-y-6">
-          <h2 className="font-bold text-lg">
-            सोबत आवश्यक कागदपत्रे अपलोड करावीत
+          <h2 className="font-bold text-lg text-gray-800">
+            {t.docsHeader}
           </h2>
 
           <div className="grid md:grid-cols-2 gap-6">
             {/* Aadhar */}
             <div>
-              <p className="font-semibold">आधार कार्ड *</p>
-              <input type="file" onChange={(e) => handleFileChange(e, "aadhar")} />
-              <p className="text-sm text-gray-500">Max 10MB</p>
+              <p className="font-semibold text-gray-700">{t.labelAadhar}</p>
+              <input type="file" onChange={(e) => handleFileChange(e, "aadhar")} className="block mt-1" />
+              <p className="text-sm text-gray-500">{t.max10mb}</p>
             </div>
 
             {/* Photo */}
             <div>
-              <p className="font-semibold">आस्थापनाचा फोटो *</p>
-              <input type="file" onChange={(e) => handleFileChange(e, "photo")} />
-              <p className="text-sm text-gray-500">Max 10MB</p>
+              <p className="font-semibold text-gray-700">{t.labelPhoto}</p>
+              <input type="file" onChange={(e) => handleFileChange(e, "photo")} className="block mt-1" />
+              <p className="text-sm text-gray-500">{t.max10mb}</p>
             </div>
           </div>
         </div>
 
         {/* PAYMENT */}
         <div className="border-t pt-6 space-y-4 text-center">
-          <img src="/assets/GramnidhiQr.jpeg" className="mx-auto w-64" />
-            <p className="font-semibold text-gray-700">
-            ₹59/- रुपये शुल्क भरल्यानंतर UTR नंबर टाका
-            </p>
-          <input name="utr" placeholder="पेमेंट UTR नंबर" className="input" onChange={handleChange} required />
+          <img src="/assets/GramnidhiQr.jpeg" className="mx-auto w-64" alt="Gramnidhi QR" />
+          <p className="font-semibold text-gray-700">
+            {t.paymentLabel}
+          </p>
+          <input name="utr" placeholder={t.placeholderUtr} className="input" onChange={handleChange} required />
 
           <div>
-            <label className="font-semibold">पेमेंट स्क्रीनशॉट *</label>
-            <input type="file" onChange={(e) => handleFileChange(e, "payment")} />
+            <label className="font-semibold text-gray-700 block mb-1">{t.labelPaymentScreenshot}</label>
+            <input type="file" onChange={(e) => handleFileChange(e, "payment")} className="block mx-auto border p-2 rounded" />
           </div>
         </div>
 
         {/* BUTTON */}
-        <button className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded w-full">
-          अर्ज पाठवा
+        <button className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded w-full font-bold">
+          {t.btnSubmit}
         </button>
       </form>
 

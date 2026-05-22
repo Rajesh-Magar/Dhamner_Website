@@ -1,7 +1,54 @@
 import { useState } from "react";
 import axios from "axios";
+import { useLang } from "../../context/LanguageContext";
+
+const localTexts = {
+  mr: {
+    heroTitle: "डिजिटल स्वाक्षरीत 7/12",
+    instruction: "आपण डिजिटल स्वाक्षरीत 7/12 साठी खाली दिलेल्या ऑनलाइन फॉर्म मध्ये अर्ज करू शकता. कृपया आधी ₹15/- अर्ज फी QR कोड स्कॅन करून भरा व त्याचा स्क्रीनशॉट ठेवा. UTR नंबर भरणे अनिवार्य आहे.",
+    placeholderSurveyNo: "सर्वे नंबर / गट नंबर",
+    placeholderMobile: "व्हाट्सअप मोबाईल क्रमांक",
+    placeholderEmail: "ई मेल आय डी",
+    placeholderOwnerName: "मालकांचे नाव",
+    placeholderVillage: "गावाचे नाव",
+    placeholderTaluka: "तालुका",
+    placeholderDistrict: "जिल्हा",
+    paymentLabel: "₹15/- रुपये शुल्क भरल्यानंतर UTR नंबर टाका",
+    placeholderUtr: "UTR नंबर",
+    labelPaymentScreenshot: "आपण केलेल्या पेमेंटचा स्क्रीनशॉट अपलोड करा *",
+    maxSize: "कमाल फाइल साइज: 10 MB (JPG, PNG, PDF)",
+    selectedFile: "निवडलेली फाईल",
+    btnSubmit: "अर्ज पाठवा",
+    alertNoScreenshot: "कृपया स्क्रीनशॉट अपलोड करा!",
+    alertSuccess: "अर्ज यशस्वीरित्या पाठवला गेला आहे ✅",
+    alertUnknownError: "अज्ञात त्रुटी"
+  },
+  en: {
+    heroTitle: "Digitally Signed 7/12 Extract",
+    instruction: "You can apply for a digitally signed 7/12 extract using the online form below. Please pay ₹15/- application fee using QR code first and save the screenshot. UTR number is mandatory.",
+    placeholderSurveyNo: "Survey Number / Gat Number",
+    placeholderMobile: "WhatsApp Mobile Number",
+    placeholderEmail: "Email ID",
+    placeholderOwnerName: "Owner's Name",
+    placeholderVillage: "Village Name",
+    placeholderTaluka: "Taluka",
+    placeholderDistrict: "District",
+    paymentLabel: "Pay ₹15 fee and enter UTR number",
+    placeholderUtr: "UTR Number",
+    labelPaymentScreenshot: "Upload a screenshot of the payment made *",
+    maxSize: "Maximum file size: 10 MB (JPG, PNG, PDF)",
+    selectedFile: "Selected file",
+    btnSubmit: "Submit Application",
+    alertNoScreenshot: "Please upload the screenshot!",
+    alertSuccess: "Form submitted successfully ✅",
+    alertUnknownError: "Unknown Error"
+  }
+};
 
 export default function Land712Document() {
+  const { lang } = useLang();
+  const t = localTexts[lang] || localTexts.mr;
+
   const [formData, setFormData] = useState({
     surveyNo: "",
     ownerName: "",
@@ -28,7 +75,7 @@ export default function Land712Document() {
 
     // Validate file is selected
     if (!file) {
-      alert("कृपया स्क्रीनशॉट अपलोड करा!");
+      alert(t.alertNoScreenshot);
       return;
     }
 
@@ -42,7 +89,7 @@ export default function Land712Document() {
 
     try {
       await axios.post("https://dhamner-website.onrender.com/api/land712", data);
-      alert("Form submitted successfully!");
+      alert(t.alertSuccess);
       // Reset form
       setFormData({
         surveyNo: "",
@@ -57,7 +104,7 @@ export default function Land712Document() {
       setFile(null);
     } catch (err) {
       console.error("Full Error:", err.response?.data || err.message);
-      const errorMsg = err.response?.data?.message || err.message || "अज्ञात त्रुटी";
+      const errorMsg = err.response?.data?.message || err.message || t.alertUnknownError;
       alert(errorMsg);
     }
   };
@@ -68,7 +115,7 @@ export default function Land712Document() {
       {/* HERO */}
       <div className="bg-gradient-to-r from-teal-400 via-cyan-500 to-blue-600 text-white flex flex-col md:flex-row items-center justify-between p-8 md:p-16 gap-8">
         <h1 className="text-3xl md:text-5xl font-bold">
-          डिजिटल स्वाक्षरीत 7/12
+          {t.heroTitle}
         </h1>
 
         <img
@@ -79,11 +126,9 @@ export default function Land712Document() {
       </div>
 
       {/* INSTRUCTION */}
-      <div className="max-w-4xl mx-auto p-4 text-gray-700 text-center">
+      <div className="max-w-4xl mx-auto p-4 text-gray-700 text-center font-semibold">
         <p>
-          आपण डिजिटल स्वाक्षरीत 7/12 साठी खाली दिलेल्या ऑनलाइन फॉर्म मध्ये अर्ज करू शकता.
-          कृपया आधी ₹15/- अर्ज फी QR कोड स्कॅन करून भरा व त्याचा स्क्रीनशॉट ठेवा.
-          UTR नंबर भरणे अनिवार्य आहे.
+          {t.instruction}
         </p>
       </div>
 
@@ -97,7 +142,7 @@ export default function Land712Document() {
         <input
           type="text"
           name="surveyNo"
-          placeholder="सर्वे नंबर / गट नंबर"
+          placeholder={t.placeholderSurveyNo}
           className="input"
           value={formData.surveyNo}
           onChange={handleChange}
@@ -109,7 +154,7 @@ export default function Land712Document() {
           <input
             type="text"
             name="mobile"
-            placeholder="व्हाट्सअप मोबाईल क्रमांक"
+            placeholder={t.placeholderMobile}
             className="input"
             value={formData.mobile}
             onChange={handleChange}
@@ -119,7 +164,7 @@ export default function Land712Document() {
           <input
             type="email"
             name="email"
-            placeholder="ई मेल आय डी"
+            placeholder={t.placeholderEmail}
             className="input"
             value={formData.email}
             onChange={handleChange}
@@ -130,7 +175,7 @@ export default function Land712Document() {
         <input
           type="text"
           name="ownerName"
-          placeholder="मालकांचे नाव"
+          placeholder={t.placeholderOwnerName}
           className="input"
           value={formData.ownerName}
           onChange={handleChange}
@@ -140,7 +185,7 @@ export default function Land712Document() {
         <input
           type="text"
           name="village"
-          placeholder="गावाचे नाव"
+          placeholder={t.placeholderVillage}
           className="input"
           value={formData.village}
           onChange={handleChange}
@@ -150,7 +195,7 @@ export default function Land712Document() {
         <input
           type="text"
           name="taluka"
-          placeholder="तालुका"
+          placeholder={t.placeholderTaluka}
           className="input"
           value={formData.taluka}
           onChange={handleChange}
@@ -160,7 +205,7 @@ export default function Land712Document() {
         <input
           type="text"
           name="district"
-          placeholder="जिल्हा"
+          placeholder={t.placeholderDistrict}
           className="input"
           value={formData.district}
           onChange={handleChange}
@@ -176,13 +221,13 @@ export default function Land712Document() {
           />
 
           <p className="font-semibold text-gray-700">
-            ₹15/- रुपये शुल्क भरल्यानंतर UTR नंबर टाका
+            {t.paymentLabel}
           </p>
 
           <input
             type="text"
             name="utr"
-            placeholder="UTR नंबर"
+            placeholder={t.placeholderUtr}
             className="input"
             value={formData.utr}
             onChange={handleChange}
@@ -192,7 +237,7 @@ export default function Land712Document() {
           {/* Upload */}
           <div className="space-y-2">
             <label className="block font-semibold text-gray-700">
-              आपण केलेल्या पेमेंटचा स्क्रीनशॉट अपलोड करा *
+              {t.labelPaymentScreenshot}
             </label>
 
             <input
@@ -204,15 +249,15 @@ export default function Land712Document() {
             />
 
             <p className="text-sm text-gray-500">
-              Maximum file size: 10 MB (JPG, PNG, PDF)
+              {t.maxSize}
             </p>
-            {file && <p className="text-sm text-green-600">✅ Selected: {file.name}</p>}
+            {file && <p className="text-sm text-green-600">✅ {t.selectedFile}: {file.name}</p>}
           </div>
         </div>
 
         {/* SUBMIT */}
-        <button type="submit" className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded w-full">
-          अर्ज पाठवा
+        <button type="submit" className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded w-full font-bold">
+          {t.btnSubmit}
         </button>
       </form>
 

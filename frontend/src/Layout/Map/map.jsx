@@ -1,12 +1,30 @@
 import React from "react";
+import { useLang } from "../../context/LanguageContext";
 
 const Map = () => {
+  const { lang } = useLang();
+  
+  const content = {
+    mr: {
+      title: "📍 आमच्या गावाची भौगोलिक स्थिती",
+      location: "धामणेर, महाराष्ट्र",
+      clickText: "नकाशा पाहण्यासाठी क्लिक करा",
+    },
+    en: {
+      title: "📍 Our Village Location",
+      location: "Dhamner, Maharashtra",
+      clickText: "Click map to explore",
+    }
+  };
+
+  const t = content[lang] || content.mr;
+
   return (
     <div className="w-full px-4 md:px-10 py-10 bg-gray-100">
 
       {/* Title */}
       <h2 className="text-2xl md:text-3xl font-bold text-center mb-6">
-        📍 Our Village Location
+        {t.title}
       </h2>
 
       {/* Map Container */}
@@ -26,8 +44,8 @@ const Map = () => {
 
         {/* Overlay Info Card */}
         <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-md px-4 py-2 rounded-xl shadow-md">
-          <p className="text-sm font-semibold text-gray-800">Dhamner, Maharashtra</p>
-          <p className="text-xs text-gray-600">Click map to explore</p>
+          <p className="text-sm font-semibold text-gray-800">{t.location}</p>
+          <p className="text-xs text-gray-600">{t.clickText}</p>
         </div>
 
       </div>

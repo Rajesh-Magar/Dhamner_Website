@@ -1,7 +1,58 @@
 import { useState } from "react";
 import axios from "axios";
+import { useLang } from "../../context/LanguageContext";
+
+const localTexts = {
+  mr: {
+    heroTitle: "बांधकाम परवाना अर्ज",
+    placeholderFullName: "संपूर्ण नाव (नाव | वडिलांचे/पतीचे नाव | आडनाव)",
+    placeholderAddress: "संपूर्ण पत्ता",
+    placeholderMobile: "व्हाट्सअप मोबाईल क्रमांक",
+    placeholderEmail: "ई मेल आय डी",
+    placeholderBusiness: "व्यवसाय",
+    placeholderPropertyNo: "मिळकत क्रमांक",
+    placeholderPlotAreaSqFt: "मिळकतीचा आकार स्के. फूट",
+    placeholderPlotAreaSqM: "मिळकतीचा आकार स्के. मीटर",
+    placeholderConstructionAreaSqFt: "बांधकाम तपशील स्के. फूट",
+    placeholderConstructionAreaSqM: "बांधकाम तपशील स्के. मीटर",
+    placeholderFloors: "मजले (उदा: एक मजला)",
+    labelOwnershipDocs: "जागेच्या मालकीचे कागदपत्रे *",
+    labelLayoutPlan: "मंजूर लेआउट (Plan layout) *",
+    labelBuildingPlan: "बिल्डिंग प्लान (p-line सहित) *",
+    labelTaxReceipt: "विकास शुल्क व कामगार उपकर संबंधीत प्राधिकरणाकडे भरल्याची पोच पावती *",
+    maxSize: "कमाल फाईल साईझ: १० MB",
+    btnSubmit: "अर्ज पाठवा",
+    alertSuccess: "अर्ज यशस्वीरित्या पाठवला गेला आहे ✅",
+    alertUnknownError: "अज्ञात त्रुटी"
+  },
+  en: {
+    heroTitle: "Building Permission Application",
+    placeholderFullName: "Full Name (First Name | Father's/Husband's Name | Last Name)",
+    placeholderAddress: "Full Address",
+    placeholderMobile: "WhatsApp Mobile Number",
+    placeholderEmail: "Email ID",
+    placeholderBusiness: "Occupation",
+    placeholderPropertyNo: "Property Number",
+    placeholderPlotAreaSqFt: "Property Size Sq. Ft.",
+    placeholderPlotAreaSqM: "Property Size Sq. M.",
+    placeholderConstructionAreaSqFt: "Construction Area Sq. Ft.",
+    placeholderConstructionAreaSqM: "Construction Area Sq. M.",
+    placeholderFloors: "Floors (e.g. One Floor)",
+    labelOwnershipDocs: "Land Ownership Documents *",
+    labelLayoutPlan: "Approved Layout (Plan layout) *",
+    labelBuildingPlan: "Building Plan (including p-line) *",
+    labelTaxReceipt: "Receipt of Development Fee & Labor Cess paid to relevant authority *",
+    maxSize: "Maximum file size: 10 MB",
+    btnSubmit: "Submit Application",
+    alertSuccess: "Form submitted successfully ✅",
+    alertUnknownError: "Unknown Error"
+  }
+};
 
 export default function BuildingPermission() {
+  const { lang } = useLang();
+  const t = localTexts[lang] || localTexts.mr;
+
   const [formData, setFormData] = useState({
     fullName: "",
     address: "",
@@ -48,10 +99,10 @@ export default function BuildingPermission() {
 
     try {
       await axios.post("https://dhamner-website.onrender.com/api/building-permission", data);
-      alert("Form submitted successfully!");
+      alert(t.alertSuccess);
     } catch (err) {
       console.error(err);
-      alert("Error submitting form");
+      alert(t.alertUnknownError);
     }
   };
 
@@ -61,7 +112,7 @@ export default function BuildingPermission() {
       {/* HERO */}
       <div className="bg-gradient-to-r from-teal-400 via-cyan-500 to-blue-600 text-white flex flex-col md:flex-row items-center justify-between p-8 md:p-16 gap-8">
         <h1 className="text-3xl md:text-5xl font-bold">
-          बांधकाम परवाना अर्ज
+          {t.heroTitle}
         </h1>
 
         <img
@@ -81,7 +132,7 @@ export default function BuildingPermission() {
         <input
           type="text"
           name="fullName"
-          placeholder="संपूर्ण नाव (नाव | वडिलांचे/पतीचे नाव | आडनाव)"
+          placeholder={t.placeholderFullName}
           className="input"
           onChange={handleChange}
           required
@@ -89,7 +140,7 @@ export default function BuildingPermission() {
 
         <textarea
           name="address"
-          placeholder="संपूर्ण पत्ता"
+          placeholder={t.placeholderAddress}
           className="input"
           onChange={handleChange}
           required
@@ -99,7 +150,7 @@ export default function BuildingPermission() {
           <input
             type="text"
             name="mobile"
-            placeholder="व्हाट्सअप मोबाईल क्रमांक"
+            placeholder={t.placeholderMobile}
             className="input"
             onChange={handleChange}
             required
@@ -108,7 +159,7 @@ export default function BuildingPermission() {
           <input
             type="email"
             name="email"
-            placeholder="ई मेल आय डी"
+            placeholder={t.placeholderEmail}
             className="input"
             onChange={handleChange}
           />
@@ -117,7 +168,7 @@ export default function BuildingPermission() {
         <input
           type="text"
           name="business"
-          placeholder="व्यवसाय"
+          placeholder={t.placeholderBusiness}
           className="input"
           onChange={handleChange}
         />
@@ -125,7 +176,7 @@ export default function BuildingPermission() {
         <input
           type="text"
           name="propertyNo"
-          placeholder="मिळकत क्रमांक"
+          placeholder={t.placeholderPropertyNo}
           className="input"
           onChange={handleChange}
           required
@@ -135,7 +186,7 @@ export default function BuildingPermission() {
         <input
           type="text"
           name="plotAreaSqFt"
-          placeholder="मिळकतीचा आकार स्के. फूट"
+          placeholder={t.placeholderPlotAreaSqFt}
           className="input"
           onChange={handleChange}
           required
@@ -144,7 +195,7 @@ export default function BuildingPermission() {
         <input
           type="text"
           name="plotAreaSqM"
-          placeholder="मिळकतीचा आकार स्के. मीटर"
+          placeholder={t.placeholderPlotAreaSqM}
           className="input"
           onChange={handleChange}
           required
@@ -153,7 +204,7 @@ export default function BuildingPermission() {
         <input
           type="text"
           name="constructionAreaSqFt"
-          placeholder="बांधकाम तपशील स्के. फूट"
+          placeholder={t.placeholderConstructionAreaSqFt}
           className="input"
           onChange={handleChange}
           required
@@ -162,7 +213,7 @@ export default function BuildingPermission() {
         <input
           type="text"
           name="constructionAreaSqM"
-          placeholder="बांधकाम तपशील स्के. मीटर"
+          placeholder={t.placeholderConstructionAreaSqM}
           className="input"
           onChange={handleChange}
           required
@@ -171,7 +222,7 @@ export default function BuildingPermission() {
         <input
           type="text"
           name="floors"
-          placeholder="मजले (उदा: एक मजला)"
+          placeholder={t.placeholderFloors}
           className="input"
           onChange={handleChange}
           required
@@ -183,7 +234,7 @@ export default function BuildingPermission() {
           {/* Ownership */}
           <div>
             <label className="font-semibold block mb-2">
-              जागेच्या मालकीचे कागदपत्रे *
+              {t.labelOwnershipDocs}
             </label>
             <input
               type="file"
@@ -192,13 +243,13 @@ export default function BuildingPermission() {
               className="file"
               required
             />
-            <p className="text-sm text-gray-500">Maximum file size: 10 MB</p>
+            <p className="text-sm text-gray-500">{t.maxSize}</p>
           </div>
 
           {/* Layout */}
           <div>
             <label className="font-semibold block mb-2">
-              मंजूर लेआउट (Plan layout) *
+              {t.labelLayoutPlan}
             </label>
             <input
               type="file"
@@ -207,13 +258,13 @@ export default function BuildingPermission() {
               className="file"
               required
             />
-            <p className="text-sm text-gray-500">Maximum file size: 10 MB</p>
+            <p className="text-sm text-gray-500">{t.maxSize}</p>
           </div>
 
           {/* Building Plan */}
           <div>
             <label className="font-semibold block mb-2">
-              बिल्डिंग प्लान (p-line सहित) *
+              {t.labelBuildingPlan}
             </label>
             <input
               type="file"
@@ -222,13 +273,13 @@ export default function BuildingPermission() {
               className="file"
               required
             />
-            <p className="text-sm text-gray-500">Maximum file size: 10 MB</p>
+            <p className="text-sm text-gray-500">{t.maxSize}</p>
           </div>
 
           {/* Tax */}
           <div>
             <label className="font-semibold block mb-2">
-              विकास शुल्क व कामगार उपकर संबंधीत प्राधिकरणाकडे भरल्याची पोच पावती *
+              {t.labelTaxReceipt}
             </label>
             <input
               type="file"
@@ -237,14 +288,14 @@ export default function BuildingPermission() {
               className="file"
               required
             />
-            <p className="text-sm text-gray-500">Maximum file size: 10 MB</p>
+            <p className="text-sm text-gray-500">{t.maxSize}</p>
           </div>
 
         </div>
 
         {/* SUBMIT */}
-        <button className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded w-full">
-          अर्ज पाठवा
+        <button className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded w-full font-bold">
+          {t.btnSubmit}
         </button>
       </form>
 

@@ -25,16 +25,13 @@ export default function Hero() {
   return (
     <>
       <section className="relative w-full min-h-[90vh] flex items-center">
-        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('/village.jpg')" }}></div>
+        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('/Dhamner-Village-New-Final.webp')" }}></div>
         <div className="absolute inset-0 bg-black/60"></div>
 
         {/* Content */}
         <div className="relative max-w-7xl mx-auto px-6 lg:px-10 py-20 lg:py-28 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
           <div className="text-white text-center lg:text-left z-10">
-            <span className="inline-block px-4 py-1.5 rounded-full bg-green-700/80 border border-green-500/30 text-xs md:text-sm font-bold tracking-wider uppercase mb-6 animate-pulse">
-              {c.districtTag}
-            </span>
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight tracking-tight drop-shadow-md">
               {lang === "en" ? (
                 <>Yashwant Gram Panchayat <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-amber-300">Dhamner</span></>

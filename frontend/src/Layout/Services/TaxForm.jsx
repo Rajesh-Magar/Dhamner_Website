@@ -1,7 +1,68 @@
 import { useState } from "react";
 import axios from "axios";
+import { useLang } from "../../context/LanguageContext";
+
+const localTexts = {
+  mr: {
+    heroTitle: "कर भरणा",
+    heroDesc: "आपल्या गावातील कर ऑनलाइन भरण्यासाठी खालील माहिती भरा व QR कोड स्कॅन करून पेमेंट करा.",
+    instructionsTitle: "सूचना",
+    instructionsDesc: "खाली दिलेल्या स्कॅनरवर ऑनलाइन भरणा करू शकता.",
+    instruction1: "१. घरपट्टी, सॅनिटरी, दिवाबत्ती ही ग्रामनिधी स्कॅनर वर स्कॅन करून भरावी.",
+    instruction2: "२. पाणीपट्टी भरणा हा केवळ पाणीपट्टी स्कॅनर वर स्कॅन करून भरावा.",
+    instruction3: "भरणा केल्याचा स्क्रीनशॉट काढावा व ऑनलाइन फॉर्म मध्ये अपलोड करावा.",
+    qrTitle: "QR कोड स्कॅन करा",
+    qrGramnidhi: "ग्रामनिधी/घरपट्टी/सॅनिटरी/दिवाबत्ती",
+    qrPanipatti: "पाणीपट्टी",
+    formTitle: "माहिती भरा",
+    placeholderName: "खातेदाराचे नाव *",
+    placeholderWhatsapp: "व्हॉट्सअप नंबर *",
+    placeholderEmail: "ईमेल",
+    placeholderReceiptNo: "मिळकत क्रमांक *",
+    placeholderGharpattiAmount: "घरपट्टी रक्कम *",
+    placeholderPanipattiAmount: "पाणीपट्टी रक्कम *",
+    placeholderGharpattiUpi: "घरपट्टी UPI ID *",
+    placeholderPanipattiUpi: "पाणीपट्टी UPI ID *",
+    labelGharpattiScreenshot: "घरपट्टी Screenshot *",
+    labelPanipattiScreenshot: "पाणीपट्टी Screenshot *",
+    btnSubmit: "अर्ज पाठवा",
+    alertMinScreenshot: "कृपया किमान एक स्क्रीनशॉट अपलोड करा!",
+    alertSuccess: "अर्ज यशस्वीरित्या पाठवला गेला आहे ✅",
+    alertUnknownError: "अज्ञात त्रुटी",
+  },
+  en: {
+    heroTitle: "Tax Payment",
+    heroDesc: "To pay your village taxes online, fill out the form below and make the payment by scanning the QR code.",
+    instructionsTitle: "Instructions",
+    instructionsDesc: "You can make online payments using the scanners below.",
+    instruction1: "1. House Tax, Sanitary, and Street Light taxes should be paid by scanning the Gram Nidhi scanner.",
+    instruction2: "2. Water Tax payment must only be paid by scanning the Water Tax scanner.",
+    instruction3: "Take a screenshot of the payment and upload it in the online form.",
+    qrTitle: "Scan QR Code",
+    qrGramnidhi: "Gram Nidhi / House Tax / Sanitary / Street Lights",
+    qrPanipatti: "Water Tax",
+    formTitle: "Fill Information",
+    placeholderName: "Account Holder's Name *",
+    placeholderWhatsapp: "WhatsApp Number *",
+    placeholderEmail: "Email",
+    placeholderReceiptNo: "Property/Income Number *",
+    placeholderGharpattiAmount: "House Tax Amount *",
+    placeholderPanipattiAmount: "Water Tax Amount *",
+    placeholderGharpattiUpi: "House Tax UPI ID *",
+    placeholderPanipattiUpi: "Water Tax UPI ID *",
+    labelGharpattiScreenshot: "House Tax Screenshot *",
+    labelPanipattiScreenshot: "Water Tax Screenshot *",
+    btnSubmit: "Submit Application",
+    alertMinScreenshot: "Please upload at least one screenshot!",
+    alertSuccess: "Form submitted successfully ✅",
+    alertUnknownError: "Unknown Error",
+  }
+};
 
 export default function TaxPage() {
+  const { lang } = useLang();
+  const t = localTexts[lang] || localTexts.mr;
+
   const [formData, setFormData] = useState({
     name: "",
     whatsapp: "",
@@ -34,7 +95,7 @@ export default function TaxPage() {
 
     // Validate at least one screenshot is selected
     if (!files.gharpattiScreenshot && !files.panipattiScreenshot) {
-      alert("कृपया किमान एक स्क्रीनशॉट अपलोड करा!");
+      alert(t.alertMinScreenshot);
       return;
     }
 
@@ -56,7 +117,7 @@ export default function TaxPage() {
       const response = await axios.post("https://dhamner-website.onrender.com/api/tax", data);
       
       if (response.data.success) {
-        alert("Form submitted successfully ✅");
+        alert(t.alertSuccess);
       } else {
         alert(`Error: ${response.data.message}`);
         return;
@@ -78,7 +139,7 @@ export default function TaxPage() {
       });
     } catch (err) {
       console.error("Full Error:", err.response?.data || err.message);
-      const errorMsg = err.response?.data?.message || err.message || "अज्ञात त्रुटी";
+      const errorMsg = err.response?.data?.message || err.message || t.alertUnknownError;
       alert(errorMsg);
     }
   };
@@ -90,10 +151,10 @@ export default function TaxPage() {
       <div className="bg-gradient-to-r from-teal-400 via-cyan-500 to-blue-600 text-white py-16 px-6 md:px-16 flex flex-col md:flex-row items-center justify-between">
         <div className="max-w-xl">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            कर भरणा
+            {t.heroTitle}
           </h1>
           <p className="text-lg opacity-90">
-            आपल्या गावातील कर ऑनलाइन भरण्यासाठी खालील माहिती भरा व QR कोड स्कॅन करून पेमेंट करा.
+            {t.heroDesc}
           </p>
         </div>
 
@@ -106,32 +167,24 @@ export default function TaxPage() {
             {/* ================= INSTRUCTIONS ================= */}
       <div className="bg-gray-100 py-12 px-6 md:px-16 text-center">
         <h2 className="text-2xl md:text-3xl font-bold mb-6">
-          सूचना
+          {t.instructionsTitle}
         </h2>
 
         <p className="mb-6 text-gray-600 font-bold">
-          खाली दिलेल्या स्कॅनरवर ऑनलाइन भरणा करू शकता.
+          {t.instructionsDesc}
         </p>
 
         <div className="max-w-3xl mx-auto text-center font-bold space-y-4 text-gray-700">
           <p>
-            1. घरपट्टी, सॅनिटरी, दिवाबत्ती ही{" "}
-            <span className="text-green-600 font-semibold">
-              ग्रामनिधी स्कॅनर
-            </span>{" "}
-            वर स्कॅन करून भरावी.
+            {t.instruction1}
           </p>
 
           <p>
-            2. पाणीपट्टी भरणा हा केवळ{" "}
-            <span className="text-green-600 font-semibold">
-              पाणीपट्टी स्कॅनर
-            </span>{" "}
-            वर स्कॅन करून भरावा.
+            {t.instruction2}
           </p>
 
           <p>
-            भरणा केल्याचा स्क्रीनशॉट काढावा व ऑनलाइन फॉर्म मध्ये अपलोड करावा.
+            {t.instruction3}
           </p>
         </div>
       </div>
@@ -139,7 +192,7 @@ export default function TaxPage() {
       {/* ================= QR SECTION ================= */}
       <div className="bg-white py-12 px-4 md:px-10">
         <h2 className="text-2xl md:text-3xl font-bold text-center mb-10">
-          QR कोड स्कॅन करा
+          {t.qrTitle}
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto">
@@ -151,7 +204,7 @@ export default function TaxPage() {
               className="mx-auto w-64 md:w-72 rounded-lg shadow hover:scale-105 transition"
             />
             <h3 className="text-xl font-semibold text-green-600 mt-4">
-              ग्रामनिधी/घरपट्टी/सॅनिटरी/दिवाबत्ती
+              {t.qrGramnidhi}
             </h3>
           </div>
 
@@ -162,7 +215,7 @@ export default function TaxPage() {
               className="mx-auto w-64 md:w-72 rounded-lg shadow hover:scale-105 transition"
             />
             <h3 className="text-xl font-semibold text-green-600 mt-4">
-              पाणीपट्टी
+              {t.qrPanipatti}
             </h3>
           </div>
 
@@ -178,36 +231,36 @@ export default function TaxPage() {
           className="max-w-6xl mx-auto bg-white p-6 md:p-10 rounded-xl shadow"
         >
           <h2 className="text-2xl md:text-3xl font-bold mb-6">
-            माहिती भरा
+            {t.formTitle}
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-            <input name="name" placeholder="खातेदाराचे नाव *" onChange={handleChange} className="border p-3 rounded" required />
-            <input name="whatsapp" placeholder="व्हॉट्सअप नंबर *" onChange={handleChange} className="border p-3 rounded" required />
-            <input name="email" placeholder="ईमेल" onChange={handleChange} className="border p-3 rounded" />
-            <input name="receiptNo" placeholder="मिळकत क्रमांक *" onChange={handleChange} className="border p-3 rounded" required />
+            <input name="name" placeholder={t.placeholderName} onChange={handleChange} className="border p-3 rounded" required />
+            <input name="whatsapp" placeholder={t.placeholderWhatsapp} onChange={handleChange} className="border p-3 rounded" required />
+            <input name="email" placeholder={t.placeholderEmail} onChange={handleChange} className="border p-3 rounded" />
+            <input name="receiptNo" placeholder={t.placeholderReceiptNo} onChange={handleChange} className="border p-3 rounded" required />
 
-            <input name="gharpattiAmount" type="number" placeholder="घरपट्टी रक्कम *" onChange={handleChange} className="border p-3 rounded" required />
-            <input name="panipattiAmount" type="number" placeholder="पाणीपट्टी रक्कम *" onChange={handleChange} className="border p-3 rounded" required />
+            <input name="gharpattiAmount" type="number" placeholder={t.placeholderGharpattiAmount} onChange={handleChange} className="border p-3 rounded" required />
+            <input name="panipattiAmount" type="number" placeholder={t.placeholderPanipattiAmount} onChange={handleChange} className="border p-3 rounded" required />
 
-            <input name="gharpattiUpi" placeholder="घरपट्टी UPI ID *" onChange={handleChange} className="border p-3 rounded" required />
-            <input name="panipattiUpi" placeholder="पाणीपट्टी UPI ID *" onChange={handleChange} className="border p-3 rounded" required />
+            <input name="gharpattiUpi" placeholder={t.placeholderGharpattiUpi} onChange={handleChange} className="border p-3 rounded" required />
+            <input name="panipattiUpi" placeholder={t.placeholderPanipattiUpi} onChange={handleChange} className="border p-3 rounded" required />
 
             <div>
-              <label>घरपट्टी Screenshot *</label>
+              <label>{t.labelGharpattiScreenshot}</label>
               <input type="file" name="gharpattiScreenshot" onChange={handleFileChange} required />
             </div>
 
             <div>
-              <label>पाणीपट्टी Screenshot *</label>
+              <label>{t.labelPanipattiScreenshot}</label>
               <input type="file" name="panipattiScreenshot" onChange={handleFileChange} required />
             </div>
 
           </div>
 
           <button className="mt-8 bg-green-600 text-white px-6 py-3 rounded hover:bg-green-700 font-bold">
-            अर्ज पाठवा
+            {t.btnSubmit}
           </button>
         </form>
       </div>

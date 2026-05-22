@@ -1,7 +1,65 @@
 import { useState } from "react";
 import axios from "axios";
+import { useLang } from "../../context/LanguageContext";
+
+const localTexts = {
+  mr: {
+    heroTitle: "मालमत्ता हस्तांतरण अर्ज",
+    labelDescription: "वर्णन",
+    propertyTypes: [
+      { value: "बखळ  जागा", label: "बखळ  जागा" },
+      { value: "कच्चे घर", label: "कच्चे घर" },
+      { value: "अर्धे पक्के घर", label: "अर्धे पक्के घर" },
+      { value: "आर सी सी पक्के घर", label: "आर सी सी पक्के घर" }
+    ],
+    placeholderArea: "क्षेत्रफळ (लांबी x रुंदी) एकूण चौ. फुट ",
+    labelTaxReceipt: "वारस दाखला / कर पावती (Max 10MB)",
+    labelUtara: "जागेचा उतारा (नमुना ०८)",
+    labelConsent: "संमतीपत्र / सूची क्रमांक",
+    labelDeathCertificate: "मालमता धारक मयत असल्यास मृत दाखला ",
+    limitInstructions: "(आपण जास्तीत जास्त 1 फाईल अपलोड करू शकता. एकूण अपलोड लिमिट 10MB आहे)",
+    maxSize: "Maximum file size: 10 MB",
+    placeholderMobile: "व्हाट्सअप मोबाईल क्रमांक",
+    placeholderEmail: "ई मेल आय डी",
+    placeholderSellerName: "लिहून देणाऱ्याचे नाव",
+    placeholderAddress: "पत्ता",
+    placeholderBuyerName: "लिहून घेणाऱ्याचे नाव",
+    placeholderPropertyNo: "मिळकत क्रमांक",
+    btnSubmit: "अर्ज पाठवा",
+    alertSuccess: "अर्ज यशस्वीरित्या पाठवला गेला आहे ✅",
+    alertError: "अर्ज पाठवताना त्रुटी आली"
+  },
+  en: {
+    heroTitle: "Property Transfer Application",
+    labelDescription: "Description",
+    propertyTypes: [
+      { value: "बखळ  जागा", label: "Vacant Land" },
+      { value: "कच्चे घर", label: "Kutcha House" },
+      { value: "अर्धे पक्के घर", label: "Semi-Pucca House" },
+      { value: "आर सी सी पक्के घर", label: "RCC Pucca House" }
+    ],
+    placeholderArea: "Area (Length x Width) Total Sq. Ft.",
+    labelTaxReceipt: "Heir Certificate / Tax Receipt (Max 10MB)",
+    labelUtara: "Property Utara (Form 08)",
+    labelConsent: "Consent Letter / Index Number",
+    labelDeathCertificate: "Death Certificate if Property Owner is Deceased",
+    limitInstructions: "(You can upload maximum 1 file. Total upload limit is 10MB)",
+    maxSize: "Maximum file size: 10 MB",
+    placeholderMobile: "WhatsApp Mobile Number",
+    placeholderEmail: "Email ID",
+    placeholderSellerName: "Seller's Name",
+    placeholderAddress: "Address",
+    placeholderBuyerName: "Buyer's Name",
+    placeholderPropertyNo: "Property Number",
+    btnSubmit: "Submit Application",
+    alertSuccess: "Form submitted successfully! ✅",
+    alertError: "Error submitting form"
+  }
+};
 
 export default function PropertyTransfer() {
+  const { lang } = useLang();
+  const t = localTexts[lang] || localTexts.mr;
   const [formData, setFormData] = useState({
     sellerName: "",
     sellerAddress: "",
@@ -43,10 +101,10 @@ export default function PropertyTransfer() {
 
     try {
       await axios.post("https://dhamner-website.onrender.com/api/property-transfer", data);
-      alert("Form submitted successfully!");
+      alert(t.alertSuccess);
     } catch (err) {
       console.error(err);
-      alert("Error submitting form");
+      alert(t.alertError);
     }
   };
 
@@ -56,7 +114,7 @@ export default function PropertyTransfer() {
       {/* HERO */}
       <div className="bg-gradient-to-r from-teal-400 via-cyan-500 to-blue-600 text-white flex flex-col md:flex-row items-center justify-between p-8 md:p-16 gap-8">
         <h1 className="text-3xl md:text-5xl font-bold">
-          मालमत्ता हस्तांतरण अर्ज
+          {t.heroTitle}
         </h1>
 
         <img
@@ -74,18 +132,18 @@ export default function PropertyTransfer() {
 
         {/* PROPERTY TYPE */}
         <div>
-          <label className="font-semibold block mb-2">वर्णन</label>
+          <label className="font-semibold block mb-2">{t.labelDescription}</label>
 
           <div className="space-y-2">
-            {["बखळ  जागा", "कच्चे घर", "अर्धे पक्के घर", "आर सी सी पक्के घर"].map((type) => (
-              <label key={type} className="flex items-center gap-2">
+            {t.propertyTypes.map((item) => (
+              <label key={item.value} className="flex items-center gap-2">
                 <input
                   type="radio"
                   name="propertyType"
-                  value={type}
+                  value={item.value}
                   onChange={handleChange}
                 />
-                {type}
+                {item.label}
               </label>
             ))}
           </div>
@@ -95,7 +153,7 @@ export default function PropertyTransfer() {
         <input
           type="text"
           name="area"
-          placeholder="क्षेत्रफळ (लांबी x रुंदी) एकूण चौ. फुट "
+          placeholder={t.placeholderArea}
           className="input"
           onChange={handleChange}
           required
@@ -107,7 +165,7 @@ export default function PropertyTransfer() {
           {/* TAX RECEIPT */}
           <div>
             <label className="font-semibold">
-              वारस दाखला / कर पावती (Max 10MB)
+              {t.labelTaxReceipt}
             </label>
             <input
               type="file"
@@ -120,7 +178,7 @@ export default function PropertyTransfer() {
           {/* UTARA */}
           <div>
             <label className="font-semibold">
-              जागेचा उतारा (नमुना ०८)
+              {t.labelUtara}
             </label>
             <input
               type="file"
@@ -133,7 +191,7 @@ export default function PropertyTransfer() {
           {/* CONSENT */}
           <div>
             <label className="font-semibold">
-              संमतीपत्र / सूची क्रमांक
+              {t.labelConsent}
             </label>
             <input
               type="file"
@@ -143,25 +201,25 @@ export default function PropertyTransfer() {
             />
           </div>
           {/* DEATH CERTIFICATE */}
-<div>
-  <label className="font-semibold">
-    मालमता धारक मयत असल्यास मृत दाखला 
-    <span className="text-sm text-gray-500 block">
-      (आपण जास्तीत जास्त 1 फाईल अपलोड करू शकता. एकूण अपलोड लिमिट 10MB आहे)
-    </span>
-  </label>
+          <div>
+            <label className="font-semibold">
+              {t.labelDeathCertificate}
+              <span className="text-sm text-gray-500 block">
+                {t.limitInstructions}
+              </span>
+            </label>
 
-  <input
-    type="file"
-    name="deathCertificate"
-    onChange={handleFileChange}
-    className="block mt-2"
-  />
+            <input
+              type="file"
+              name="deathCertificate"
+              onChange={handleFileChange}
+              className="block mt-2"
+            />
 
-  <p className="text-sm text-gray-500 mt-1">
-    Maximum file size: 10 MB
-  </p>
-</div>
+            <p className="text-sm text-gray-500 mt-1">
+              {t.maxSize}
+            </p>
+          </div>
 
         </div>
 
@@ -170,7 +228,7 @@ export default function PropertyTransfer() {
           <input
             type="text"
             name="mobile"
-            placeholder="व्हाट्सअप मोबाईल क्रमांक"
+            placeholder={t.placeholderMobile}
             className="input"
             onChange={handleChange}
             required
@@ -179,7 +237,7 @@ export default function PropertyTransfer() {
           <input
             type="email"
             name="email"
-            placeholder="ई मेल आय डी"
+            placeholder={t.placeholderEmail}
             className="input"
             onChange={handleChange}
           />
@@ -189,7 +247,7 @@ export default function PropertyTransfer() {
         <input
           type="text"
           name="sellerName"
-          placeholder="लिहून देणाऱ्याचे नाव"
+          placeholder={t.placeholderSellerName}
           className="input"
           onChange={handleChange}
           required
@@ -197,7 +255,7 @@ export default function PropertyTransfer() {
 
         <textarea
           name="sellerAddress"
-          placeholder="पत्ता"
+          placeholder={t.placeholderAddress}
           className="input"
           onChange={handleChange}
           required
@@ -207,7 +265,7 @@ export default function PropertyTransfer() {
         <input
           type="text"
           name="buyerName"
-          placeholder="लिहून घेणाऱ्याचे नाव"
+          placeholder={t.placeholderBuyerName}
           className="input"
           onChange={handleChange}
           required
@@ -215,7 +273,7 @@ export default function PropertyTransfer() {
 
         <textarea
           name="buyerAddress"
-          placeholder="पत्ता"
+          placeholder={t.placeholderAddress}
           className="input"
           onChange={handleChange}
           required
@@ -225,7 +283,7 @@ export default function PropertyTransfer() {
         <input
           type="text"
           name="propertyNo"
-          placeholder="मिळकत क्रमांक"
+          placeholder={t.placeholderPropertyNo}
           className="input"
           onChange={handleChange}
           required
@@ -233,7 +291,7 @@ export default function PropertyTransfer() {
 
         {/* SUBMIT */}
         <button className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded w-full">
-          अर्ज पाठवा
+          {t.btnSubmit}
         </button>
       </form>
 

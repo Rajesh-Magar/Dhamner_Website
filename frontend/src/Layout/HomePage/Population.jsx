@@ -38,7 +38,7 @@ export default function Population() {
       <div 
         className="absolute inset-0 bg-cover bg-center"
         style={{
-          backgroundImage: "url('/village.jpg')",
+          backgroundImage: "url('/Dhamner-Village-New-Final.webp')",
         }}
       >
         <div className="absolute inset-0 bg-green-950/80 backdrop-blur-xs"></div>

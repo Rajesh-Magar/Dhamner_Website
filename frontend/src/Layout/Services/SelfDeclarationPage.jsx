@@ -1,40 +1,90 @@
 import { FileText } from "lucide-react";
+import { useLang } from "../../context/LanguageContext";
+
+const localTexts = {
+  mr: {
+    heroTitle: "स्वयंघोषणापत्रे",
+    subTitle: "आवश्यक कागदपत्रे डाउनलोड करा",
+    btnDownload: "Download",
+    pdfs: [
+      {
+        name: "कोणत्याही-योजनेचा-लाभ-न-घेतल्याचे-स्वयंघोषणापत्र",
+        file: "/Pdfs/कोणत्याही-योजनेचा-लाभ-न-घेतल्याचे-स्वयंघोषणापत्र.pdf",
+      },
+      {
+        name: "परितव्या-असल्याबाबत-स्वयंघोषणापत्र",
+        file: "/Pdfs/परितक्या-असल्याबाबत-स्वयंघोषणापत्र.pdf",
+      },
+      {
+        name: "रहिवाशी-दाखला-स्व-घोषणापत्र",
+        file: "/Pdfs/रहिवाशी-दाखला-स्व-घोषणापत्र.pdf",
+      },
+      {
+        name: "विधवा-असल्याबाबत-स्वयंघोषणापत्र",
+        file: "/Pdfs/विधवा-असल्याबाबत-स्वयंघोषणापत्र.pdf",
+      },
+      {
+        name: "विभक्त-कुटुंब-असल्यास-स्वयंघोषणापत्र",
+        file: "/Pdfs/विभक्त-कुटुंब-असल्यास-स्वयंघोषणापत्र.pdf",
+      },
+      {
+        name: "वीज-जोडणी-स्वयंघोषणापत्र",
+        file: "/Pdfs/वीज-जोडणी-स्वयंघोषणापत्र.pdf",
+      },
+      {
+        name: "शौचालय-असल्याबाबत-स्वयंघोषणापत्र",
+        file: "/Pdfs/शौचालय-असल्याबाबत-स्वयंघोषणापत्र.pdf",
+      },
+      {
+        name: "हयात-असल्याबाबत-स्वयंघोषणापत्र",
+        file: "/Pdfs/हयात-असल्याबाबत-स्वयंघोषणापत्र.pdf",
+      },
+    ]
+  },
+  en: {
+    heroTitle: "Self-Declaration Forms",
+    subTitle: "Download Required Documents",
+    btnDownload: "Download",
+    pdfs: [
+      {
+        name: "Self-declaration of not having availed benefits of any scheme",
+        file: "/Pdfs/कोणत्याही-योजनेचा-लाभ-न-घेतल्याचे-स्वयंघोषणापत्र.pdf",
+      },
+      {
+        name: "Self-declaration of being deserted / abandoned",
+        file: "/Pdfs/परितक्या-असल्याबाबत-स्वयंघोषणापत्र.pdf",
+      },
+      {
+        name: "Self-declaration for residence certificate",
+        file: "/Pdfs/रहिवाशी-दाखला-स्व-घोषणापत्र.pdf",
+      },
+      {
+        name: "Self-declaration of being a widow",
+        file: "/Pdfs/विधवा-असल्याबाबत-स्वयंघोषणापत्र.pdf",
+      },
+      {
+        name: "Self-declaration of living as a separate family",
+        file: "/Pdfs/विभक्त-कुटुंब-असल्यास-स्वयंघोषणापत्र.pdf",
+      },
+      {
+        name: "Self-declaration for electricity connection",
+        file: "/Pdfs/वीज-जोडणी-स्वयंघोषणापत्र.pdf",
+      },
+      {
+        name: "Self-declaration of having a toilet",
+        file: "/Pdfs/शौचालय-असल्याबाबत-स्वयंघोषणापत्र.pdf",
+      },
+      {
+        name: "Self-declaration of being alive (Life Certificate)",
+        file: "/Pdfs/हयात-असल्याबाबत-स्वयंघोषणापत्र.pdf",
+      },
+    ]
+  }
+};
 
 export default function SelfDeclarationPage() {
-  const pdfs = [
-    {
-      name: "कोणत्याही-योजनेचा-लाभ-न-घेतल्याचे-स्वयंघोषणापत्र",
-      file: "/Pdfs/कोणत्याही-योजनेचा-लाभ-न-घेतल्याचे-स्वयंघोषणापत्र.pdf",
-    },
-    {
-      name: "परितव्या-असल्याबाबत-स्वयंघोषणापत्र",
-      file: "/Pdfs/परितक्या-असल्याबाबत-स्वयंघोषणापत्र.pdf",
-    },
-    {
-      name: "रहिवाशी-दाखला-स्व-घोषणापत्र",
-      file: "/Pdfs/रहिवाशी-दाखला-स्व-घोषणापत्र.pdf",
-    },
-    {
-      name: "विधवा-असल्याबाबत-स्वयंघोषणापत्र",
-      file: "/Pdfs/विधवा-असल्याबाबत-स्वयंघोषणापत्र.pdf",
-    },
-    {
-      name: "विभक्त-कुटुंब-असल्यास-स्वयंघोषणापत्र",
-      file: "/Pdfs/विभक्त-कुटुंब-असल्यास-स्वयंघोषणापत्र.pdf",
-    },
-    {
-      name: "वीज-जोडणी-स्वयंघोषणापत्र",
-      file: "/Pdfs/वीज-जोडणी-स्वयंघोषणापत्र.pdf",
-    },
-    {
-      name: "शौचालय-असल्याबाबत-स्वयंघोषणापत्र",
-      file: "/Pdfs/शौचालय-असल्याबाबत-स्वयंघोषणापत्र.pdf",
-    },
-    {
-      name: "हयात-असल्याबाबत-स्वयंघोषणापत्र",
-      file: "/Pdfs/हयात-असल्याबाबत-स्वयंघोषणापत्र.pdf",
-    },
-  ];
+  const { lang } = useLang();
+  const t = localTexts[lang] || localTexts.mr;
 
   return (
     <div className="w-full">
@@ -45,7 +95,7 @@ export default function SelfDeclarationPage() {
         {/* LEFT */}
         <div className="w-full md:w-1/2 text-center md:text-left">
           <h1 className="text-4xl md:text-6xl font-extrabold leading-tight drop-shadow-[2px_2px_0px_rgba(0,0,0,0.3)]">
-            स्वयंघोषणापत्रे
+            {t.heroTitle}
           </h1>
         </div>
 
@@ -64,12 +114,12 @@ export default function SelfDeclarationPage() {
       <div className="bg-gray-100 py-10 px-4 md:px-10">
 
         <h2 className="text-2xl md:text-3xl font-bold mb-8 text-gray-800 text-center md:text-left">
-          आवश्यक कागदपत्रे डाउनलोड करा
+          {t.subTitle}
         </h2>
 
         <div className="max-w-4xl mx-auto space-y-4">
 
-          {pdfs.map((pdf, index) => (
+          {t.pdfs.map((pdf, index) => (
             <a
               key={index}
               href={pdf.file}
@@ -84,7 +134,7 @@ export default function SelfDeclarationPage() {
               </div>
 
               <span className="text-green-600 font-medium text-sm md:text-base">
-                Download
+                {t.btnDownload}
               </span>
             </a>
           ))}

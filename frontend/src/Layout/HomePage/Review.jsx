@@ -1,7 +1,39 @@
 import { useState } from "react";
 import axios from "axios";
+import { useLang } from "../../context/LanguageContext";
 
 export default function Review() {
+  const { lang } = useLang();
+  
+  const content = {
+    mr: {
+      title: "आपली मते व अभिप्राय",
+      subtitle: "आपले विचार आम्हाला सांगा – कारण तुमचा अनुभव आमच्या प्रगतीचा मार्गदर्शक आहे.",
+      firstName: "पहिले नाव",
+      lastName: "आडनाव",
+      email: "ईमेल",
+      subject: "विषय",
+      message: "विषयाचे वर्गीकरण",
+      submit: "फॉर्म पाठवा",
+      successAlert: "आपली मते पाठवली गेली ✅",
+      errorAlert: "अज्ञात त्रुटी",
+    },
+    en: {
+      title: "Feedback & Reviews",
+      subtitle: "Tell us your thoughts – because your experience guides our progress.",
+      firstName: "First Name",
+      lastName: "Last Name",
+      email: "Email",
+      subject: "Subject",
+      message: "Message Details",
+      submit: "Submit Form",
+      successAlert: "Your feedback has been submitted successfully ✅",
+      errorAlert: "Unknown error occurred",
+    }
+  };
+
+  const t = content[lang] || content.mr;
+
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -22,7 +54,7 @@ export default function Review() {
 
     try {
       await axios.post("https://dhamner-website.onrender.com/api/review", formData);
-      alert("आपली मते पाठवली गेली ✅");
+      alert(t.successAlert);
       setFormData({
         firstName: "",
         lastName: "",
@@ -32,7 +64,7 @@ export default function Review() {
       });
     } catch (error) {
       console.error("Full Error:", error.response?.data || error.message);
-      const errorMsg = error.response?.data?.message || error.message || "अज्ञात त्रुटी";
+      const errorMsg = error.response?.data?.message || error.message || t.errorAlert;
       alert(errorMsg);
     }
   };
@@ -42,7 +74,7 @@ export default function Review() {
       {/* Heading */}
       <div className="text-center mb-14">
         <h2 className="text-4xl font-bold text-gray-800">
-          आपली मते व अभिप्राय
+          {t.title}
         </h2>
 
         <div className="flex items-center justify-center gap-4 my-4">
@@ -52,8 +84,7 @@ export default function Review() {
         </div>
 
         <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-          आपले विचार आम्हाला सांगा – कारण तुमचा अनुभव आमच्या प्रगतीचा मार्गदर्शक
-          आहे.
+          {t.subtitle}
         </p>
       </div>
 
@@ -65,12 +96,12 @@ export default function Review() {
           <div className="grid md:grid-cols-2 gap-6">
             <div>
               <label className="font-semibold">
-                पहिले नाव <span className="text-red-500">*</span>
+                {t.firstName} <span className="text-red-500">*</span>
               </label>
               <input
                 type="text"
                 name="firstName"
-                placeholder="पहिले नाव"
+                placeholder={t.firstName}
                 value={formData.firstName}
                 onChange={handleChange}
                 required
@@ -80,12 +111,12 @@ export default function Review() {
 
             <div>
               <label className="font-semibold">
-                आडनाव <span className="text-red-500">*</span>
+                {t.lastName} <span className="text-red-500">*</span>
               </label>
               <input
                 type="text"
                 name="lastName"
-                placeholder="आडनाव"
+                placeholder={t.lastName}
                 value={formData.lastName}
                 onChange={handleChange}
                 required
@@ -97,12 +128,12 @@ export default function Review() {
           {/* Email */}
           <div>
             <label className="font-semibold">
-              ईमेल <span className="text-red-500">*</span>
+              {t.email} <span className="text-red-500">*</span>
             </label>
             <input
               type="email"
               name="email"
-              placeholder="ईमेल"
+              placeholder={t.email}
               value={formData.email}
               onChange={handleChange}
               required
@@ -113,12 +144,12 @@ export default function Review() {
           {/* Subject */}
           <div>
             <label className="font-semibold">
-              विषय <span className="text-red-500">*</span>
+              {t.subject} <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
               name="subject"
-              placeholder="विषय"
+              placeholder={t.subject}
               value={formData.subject}
               onChange={handleChange}
               required
@@ -129,12 +160,12 @@ export default function Review() {
           {/* Message */}
           <div>
             <label className="font-semibold">
-              विषयाचे वर्गीकरण <span className="text-red-500">*</span>
+              {t.message} <span className="text-red-500">*</span>
             </label>
             <textarea
               name="message"
               rows="4"
-              placeholder="विषयाचे वर्गीकरण"
+              placeholder={t.message}
               value={formData.message}
               onChange={handleChange}
               required
@@ -147,7 +178,7 @@ export default function Review() {
             type="submit"
             className="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg text-lg font-semibold transition"
           >
-            Submit Form
+            {t.submit}
           </button>
         </form>
       </div>

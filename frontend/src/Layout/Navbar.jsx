@@ -95,36 +95,42 @@ export default function Navbar() {
       <div className="bg-white px-4 lg:px-10 py-3 flex flex-col lg:flex-row justify-between items-center gap-4 border-b border-gray-100">
 
         <div className="flex items-center gap-2">
-          <img src="/assets/HD-wallpaper-satyamev-jayate-bharat-civil-service-history-ias-india-indian-ips-lion-emblem-motivation-removebg-preview.png" className="h-[75px] md:h-[85px] w-auto object-contain" alt="Emblem" />
-          <img src="/assets/Seal_of_Maharashtra.svg.png" className="h-[45px] md:h-[55px] ml-[-10px]" alt="Seal" />
+          <img src="/assets/HD-wallpaper-satyamev-jayate-bharat-civil-service-history-ias-india-indian-ips-lion-emblem-motivation-removebg-preview.png" className="hidden md:block h-[75px] md:h-[85px] w-auto object-contain" alt="Emblem" />
+          <img src="/assets/Seal_of_Maharashtra.svg.png" className="hidden md:block h-[45px] md:h-[55px] ml-[-10px]" alt="Seal" />
           <img src="/assets/Gemini_Generated_Image_7qc6v97qc6v97qc6-removebg-preview.png" className="h-[55px] md:h-[65px]" alt="Logo" />
 
           <div className="ml-2">
-            <h1 className="text-lg lg:text-2xl font-extrabold text-green-800 tracking-tight">यशवंत ग्रामपंचायत धामणेर</h1>
-            <p className="text-xs md:text-sm font-semibold text-orange-600">ता - कोरेगाव, जि - सातारा</p>
+            <h1 className="text-lg lg:text-2xl font-extrabold text-green-800 tracking-tight">
+              {lang === "mr" ? "यशवंत ग्रामपंचायत धामणेर" : "Yeshwant Gram Panchayat Dhamner"}
+            </h1>
+            <p className="text-xs md:text-sm font-semibold text-orange-600">
+              {lang === "mr" ? "ध्यास विकासाचा, वेग प्रगतीचा" : "Pursuit of Development, Speed of Progress"}
+            </p>
           </div>
         </div>
 
-        <div className="hidden lg:flex gap-8 text-gray-700 items-center">
-          <div className="flex items-center gap-2">
-            <Mail size={18} className="text-green-700" />
-            <div>
-              <p className="font-semibold text-xs text-gray-500 uppercase">{t.email}</p>
-              <p className="text-xs font-medium text-gray-800">dhamner189585@gmail.com</p>
+        <div className="hidden lg:flex gap-6 text-gray-700 items-center">
+          <div className="flex flex-col gap-1.5 border-r border-gray-200 pr-6 py-0.5">
+            <div className="flex items-center gap-2">
+              <Mail size={14} className="text-green-700 shrink-0" />
+              <div className="text-xs text-gray-800">
+                <span className="font-semibold text-gray-500 uppercase mr-1.5 text-[10px]">{t.email}:</span>
+                dhamner189585@gmail.com
+              </div>
             </div>
-          </div>
-          <div className="flex items-center gap-2">
-            <Clock size={18} className="text-green-700" />
-            <div>
-              <p className="font-semibold text-xs text-gray-500 uppercase">{t.officeHours}</p>
-              <p className="text-xs font-medium text-gray-800">{t.officeHoursVal}</p>
+            <div className="flex items-center gap-2">
+              <Clock size={14} className="text-green-700 shrink-0" />
+              <div className="text-xs text-gray-800">
+                <span className="font-semibold text-gray-500 uppercase mr-1.5 text-[10px]">{t.officeHours}:</span>
+                {t.officeHoursVal}
+              </div>
             </div>
-          </div>
-          <div className="flex items-center gap-2">
-            <Phone size={18} className="text-green-700" />
-            <div>
-              <p className="font-semibold text-xs text-gray-500 uppercase">{t.phone}</p>
-              <p className="text-xs font-medium text-gray-800">+91 9850032987</p>
+            <div className="flex items-center gap-2">
+              <Phone size={14} className="text-green-700 shrink-0" />
+              <div className="text-xs text-gray-800">
+                <span className="font-semibold text-gray-500 uppercase mr-1.5 text-[10px]">{t.phone}:</span>
+                +91 9850032987
+              </div>
             </div>
           </div>
 
@@ -132,7 +138,7 @@ export default function Navbar() {
           <button
             id="lang-toggle-desktop"
             onClick={toggleLang}
-            className="flex items-center gap-2 bg-orange-500 hover:bg-orange-600 active:scale-95 text-white px-4 py-2 rounded-full text-sm font-bold transition-all shadow-md"
+            className="flex items-center gap-2 bg-orange-500 hover:bg-orange-600 active:scale-95 text-white px-4 py-2 rounded-full text-sm font-bold transition-all shadow-md shrink-0"
             aria-label="Toggle Language"
           >
             <Globe size={16} />

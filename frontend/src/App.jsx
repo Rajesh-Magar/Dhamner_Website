@@ -1,5 +1,6 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
+import { ArrowUp } from "lucide-react";
 
 import Navbar from "./Layout/Navbar";
 import Footer from "./Layout/Footer";
@@ -53,9 +54,37 @@ import EmploymentPage from "./Layout/Employment/EmploymentPage.jsx";
 import EducationPage from "./Layout/Education/EducationPage.jsx";
 import EnvironmentPage from "./Layout/Environment/EnvironmentPage.jsx";
 
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 
 function App() {
+  const { pathname } = useLocation();
+  const [showScroll, setShowScroll] = useState(false);
+
+  // 🔝 Scroll to top on route change
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  // 🚀 Scroll to top button visibility listener
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 300) {
+        setShowScroll(true);
+      } else {
+        setShowScroll(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
 
   // 🔥 Backend Wake-up Call (runs once when app loads)
   useEffect(() => {
@@ -121,6 +150,17 @@ function App() {
       </Routes>
 
       <Footer />
+
+      {/* 🚀 Scroll To Top Button */}
+      <button
+        onClick={scrollToTop}
+        className={`fixed bottom-6 right-6 z-50 p-3.5 rounded-full bg-green-700 hover:bg-green-800 text-white shadow-2xl transition-all duration-300 hover:scale-110 hover:-translate-y-1 active:scale-95 border border-green-500/20 group cursor-pointer ${
+          showScroll ? "opacity-100 translate-y-0 visible" : "opacity-0 translate-y-4 invisible pointer-events-none"
+        }`}
+        aria-label="Scroll to top"
+      >
+        <ArrowUp size={24} className="group-hover:-translate-y-0.5 transition-transform duration-200" />
+      </button>
     </>
   );
 }
