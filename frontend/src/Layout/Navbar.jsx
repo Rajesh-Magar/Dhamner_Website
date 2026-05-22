@@ -121,7 +121,7 @@ export default function Navbar() {
               <Mail size={14} className="text-green-700 shrink-0" />
               <div className="text-xs text-gray-800">
                 <span className="font-semibold text-gray-500 uppercase mr-1.5 text-[10px]">{t.email}:</span>
-                dhamner189585@gmail.com
+                <a href="mailto:dhamner189585@gmail.com" className="hover:text-green-700 transition-colors">dhamner189585@gmail.com</a>
               </div>
             </div>
             <div className="flex items-center gap-2">
@@ -135,7 +135,7 @@ export default function Navbar() {
               <Phone size={14} className="text-green-700 shrink-0" />
               <div className="text-xs text-gray-800">
                 <span className="font-semibold text-gray-500 uppercase mr-1.5 text-[10px]">{t.phone}:</span>
-                +91 9850032987
+                <a href="tel:+919850032987" className="hover:text-green-700 transition-colors">+91 9850032987</a>
               </div>
             </div>
           </div>

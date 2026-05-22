@@ -70,12 +70,20 @@ export default function Footer() {
           <div className="space-y-4 text-sm font-devanagari text-green-100">
             <div>
               <p className="font-bold text-white text-base">{t.phone}</p>
-              <p className="mt-1 font-medium">+91 9850032987</p>
+              <p className="mt-1 font-medium">
+                <a href="tel:+919850032987" className="hover:underline hover:text-amber-300 transition-colors">
+                  +91 9850032987
+                </a>
+              </p>
             </div>
 
             <div>
               <p className="font-bold text-white text-base">{t.email}</p>
-              <p className="mt-1 font-medium text-amber-300">dhamner189585@gmail.com</p>
+              <p className="mt-1 font-medium text-amber-300">
+                <a href="mailto:dhamner189585@gmail.com" className="hover:underline hover:text-white transition-colors">
+                  dhamner189585@gmail.com
+                </a>
+              </p>
             </div>
 
             <div>
