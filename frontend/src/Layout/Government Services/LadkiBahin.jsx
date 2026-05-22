@@ -1,5 +1,6 @@
 import React from "react";
 import { useLang } from "../../context/LanguageContext";
+import { Users } from "lucide-react";
 
 export default function LadkiBahin() {
   const { lang } = useLang();
@@ -7,6 +8,7 @@ export default function LadkiBahin() {
   const localTexts = {
     mr: {
       heroTitle: "लाडकी बहीण योजना",
+      heroDesc: "राज्यातील महिलांच्या आर्थिक स्वावलंबनासाठी व कल्याणासाठी दरमहा ₹१,५०० ची थेट आर्थिक मदत",
       title: "लाडकी बहीण योजना (Ladki Bahin Yojana) – महाराष्ट्र शासन",
       objectiveTitle: "योजनेचा उद्देश:",
       objectiveDesc: "लाडकी बहीण योजना ही महाराष्ट्र शासनाची एक महत्त्वाची सामाजिक कल्याण योजना असून राज्यातील महिलांना आर्थिकदृष्ट्या सक्षम बनवणे आणि त्यांना दरमहा आर्थिक मदत देणे हा योजनेचा उद्देश आहे. या योजनेद्वारे महिलांच्या जीवनमानात सुधारणा करून त्यांना स्वावलंबी बनवणे आणि कुटुंबातील आर्थिक भार कमी करणे हे मुख्य ध्येय आहे.",
@@ -53,6 +55,7 @@ export default function LadkiBahin() {
     },
     en: {
       heroTitle: "Ladki Bahin Scheme",
+      heroDesc: "Monthly financial assistance of ₹1,500 directly to women for their empowerment and welfare",
       title: "Ladki Bahin Scheme (Ladki Bahin Yojana) – Govt. of Maharashtra",
       objectiveTitle: "Scheme Objective:",
       objectiveDesc: "The Ladki Bahin Scheme is a vital social welfare initiative of the Maharashtra Government, aimed at financially empowering women in the state and providing them with monthly financial aid. The main goal is to improve the standard of living of women, make them self-reliant, and reduce the economic burden on families.",
@@ -104,19 +107,16 @@ export default function LadkiBahin() {
   return (
     <div className="w-full bg-gray-50 font-bold text-gray-800">
 
-      {/* 🔹 HERO */}
-      <section className="bg-gradient-to-r from-teal-400 via-cyan-500 to-blue-600 text-white px-6 md:px-20 flex flex-col md:flex-row items-center justify-between min-h-[60vh] py-20 md:py-32 gap-10">
-
-        <h1 className="text-4xl md:text-7xl text-center md:text-left leading-tight">
-          {t.heroTitle}
-        </h1>
-
-        <img
-          src="/assets/ladki-bahin.png"
-          alt="ladki bahin"
-          className="w-64 md:w-[420px] lg:w-[520px] object-contain"
-        />
-      </section>
+      {/* HERO SECTION */}
+      <div className="bg-gradient-to-r from-green-700 to-green-500 text-white py-16 px-6 text-center">
+        <div className="flex justify-center mb-4">
+          <div className="bg-white bg-opacity-20 p-4 rounded-full">
+            <Users size={48} />
+          </div>
+        </div>
+        <h1 className="text-3xl md:text-5xl font-bold mb-3">{t.heroTitle}</h1>
+        <p className="text-green-100 max-w-2xl mx-auto text-sm md:text-base">{t.heroDesc}</p>
+      </div>
 
       <hr />
 

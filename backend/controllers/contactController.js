@@ -1,3 +1,4 @@
+const { sendFormNotificationEmail } = require("../utils/emailService");
 const Contact = require("../models/Contact");
 
 exports.createContact = async (req, res) => {
@@ -13,6 +14,10 @@ exports.createContact = async (req, res) => {
     });
 
     await contact.save();
+    
+    // Send email notification (async in background)
+    sendFormNotificationEmail("संपर्क संदेश / Contact Message", contact)
+      .catch((err) => console.error("Error sending contact email:", err));
 
     res.status(201).json({
       success: true,

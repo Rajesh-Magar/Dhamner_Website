@@ -1,10 +1,12 @@
 import { useState } from "react";
 import axios from "axios";
 import { useLang } from "../../context/LanguageContext";
+import { Briefcase } from "lucide-react";
 
 const localTexts = {
   mr: {
     heroTitle: "व्यवसाय परवाना प्रमाणपत्र",
+    heroDesc: "व्यवसाय परवाना प्रमाणपत्रासाठी ऑनलाइन अर्ज करा",
     instruction: "आपण व्यवसाय परवाना प्रमाणपत्रासाठी खाली दिलेल्या ऑनलाइन फॉर्म मध्ये अर्ज करू शकता. कृपया ₹59/- फी भरून UTR नंबर व स्क्रीनशॉट अपलोड करा.",
     placeholderOwnerName: "मालकाचे संपूर्ण नाव",
     placeholderOwnerAddress: "मालकाचा निवास पत्ता",
@@ -42,6 +44,7 @@ const localTexts = {
   },
   en: {
     heroTitle: "Business License Certificate",
+    heroDesc: "Apply online for Business License Certificate",
     instruction: "You can apply for the business license certificate using the online form below. Please pay ₹59/- fee and upload UTR number & screenshot.",
     placeholderOwnerName: "Owner's Full Name",
     placeholderOwnerAddress: "Owner's Residential Address",
@@ -142,8 +145,8 @@ export default function BusinessLicense() {
     if (files.payment) data.append("payment", files.payment);
 
     try {
-      await axios.post("https://dhamner-website.onrender.com/api/business-form", data);
-      alert(t.alertSuccess);
+      await axios.post(`${window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" ? "http://localhost:5000" : "https://dhamner-website.onrender.com"}/api/business-form`, data);
+      window.location.href = "/thank-you";
       // Reset form
       setFormData({
         ownerName: "",
@@ -183,15 +186,14 @@ export default function BusinessLicense() {
   return (
     <div className="w-full">
       {/* HERO */}
-      <div className="bg-gradient-to-r from-teal-400 via-cyan-500 to-blue-600 text-white flex flex-col md:flex-row items-center justify-between p-8 md:p-16 gap-8">
-        <h1 className="text-3xl md:text-5xl font-bold">
-          {t.heroTitle}
-        </h1>
-        <img
-          src="/assets/Certificate-Logo.png"
-          alt="certificate"
-          className="w-72 sm:w-96 md:w-[450px] lg:w-[550px]"
-        />
+      <div className="bg-gradient-to-r from-blue-700 to-blue-500 text-white py-16 px-6 text-center">
+        <div className="flex justify-center mb-4">
+          <div className="bg-white bg-opacity-20 p-4 rounded-full">
+            <Briefcase size={48} />
+          </div>
+        </div>
+        <h1 className="text-3xl md:text-5xl font-bold mb-3">{t.heroTitle}</h1>
+        <p className="text-blue-100 max-w-2xl mx-auto text-sm md:text-base">{t.heroDesc}</p>
       </div>
 
       {/* INSTRUCTION */}

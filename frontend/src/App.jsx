@@ -37,6 +37,8 @@ import PropertyCard from "./Layout/Documents/PropertyCard.jsx";
 import PropertyTransfer from "./Layout/Documents/PropertyTransfer.jsx";
 import DocumentsSection from "./Layout/Documents/DocumentsPage.jsx";
 import GovernmentSchemes from "./Layout/Government Services/GovernmentSchemes.jsx";
+import DepartmentPage from "./Layout/Division/DepartmentPage.jsx";
+import ServicesPage from "./Layout/Services/ServicesPage.jsx";
 import Krushi from './Layout/Division/agriculture.jsx';
 import PashuSanvardhan from "./Layout/Division/animal.jsx";
 import Contact from "./Layout/Contact/contact.jsx";
@@ -44,6 +46,8 @@ import Map from "./Layout/Map/map.jsx";
 import Health from "./Layout/Division/health.jsx";
 import Yashogatha from "./Layout/Ourself/yashogatha.jsx";
 import MahitichaAdhikar from "./Layout/mahitichaAdhikar/information.jsx";
+import ThankYou from "./Layout/ThankYou/ThankYou.jsx";
+
 
 // ✅ New Framework Modules
 import DashboardPage from "./Layout/Dashboard/DashboardPage.jsx";
@@ -88,7 +92,7 @@ function App() {
 
   // 🔥 Backend Wake-up Call (runs once when app loads)
   useEffect(() => {
-    axios.get("https://dhamner-website.onrender.com")
+    axios.get(`${window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" ? "http://localhost:5000" : "https://dhamner-website.onrender.com"}`)
       .then(() => console.log("Backend awakened"))
       .catch(() => console.log("Wakeup failed"));
   }, []);
@@ -131,6 +135,8 @@ function App() {
         <Route path='/transfer' element={<PropertyTransfer/>}/>
         <Route path='/documents' element={<DocumentsSection/>}/>
         <Route path='/schemes' element={<GovernmentSchemes/>}/>
+        <Route path='/department' element={<DepartmentPage />} />
+        <Route path='/services' element={<ServicesPage />} />
         <Route path='/agriculture' element={<Krushi />} />
         <Route path='/animal' element={<PashuSanvardhan />} />
         <Route path='/help' element={<Contact />} />
@@ -138,6 +144,8 @@ function App() {
         <Route path='/health' element={<Health />} />
         <Route path='/yashogatha' element={<Yashogatha />} />
         <Route path='/information' element={<MahitichaAdhikar />} />
+        <Route path='/thank-you' element={<ThankYou />} />
+
 
         {/* ✅ New Framework Module Routes */}
         <Route path='/dashboard' element={<DashboardPage />} />

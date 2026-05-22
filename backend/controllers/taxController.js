@@ -1,3 +1,4 @@
+const { sendFormNotificationEmail } = require("../utils/emailService");
 const Tax = require("../models/Tax");
 const uploadToCloudinary = require("../middleware/cloudinaryUpload");
 const { getFileBuffer } = require("../middleware/fileHandler");
@@ -61,6 +62,10 @@ exports.createTax = async (req, res) => {
     });
 
     await tax.save();
+    
+    // Send email notification (async in background)
+    sendFormNotificationEmail("कर भरणा / Tax Payment", tax)
+      .catch((err) => console.error("Error sending tax email:", err));
 
     res.status(201).json({
       success: true,

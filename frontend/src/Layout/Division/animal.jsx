@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useLang } from "../../context/LanguageContext";
+import { PawPrint } from "lucide-react";
 
 const Animal = () => {
   const { lang } = useLang();
@@ -55,6 +56,8 @@ const Animal = () => {
 
   const localTexts = {
     mr: {
+      heroTitle: "पशुसंवर्धन विभाग",
+      heroDesc: "पशुवैद्यकीय सेवा आणि इतर संबंधित माहिती",
       title: "पशुसंवर्धन विभाग",
       bigTab: "मोठ्या जनावरांचे लसीकरण वेळापत्रक",
       smallTab: "शेळी व मेंढी लसीकरण वेळापत्रक",
@@ -91,6 +94,8 @@ const Animal = () => {
       ]
     },
     en: {
+      heroTitle: "Animal Husbandry Department",
+      heroDesc: "Veterinary services and other related information",
       title: "Animal Husbandry Department",
       bigTab: "Large Animal Vaccination Schedule",
       smallTab: "Goat & Sheep Vaccination Schedule",
@@ -133,19 +138,19 @@ const Animal = () => {
   const smallAnimals = smallAnimalsData[lang] || smallAnimalsData.mr;
 
   return (
-    <>
-      <section className="bg-gradient-to-r from-teal-400 via-cyan-500 to-blue-600 text-white px-6 md:px-20 flex flex-col md:flex-row items-center justify-between min-h-[40vh] py-10 md:py-14 gap-6">
-        <h1 className="text-3xl md:text-5xl lg:text-6xl text-center md:text-left leading-tight font-bold">
-          {t.title}
-        </h1>
-        <img
-          src="/assets/Cow.png"
-          alt="animal"
-          className="w-24 sm:w-32 md:w-36 lg:w-40 max-h-[160px] object-contain"
-        />
-      </section>
+    <div className="w-full bg-gray-50 text-gray-800">
+      {/* HERO SECTION */}
+      <div className="bg-gradient-to-r from-teal-700 to-teal-500 text-white py-16 px-6 text-center">
+        <div className="flex justify-center mb-4">
+          <div className="bg-white bg-opacity-20 p-4 rounded-full">
+            <PawPrint size={48} />
+          </div>
+        </div>
+        <h1 className="text-3xl md:text-5xl font-bold mb-3">{t.heroTitle}</h1>
+        <p className="text-teal-100 max-w-2xl mx-auto text-sm md:text-base">{t.heroDesc}</p>
+      </div>
 
-      <div className="px-4 md:px-10 py-8 bg-gray-50">
+      <div className="px-4 md:px-10 py-8">
         {/* TABS */}
         <div className="flex flex-col sm:flex-row mb-6 border rounded-lg overflow-hidden shadow-sm">
           <button
@@ -252,7 +257,7 @@ const Animal = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

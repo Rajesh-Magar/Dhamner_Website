@@ -1,10 +1,12 @@
 import React from "react";
 import { useLang } from "../../context/LanguageContext";
+import { Sprout } from "lucide-react";
 
 const content = {
   mr: {
     schemeHeading: "शेतकऱ्यांसाठी शासकीय योजना (भारत सरकार व महाराष्ट्र शासन)",
     heroTitle: "कृषी",
+    heroDesc: "शेतकऱ्यांसाठी कृषी योजना, मार्गदर्शन आणि सेवा",
     links: "🌐 महत्त्वाचे संकेतस्थळे:",
     note: "टीप: अर्ज करताना आधार क्रमांक, 7/12 उतारा, बँक पासबुक, फोटो आवश्यक असतात.",
     schemes: [
@@ -37,6 +39,7 @@ const content = {
   en: {
     schemeHeading: "Government Schemes for Farmers (Govt. of India & Maharashtra)",
     heroTitle: "Agriculture",
+    heroDesc: "Agricultural schemes, guidance, and services for farmers",
     links: "🌐 Important Websites:",
     note: "Note: Aadhaar number, 7/12 extract, bank passbook, and photo are required while applying.",
     schemes: [
@@ -73,17 +76,15 @@ export default function Krushi() {
   const c = content[lang];
   return (
     <div className="w-full overflow-x-hidden">
-      <div className="bg-gradient-to-r from-green-700 to-lime-700 min-h-[300px] md:h-[400px] flex items-center">
-        <div className="max-w-5xl mx-auto w-full flex flex-col md:flex-row items-center justify-between px-6 md:px-10">
-          <h1 className="text-white text-3xl md:text-5xl font-bold mb-6 md:mb-0 text-center md:text-left">{c.heroTitle}</h1>
-          <img src="/assets/Farmer.png" alt="farmer" className="h-[180px] sm:h-[220px] md:h-[300px] object-contain md:-ml-16" />
+      {/* HERO SECTION */}
+      <div className="bg-gradient-to-r from-teal-700 to-teal-500 text-white py-16 px-6 text-center">
+        <div className="flex justify-center mb-4">
+          <div className="bg-white bg-opacity-20 p-4 rounded-full">
+            <Sprout size={48} />
+          </div>
         </div>
-      </div>
-
-      <div className="bg-white">
-        <svg viewBox="0 0 1440 100" className="-mt-1">
-          <path fill="#ffffff" d="M0,0 C480,100 960,100 1440,0 L1440,100 L0,100 Z" />
-        </svg>
+        <h1 className="text-3xl md:text-5xl font-bold mb-3">{c.heroTitle}</h1>
+        <p className="text-teal-100 max-w-2xl mx-auto text-sm md:text-base">{c.heroDesc}</p>
       </div>
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 py-8 md:py-10">

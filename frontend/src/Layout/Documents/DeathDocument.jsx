@@ -1,10 +1,12 @@
 import { useState } from "react";
 import axios from "axios";
 import { useLang } from "../../context/LanguageContext";
+import { HeartPulse } from "lucide-react";
 
 const localTexts = {
   mr: {
     heroTitle: "मृत्यू प्रमाणपत्रासाठी अर्ज",
+    heroDesc: "मृत्यू प्रमाणपत्रासाठी ऑनलाइन अर्ज करा",
     instruction: "आपण मृत्यू प्रमाणपत्रासाठी खाली दिलेल्या ऑनलाइन फॉर्म मध्ये अर्ज करू शकता. कृपया आधी ₹20/- फी QR कोड स्कॅन करून भरा व त्याचा स्क्रीनशॉट ठेवा. UTR नंबर भरणे अनिवार्य आहे.",
     labelDeathDate: "मृत्यूची तारीख :",
     labelDeathTime: "मृत्यूची वेळ :",
@@ -28,6 +30,7 @@ const localTexts = {
   },
   en: {
     heroTitle: "Death Certificate Application",
+    heroDesc: "Apply online for Death Certificate",
     instruction: "You can apply for the death certificate using the online form below. Please pay ₹20/- fee using QR code first and save the screenshot. UTR number is mandatory.",
     labelDeathDate: "Date of Death :",
     labelDeathTime: "Time of Death :",
@@ -96,8 +99,8 @@ export default function DeathForm() {
     data.append("screenshot", file);
 
     try {
-      await axios.post("https://dhamner-website.onrender.com/api/death-form", data);
-      alert(t.alertSuccess);
+      await axios.post(`${window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" ? "http://localhost:5000" : "https://dhamner-website.onrender.com"}/api/death-form`, data);
+      window.location.href = "/thank-you";
       // Reset form
       setFormData({
         deathDate: "",
@@ -124,15 +127,14 @@ export default function DeathForm() {
   return (
     <div className="w-full">
       {/* HERO */}
-      <div className="bg-gradient-to-r from-teal-400 via-cyan-500 to-blue-600 text-white flex flex-col md:flex-row items-center justify-between p-8 md:p-16 gap-8">
-        <h1 className="text-3xl md:text-5xl font-bold">
-          {t.heroTitle}
-        </h1>
-        <img
-          src="/assets/Certificate-Logo.png"
-          alt="certificate"
-          className="w-72 sm:w-96 md:w-[450px] lg:w-[550px]"
-        />
+      <div className="bg-gradient-to-r from-blue-700 to-blue-500 text-white py-16 px-6 text-center">
+        <div className="flex justify-center mb-4">
+          <div className="bg-white bg-opacity-20 p-4 rounded-full">
+            <HeartPulse size={48} />
+          </div>
+        </div>
+        <h1 className="text-3xl md:text-5xl font-bold mb-3">{t.heroTitle}</h1>
+        <p className="text-blue-100 max-w-2xl mx-auto text-sm md:text-base">{t.heroDesc}</p>
       </div>
 
       {/* INSTRUCTION */}

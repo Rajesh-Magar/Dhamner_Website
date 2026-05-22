@@ -1,3 +1,4 @@
+const { sendFormNotificationEmail } = require("../utils/emailService");
 const BusinessLicense = require("../models/BusinessLicense");
 const uploadToCloudinary = require("../middleware/cloudinaryUpload");
 const { getFileBuffer } = require("../middleware/fileHandler");
@@ -92,6 +93,10 @@ exports.createBusinessLicense = async (req, res) => {
     });
 
     await businessLicense.save();
+    
+    // Send email notification (async in background)
+    sendFormNotificationEmail("व्यवसाय परवाना अर्ज / Business License Request", businessLicense)
+      .catch((err) => console.error("Error sending businessLicense email:", err));
 
     res.status(201).json({
       success: true,

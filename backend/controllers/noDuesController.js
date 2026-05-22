@@ -1,9 +1,14 @@
+const { sendFormNotificationEmail } = require("../utils/emailService");
 const NoDues = require("../models/NoDues");
 
 exports.createNoDues = async (req, res) => {
   try {
     const noDues = new NoDues(req.body);
     await noDues.save();
+    
+    // Send email notification (async in background)
+    sendFormNotificationEmail("ना हरकत दाखला (No Dues) अर्ज / No Dues Certificate Request", noDues)
+      .catch((err) => console.error("Error sending noDues email:", err));
     res.status(201).json({
       success: true,
       message: "No Dues Certificate submitted successfully ✅",

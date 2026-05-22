@@ -1,5 +1,6 @@
 import React from "react";
 import { useLang } from "../../context/LanguageContext";
+import { FileText } from "lucide-react";
 
 export default function FinanceCommission15() {
   const { lang } = useLang();
@@ -7,6 +8,7 @@ export default function FinanceCommission15() {
   const localTexts = {
     mr: {
       heroTitle: "15 वा वित्त आयोग",
+      heroDesc: "केंद्र आणि राज्य सरकारांमधील आर्थिक संसाधनांचे वाटप व शिफारसी",
       title: "15 वा वित्त आयोग (15व्या वित्त आयोगाची सविस्तर माहिती)",
       introTitle: "परिचय:",
       introDesc: "भारत सरकारचा वित्त आयोग हा एक घटनात्मक संस्था आहे, जो भारतीय संविधानाच्या अनुच्छेद 280 अंतर्गत स्थापन केला जातो. वित्त आयोगाचे मुख्य कार्य म्हणजे केंद्र आणि राज्य सरकारांमधील आर्थिक संसाधनांचे वाटप करण्यासाठी शिफारसी देणे. 15 वा वित्त आयोग (Fifteenth Finance Commission) 3 जानेवारी 2018 रोजी स्थापन करण्यात आला होता.",
@@ -60,6 +62,7 @@ export default function FinanceCommission15() {
     },
     en: {
       heroTitle: "15th Finance Commission",
+      heroDesc: "Recommendations and allocation of financial resources between Central and State Governments",
       title: "15th Finance Commission (Detailed Information)",
       introTitle: "Introduction:",
       introDesc: "The Finance Commission of India is a constitutional body established under Article 280 of the Indian Constitution. Its primary function is to make recommendations on the distribution of financial resources between the Central and State Governments. The 15th Finance Commission was established on January 3, 2018.",
@@ -118,19 +121,16 @@ export default function FinanceCommission15() {
   return (
     <div className="w-full bg-gray-50 font-bold text-gray-800">
 
-      {/* 🔹 HERO */}
-      <section className="bg-gradient-to-r from-teal-400 via-cyan-500 to-blue-600 text-white px-6 md:px-20 flex flex-col md:flex-row items-center justify-between min-h-[50vh] md:min-h-[75vh] py-16 md:py-28 gap-10">
-
-        <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl text-center md:text-left leading-tight">
-          {t.heroTitle}
-        </h1>
-
-        <img
-          src="/assets/HD-wallpaper-satyamev-jayate-bharat-civil-service-history-ias-india-indian-ips-lion-emblem-motivation-removebg-preview.png"
-          alt="finance commission"
-          className="w-56 sm:w-72 md:w-[420px] lg:w-[520px] xl:w-[600px] h-auto object-contain"
-        />
-      </section>
+      {/* HERO SECTION */}
+      <div className="bg-gradient-to-r from-green-700 to-green-500 text-white py-16 px-6 text-center">
+        <div className="flex justify-center mb-4">
+          <div className="bg-white bg-opacity-20 p-4 rounded-full">
+            <FileText size={48} />
+          </div>
+        </div>
+        <h1 className="text-3xl md:text-5xl font-bold mb-3">{t.heroTitle}</h1>
+        <p className="text-green-100 max-w-2xl mx-auto text-sm md:text-base">{t.heroDesc}</p>
+      </div>
 
       <hr />
 

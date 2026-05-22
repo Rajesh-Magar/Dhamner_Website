@@ -1,9 +1,13 @@
 import { useState } from "react";
 import axios from "axios";
 import { useLang } from "../../context/LanguageContext";
+import { PhoneCall } from "lucide-react";
+
 
 const content = {
   mr: {
+    heroTitle: "संपर्क साधा",
+    heroDesc: "ग्रामपंचायत प्रशासनाशी संपर्क साधण्यासाठी आणि आपल्या समस्या मांडण्यासाठी खालील संपर्क फॉर्म भरा",
     title: "संपर्क साधा",
     firstName: "पहिले नाव",
     lastName: "आडनाव",
@@ -20,6 +24,8 @@ const content = {
     hours: "(सोम–शुक्र सकाळी ९.१५ ते सायं. ६.१५)",
   },
   en: {
+    heroTitle: "Contact Us",
+    heroDesc: "Fill out the contact form below to get in touch with the Gram Panchayat administration and raise queries",
     title: "Contact Us",
     firstName: "First Name",
     lastName: "Last Name",
@@ -47,8 +53,8 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("https://dhamner-website.onrender.com/api/contact", formData);
-      alert(c.successMsg);
+      await axios.post(`${window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" ? "http://localhost:5000" : "https://dhamner-website.onrender.com"}/api/contact`, formData);
+      window.location.href = "/thank-you";
       setFormData({ firstName: "", lastName: "", email: "", subject: "", message: "" });
     } catch (error) {
       alert(error.response?.data?.message || error.message || "Error");
@@ -57,12 +63,16 @@ const Contact = () => {
 
   return (
     <div className="w-full overflow-x-hidden">
-      <section className="bg-gradient-to-r from-teal-400 via-cyan-500 to-blue-600 text-white py-10 md:py-14 mb-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 flex flex-col md:flex-row items-center justify-between gap-6">
-          <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl text-center md:text-left leading-tight">{c.title}</h1>
-          <img src="/assets/telephone.png" alt="telephone" className="w-20 sm:w-28 md:w-36 lg:w-40 object-contain" />
+      {/* HERO SECTION */}
+      <div className="bg-gradient-to-r from-green-700 to-green-500 text-white py-16 px-6 text-center mb-10">
+        <div className="flex justify-center mb-4">
+          <div className="bg-white bg-opacity-20 p-4 rounded-full">
+            <PhoneCall size={48} />
+          </div>
         </div>
-      </section>
+        <h1 className="text-3xl md:text-5xl font-bold mb-3">{c.heroTitle}</h1>
+        <p className="text-green-100 max-w-2xl mx-auto text-sm md:text-base">{c.heroDesc}</p>
+      </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 grid grid-cols-1 md:grid-cols-2 gap-8">
         <form onSubmit={handleSubmit} className="bg-gray-100 p-5 sm:p-6 md:p-8 rounded-xl shadow">

@@ -1,10 +1,12 @@
 import { useState } from "react";
 import axios from "axios";
 import { useLang } from "../../context/LanguageContext";
+import { BadgeCheck } from "lucide-react";
 
 const localTexts = {
   mr: {
     heroTitle: "थकबाकी नसल्याचे प्रमाणपत्र",
+    heroDesc: "थकबाकी नसल्याच्या प्रमाणपत्रासाठी ऑनलाइन अर्ज करा",
     placeholderPropertyNo: "मालमत्ता क्रमांक",
     placeholderWardNo: "वॉर्ड क्र.",
     placeholderAddress: "रस्त्याचे नाव / गल्लीचा क्रमांक",
@@ -22,6 +24,7 @@ const localTexts = {
   },
   en: {
     heroTitle: "No Dues Certificate",
+    heroDesc: "Apply online for No Dues Certificate",
     placeholderPropertyNo: "Property Number",
     placeholderWardNo: "Ward No.",
     placeholderAddress: "Road Name / Lane Number",
@@ -64,8 +67,8 @@ export default function NoDues() {
     e.preventDefault();
 
     try {
-      await axios.post("https://dhamner-website.onrender.com/api/no-dues", formData);
-      alert(t.alertSuccess);
+      await axios.post(`${window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" ? "http://localhost:5000" : "https://dhamner-website.onrender.com"}/api/no-dues`, formData);
+      window.location.href = "/thank-you";
       // Reset form
       setFormData({
         propertyNo: "",
@@ -91,16 +94,14 @@ export default function NoDues() {
     <div className="w-full">
 
       {/* HERO SECTION */}
-      <div className="bg-gradient-to-r from-teal-400 via-cyan-500 to-blue-600 text-white flex flex-col md:flex-row items-center justify-between p-8 md:p-16 gap-8">
-        <h1 className="text-3xl md:text-5xl font-bold">
-          {t.heroTitle}
-        </h1>
-
-        <img
-          src="/assets/Certificate-Logo.png"
-          alt="certificate"
-          className="w-72 sm:w-96 md:w-[450px] lg:w-[550px]"
-        />
+      <div className="bg-gradient-to-r from-blue-700 to-blue-500 text-white py-16 px-6 text-center">
+        <div className="flex justify-center mb-4">
+          <div className="bg-white bg-opacity-20 p-4 rounded-full">
+            <BadgeCheck size={48} />
+          </div>
+        </div>
+        <h1 className="text-3xl md:text-5xl font-bold mb-3">{t.heroTitle}</h1>
+        <p className="text-blue-100 max-w-2xl mx-auto text-sm md:text-base">{t.heroDesc}</p>
       </div>
 
       {/* FORM */}

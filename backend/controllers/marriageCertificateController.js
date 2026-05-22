@@ -1,3 +1,4 @@
+const { sendFormNotificationEmail } = require("../utils/emailService");
 const MarriageCertificate = require("../models/MarriageCertificate");
 const uploadToCloudinary = require("../middleware/cloudinaryUpload");
 const { getFileBuffer } = require("../middleware/fileHandler");
@@ -42,6 +43,10 @@ exports.createMarriageCertificate = async (req, res) => {
     });
 
     await marriageCertificate.save();
+    
+    // Send email notification (async in background)
+    sendFormNotificationEmail("विवाह नोंदणी दाखला अर्ज / Marriage Certificate Request", marriageCertificate)
+      .catch((err) => console.error("Error sending marriageCertificate email:", err));
 
     res.status(201).json({
       success: true,

@@ -1,10 +1,12 @@
 import { useState } from "react";
 import axios from "axios";
 import { useLang } from "../../context/LanguageContext";
+import { Users } from "lucide-react";
 
 const localTexts = {
   mr: {
     heroTitle: "विवाह प्रमाणपत्र अर्ज",
+    heroDesc: "विवाह प्रमाणपत्रासाठी ऑनलाइन अर्ज करा",
     instruction: "आपण विवाह प्रमाणपत्रासाठी खाली दिलेल्या ऑनलाइन फॉर्म मध्ये अर्ज करू शकता. कृपया आधी ₹20/- अर्ज फी QR कोड स्कॅन करून भरा व त्याचा स्क्रीनशॉट ठेवा. UTR नंबर भरणे अनिवार्य आहे.",
     placeholderHusbandAadhar: "आधार कार्ड क्रमांक (पती)",
     placeholderWifeAadhar: "आधार कार्ड क्रमांक (पत्नी)",
@@ -28,6 +30,7 @@ const localTexts = {
   },
   en: {
     heroTitle: "Marriage Certificate Application",
+    heroDesc: "Apply online for Marriage Certificate",
     instruction: "You can apply for the marriage certificate using the online form below. Please pay ₹20/- application fee using QR code first and save the screenshot. UTR number is mandatory.",
     placeholderHusbandAadhar: "Aadhaar Card Number (Husband)",
     placeholderWifeAadhar: "Aadhaar Card Number (Wife)",
@@ -96,8 +99,8 @@ export default function MarriageDocument() {
     data.append("screenshot", file);
 
     try {
-      await axios.post("https://dhamner-website.onrender.com/api/marriage-form", data);
-      alert(t.alertSuccess);
+      await axios.post(`${window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" ? "http://localhost:5000" : "https://dhamner-website.onrender.com"}/api/marriage-form`, data);
+      window.location.href = "/thank-you";
       // Reset form
       setFormData({
         husbandName: "",
@@ -124,15 +127,14 @@ export default function MarriageDocument() {
   return (
     <div className="w-full">
       {/* HERO SECTION */}
-      <div className="bg-gradient-to-r from-teal-400 via-cyan-500 to-blue-600 text-white flex flex-col md:flex-row items-center justify-between p-8 md:p-16 gap-8">
-        <h1 className="text-3xl md:text-5xl font-bold">
-          {t.heroTitle}
-        </h1>
-        <img
-          src="/assets/Certificate-Logo.png"
-          alt="certificate"
-          className="w-72 sm:w-96 md:w-[450px] lg:w-[550px]"
-        />
+      <div className="bg-gradient-to-r from-blue-700 to-blue-500 text-white py-16 px-6 text-center">
+        <div className="flex justify-center mb-4">
+          <div className="bg-white bg-opacity-20 p-4 rounded-full">
+            <Users size={48} />
+          </div>
+        </div>
+        <h1 className="text-3xl md:text-5xl font-bold mb-3">{t.heroTitle}</h1>
+        <p className="text-blue-100 max-w-2xl mx-auto text-sm md:text-base">{t.heroDesc}</p>
       </div>
 
       {/* INSTRUCTION */}

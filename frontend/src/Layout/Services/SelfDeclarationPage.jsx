@@ -1,9 +1,10 @@
-import { FileText } from "lucide-react";
+import { FileText, FileSignature } from "lucide-react";
 import { useLang } from "../../context/LanguageContext";
 
 const localTexts = {
   mr: {
     heroTitle: "स्वयंघोषणापत्रे",
+    heroDesc: "विविध कारणांसाठी स्वयं घोषणापत्र आणि प्रमाणपत्रे मिळवा / डाउनलोड करा",
     subTitle: "आवश्यक कागदपत्रे डाउनलोड करा",
     btnDownload: "Download",
     pdfs: [
@@ -43,6 +44,7 @@ const localTexts = {
   },
   en: {
     heroTitle: "Self-Declaration Forms",
+    heroDesc: "Get or download self-declaration forms and certificates online",
     subTitle: "Download Required Documents",
     btnDownload: "Download",
     pdfs: [
@@ -89,25 +91,15 @@ export default function SelfDeclarationPage() {
   return (
     <div className="w-full">
 
-      {/* ================= HERO ================= */}
-      <div className="bg-gradient-to-r from-teal-400 via-cyan-500 to-blue-600 text-white py-16 px-6 md:px-16 flex flex-col md:flex-row items-center justify-between">
-
-        {/* LEFT */}
-        <div className="w-full md:w-1/2 text-center md:text-left">
-          <h1 className="text-4xl md:text-6xl font-extrabold leading-tight drop-shadow-[2px_2px_0px_rgba(0,0,0,0.3)]">
-            {t.heroTitle}
-          </h1>
+      {/* HERO SECTION */}
+      <div className="bg-gradient-to-r from-orange-600 to-amber-500 text-white py-16 px-6 text-center">
+        <div className="flex justify-center mb-4">
+          <div className="bg-white bg-opacity-20 p-4 rounded-full">
+            <FileSignature size={48} />
+          </div>
         </div>
-
-        {/* RIGHT IMAGE */}
-        <div className="w-full md:w-1/2 flex justify-center mt-10 md:mt-0">
-          <img
-            src="/assets/Documents-Logo.png"
-            alt="form"
-            className="w-64 md:w-96 lg:w-[420px] object-contain"
-          />
-        </div>
-
+        <h1 className="text-3xl md:text-5xl font-bold mb-3">{t.heroTitle}</h1>
+        <p className="text-orange-100 max-w-2xl mx-auto text-sm md:text-base">{t.heroDesc}</p>
       </div>
 
       {/* ================= PDF SECTION ================= */}

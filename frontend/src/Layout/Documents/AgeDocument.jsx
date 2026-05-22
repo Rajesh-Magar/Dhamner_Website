@@ -1,10 +1,12 @@
 import { useState } from "react";
 import axios from "axios";
 import { useLang } from "../../context/LanguageContext";
+import { Calendar } from "lucide-react";
 
 const localTexts = {
   mr: {
     heroTitle: "निराधार योजनेसाठी वयाचा दाखला",
+    heroDesc: "निराधार योजनेसाठी वयाच्या दाखल्याकरिता ऑनलाइन अर्ज भरा",
     placeholderAge: "सध्या स्थितीत वय",
     placeholderMobile: "व्हाट्सअप मोबाईल क्रमांक",
     placeholderEmail: "ई मेल आय डी",
@@ -20,6 +22,7 @@ const localTexts = {
   },
   en: {
     heroTitle: "Age Certificate for Niradhar Scheme",
+    heroDesc: "Apply online for an age certificate under the Niradhar Scheme",
     placeholderAge: "Current Age",
     placeholderMobile: "WhatsApp Mobile Number",
     placeholderEmail: "Email ID",
@@ -59,8 +62,8 @@ export default function AgeDocument() {
     e.preventDefault();
 
     try {
-      await axios.post("https://dhamner-website.onrender.com/api/age-certificate", formData);
-      alert(t.alertSuccess);
+      await axios.post(`${window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" ? "http://localhost:5000" : "https://dhamner-website.onrender.com"}/api/age-certificate`, formData);
+      window.location.href = "/thank-you";
       // Reset form
       setFormData({
         age: "",
@@ -84,16 +87,14 @@ export default function AgeDocument() {
     <div className="w-full">
 
       {/* HERO SECTION */}
-      <div className="bg-gradient-to-r from-teal-400 via-cyan-500 to-blue-600 text-white flex flex-col md:flex-row items-center justify-between p-8 md:p-16 gap-8">
-        <h1 className="text-3xl md:text-5xl font-bold">
-          {t.heroTitle}
-        </h1>
-
-        <img
-          src="/assets/Certificate-Logo.png"
-          alt="certificate"
-          className="w-72 sm:w-96 md:w-[450px] lg:w-[550px]"
-        />
+      <div className="bg-gradient-to-r from-green-700 to-green-500 text-white py-16 px-6 text-center mb-10">
+        <div className="flex justify-center mb-4">
+          <div className="bg-white bg-opacity-20 p-4 rounded-full">
+            <Calendar size={48} />
+          </div>
+        </div>
+        <h1 className="text-3xl md:text-5xl font-bold mb-3">{t.heroTitle}</h1>
+        <p className="text-green-100 max-w-2xl mx-auto text-sm md:text-base">{t.heroDesc}</p>
       </div>
 
       {/* FORM */}

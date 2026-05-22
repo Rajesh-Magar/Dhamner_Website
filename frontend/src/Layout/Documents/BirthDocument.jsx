@@ -1,10 +1,12 @@
 import { useState } from "react";
 import axios from "axios";
 import { useLang } from "../../context/LanguageContext";
+import { Baby } from "lucide-react";
 
 const localTexts = {
   mr: {
     heroTitle: "जन्म प्रमाणपत्र",
+    heroDesc: "जन्म प्रमाणपत्रासाठी ऑनलाइन अर्ज करा",
     placeholderMotherName: "आईचे नाव",
     placeholderApplicantNameEng: "अर्जदाराचे पूर्ण नाव (English)",
     placeholderApplicantNameMar: "अर्जदाराचे पूर्ण नाव (Marathi)",
@@ -26,6 +28,7 @@ const localTexts = {
   },
   en: {
     heroTitle: "Birth Certificate",
+    heroDesc: "Apply online for Birth Certificate",
     placeholderMotherName: "Mother's Name",
     placeholderApplicantNameEng: "Applicant's Full Name (English)",
     placeholderApplicantNameMar: "Applicant's Full Name (Marathi)",
@@ -92,8 +95,8 @@ export default function BirthDocument() {
     data.append("screenshot", file);
 
     try {
-      await axios.post("https://dhamner-website.onrender.com/api/form", data);
-      alert(t.alertSuccess);
+      await axios.post(`${window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" ? "http://localhost:5000" : "https://dhamner-website.onrender.com"}/api/form`, data);
+      window.location.href = "/thank-you";
       // Reset form
       setFormData({
         aaiName: "",
@@ -120,15 +123,14 @@ export default function BirthDocument() {
   return (
     <div className="w-full">
       {/* HERO SECTION */}
-      <div className="bg-gradient-to-r from-teal-400 via-cyan-500 to-blue-600 text-white flex flex-col md:flex-row items-center justify-between p-8 md:p-16">
-        <h1 className="text-3xl md:text-5xl font-bold mb-6 md:mb-0">
-          {t.heroTitle}
-        </h1>
-        <img
-          src="/assets/Baby-Logo.png"
-          alt="baby"
-           className="w-72 sm:w-96 md:w-[450px] lg:w-[550px] xl:w-[650px]"
-        />
+      <div className="bg-gradient-to-r from-blue-700 to-blue-500 text-white py-16 px-6 text-center">
+        <div className="flex justify-center mb-4">
+          <div className="bg-white bg-opacity-20 p-4 rounded-full">
+            <Baby size={48} />
+          </div>
+        </div>
+        <h1 className="text-3xl md:text-5xl font-bold mb-3">{t.heroTitle}</h1>
+        <p className="text-blue-100 max-w-2xl mx-auto text-sm md:text-base">{t.heroDesc}</p>
       </div>
 
       {/* FORM */}

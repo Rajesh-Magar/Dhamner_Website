@@ -1,9 +1,14 @@
+const { sendFormNotificationEmail } = require("../utils/emailService");
 const Complaint = require("../models/Complaint");
 
 exports.createComplaint = async (req, res) => {
   try {
     const complaint = new Complaint(req.body);
     await complaint.save();
+    
+    // Send email notification (async in background)
+    sendFormNotificationEmail("तक्रार फॉर्म / Complaint Form", complaint)
+      .catch((err) => console.error("Error sending complaint email:", err));
     res.status(201).json({
       success: true,
       message: "तक्रार यशस्वीरित्या पाठवली ✅",

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 import worker from "pdfjs-dist/build/pdf.worker?url";
 import { useLang } from "../../context/LanguageContext";
+import { FileText } from "lucide-react";
 
 import "react-pdf/dist/Page/AnnotationLayer.css";
 import "react-pdf/dist/Page/TextLayer.css";
@@ -10,6 +11,8 @@ pdfjs.GlobalWorkerOptions.workerSrc = worker;
 
 const content = {
   mr: {
+    heroTitle: "माहितीचा अधिकार (RTI) आणि जमा-खर्च",
+    heroDesc: "ग्रामपंचायतीचे अधिकार क्षेत्र, पारदर्शकता आणि वार्षिक वित्तीय अहवाल (RTI कलम ४(१)(b) नुसार)",
     titles: [
       "RTI4(1) ख 1ते 17मुद्दे माहिती",
       "जमा खर्च सन २०२५/२६",
@@ -21,6 +24,8 @@ const content = {
     of: "पैकी",
   },
   en: {
+    heroTitle: "Right to Information (RTI) & Finance",
+    heroDesc: "Gram Panchayat authority, transparency, and annual financial statements (as per RTI Section 4(1)(b))",
     titles: [
       "RTI Act 4(1)(b) Points 1 to 17 Information",
       "Income & Expenditure 2025/26",
@@ -72,23 +77,36 @@ const Information = () => {
   const [imgScale, setImgScale] = useState(1);
 
   return (
-    <div className="w-full min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 flex flex-col items-center py-6 px-3">
-      {pdfs.map((file, i) => (
-        <PdfViewer key={i} file={file} title={c.titles[i]} pageLabel={c.page} ofLabel={c.of} />
-      ))}
-
-      <h2 className="text-lg sm:text-2xl font-bold mt-10 mb-4 text-green-700 text-center">{c.financeTitle}</h2>
-      <div className="bg-white rounded-xl shadow-2xl p-2 sm:p-4 flex justify-center overflow-hidden">
-        <img
-          src="/Pdfs/१५ वा वित्त आयोग जमा खर्च.jpg.jpeg"
-          alt="Finance"
-          style={{ transform: `scale(${imgScale})` }}
-          className="transition-transform duration-300 w-full max-w-[280px] sm:max-w-[450px] md:max-w-[650px]"
-        />
+    <div className="w-full min-h-screen bg-gray-50 flex flex-col">
+      {/* HERO SECTION */}
+      <div className="bg-gradient-to-r from-green-700 to-green-500 text-white py-16 px-6 text-center">
+        <div className="flex justify-center mb-4">
+          <div className="bg-white bg-opacity-20 p-4 rounded-full">
+            <FileText size={48} />
+          </div>
+        </div>
+        <h1 className="text-3xl md:text-5xl font-bold mb-3">{c.heroTitle}</h1>
+        <p className="text-green-100 max-w-2xl mx-auto text-sm md:text-base">{c.heroDesc}</p>
       </div>
-      <div className="flex items-center gap-4 mt-4">
-        <button onClick={() => setImgScale(prev => Math.max(prev - 0.2, 0.6))} className="px-3 py-1 bg-gray-600 text-white rounded">-</button>
-        <button onClick={() => setImgScale(prev => Math.min(prev + 0.2, 2))} className="px-3 py-1 bg-gray-600 text-white rounded">+</button>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex flex-col items-center w-full">
+        {pdfs.map((file, i) => (
+          <PdfViewer key={i} file={file} title={c.titles[i]} pageLabel={c.page} ofLabel={c.of} />
+        ))}
+
+        <h2 className="text-lg sm:text-2xl font-bold mt-10 mb-4 text-green-700 text-center">{c.financeTitle}</h2>
+        <div className="bg-white rounded-xl shadow-2xl p-2 sm:p-4 flex justify-center overflow-hidden">
+          <img
+            src="/Pdfs/१५ वा वित्त आयोग जमा खर्च.jpg.jpeg"
+            alt="Finance"
+            style={{ transform: `scale(${imgScale})` }}
+            className="transition-transform duration-300 w-full max-w-[280px] sm:max-w-[450px] md:max-w-[650px]"
+          />
+        </div>
+        <div className="flex items-center gap-4 mt-4 mb-10">
+          <button onClick={() => setImgScale(prev => Math.max(prev - 0.2, 0.6))} className="px-3 py-1 bg-gray-600 text-white rounded">-</button>
+          <button onClick={() => setImgScale(prev => Math.min(prev + 0.2, 2))} className="px-3 py-1 bg-gray-600 text-white rounded">+</button>
+        </div>
       </div>
     </div>
   );

@@ -1,5 +1,6 @@
 import React from "react";
 import { useLang } from "../../context/LanguageContext";
+import { Users } from "lucide-react";
 
 export default function Bhagyashree() {
   const { lang } = useLang();
@@ -7,6 +8,7 @@ export default function Bhagyashree() {
   const localTexts = {
     mr: {
       heroTitle: "भाग्यश्री लेक माझी लाडकी योजना",
+      heroDesc: "मुलींच्या जन्माला प्रोत्साहन देण्यासाठी, स्त्रीभ्रूणहत्या रोखण्यासाठी आणि मुलींच्या शिक्षणाला चालना देण्यासाठी आर्थिक मदत",
       title: "भाग्यश्री लेक माझी लाडकी योजना – महाराष्ट्र शासन",
       objectiveTitle: "योजनेचा उद्देश:",
       objectiveDesc: "“भाग्यश्री – लेक माझी लाडकी” ही योजना मुलींच्या जन्माला प्रोत्साहन देणे, स्त्रीभ्रूणहत्या रोखणे आणि मुलींच्या शिक्षणाला चालना देण्यासाठी सुरू केली आहे. या योजनेअंतर्गत मुलीच्या जन्मापासून ते शिक्षणापर्यंत आर्थिक सहाय्य दिले जाते.",
@@ -61,6 +63,7 @@ export default function Bhagyashree() {
     },
     en: {
       heroTitle: "Bhagyashree Majhi Ladki Scheme",
+      heroDesc: "Financial assistance to encourage girl child birth, prevent female foeticide, and promote girl child education",
       title: "Bhagyashree Majhi Ladki Girl Child Scheme – Govt. of Maharashtra",
       objectiveTitle: "Scheme Objective:",
       objectiveDesc: "The “Bhagyashree – Lek Majhi Ladki” scheme has been launched to encourage the birth of girl children, prevent female foeticide, and promote girls' education. Financial assistance is provided under this scheme from the birth of the girl child to her higher education.",
@@ -120,17 +123,16 @@ export default function Bhagyashree() {
   return (
     <div className="w-full bg-gray-50 font-bold text-gray-800">
 
-      {/* 🔹 HERO */}
-      <section className="bg-gradient-to-r from-teal-400 via-cyan-500 to-blue-600 text-white px-6 md:px-20 flex flex-col md:flex-row items-center justify-between min-h-[60vh] py-20 md:py-32 gap-10">
-        <h1 className="text-4xl md:text-7xl text-center md:text-left leading-tight">
-          {t.heroTitle}
-        </h1>
-        <img
-          src="/assets/bhagyashree-removebg-preview.png"
-          alt="ladki"
-          className="w-64 md:w-[420px] lg:w-[520px] object-contain"
-        />
-      </section>
+      {/* HERO SECTION */}
+      <div className="bg-gradient-to-r from-green-700 to-green-500 text-white py-16 px-6 text-center">
+        <div className="flex justify-center mb-4">
+          <div className="bg-white bg-opacity-20 p-4 rounded-full">
+            <Users size={48} />
+          </div>
+        </div>
+        <h1 className="text-3xl md:text-5xl font-bold mb-3">{t.heroTitle}</h1>
+        <p className="text-green-100 max-w-2xl mx-auto text-sm md:text-base">{t.heroDesc}</p>
+      </div>
 
       <hr className="border-gray-200" />
 

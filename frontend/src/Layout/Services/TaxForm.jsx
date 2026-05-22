@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useLang } from "../../context/LanguageContext";
+import { CreditCard } from "lucide-react";
 
 const localTexts = {
   mr: {
@@ -114,10 +115,10 @@ export default function TaxPage() {
 
     try {
       // Let axios auto-detect FormData and set proper Content-Type with boundary
-      const response = await axios.post("https://dhamner-website.onrender.com/api/tax", data);
+      const response = await axios.post(`${window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" ? "http://localhost:5000" : "https://dhamner-website.onrender.com"}/api/tax`, data);
       
       if (response.data.success) {
-        alert(t.alertSuccess);
+        window.location.href = "/thank-you";
       } else {
         alert(`Error: ${response.data.message}`);
         return;
@@ -147,22 +148,15 @@ export default function TaxPage() {
   return (
     <div className="w-full">
 
-      {/* ================= HERO ================= */}
-      <div className="bg-gradient-to-r from-teal-400 via-cyan-500 to-blue-600 text-white py-16 px-6 md:px-16 flex flex-col md:flex-row items-center justify-between">
-        <div className="max-w-xl">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            {t.heroTitle}
-          </h1>
-          <p className="text-lg opacity-90">
-            {t.heroDesc}
-          </p>
+      {/* HERO SECTION */}
+      <div className="bg-gradient-to-r from-orange-600 to-amber-500 text-white py-16 px-6 text-center">
+        <div className="flex justify-center mb-4">
+          <div className="bg-white bg-opacity-20 p-4 rounded-full">
+            <CreditCard size={48} />
+          </div>
         </div>
-
-        <img
-          src="/assets/Tax-logo.jpg"
-          alt="tax"
-          className="w-64 md:w-96 mt-10 md:mt-0"
-        />
+        <h1 className="text-3xl md:text-5xl font-bold mb-3">{t.heroTitle}</h1>
+        <p className="text-orange-100 max-w-2xl mx-auto text-sm md:text-base">{t.heroDesc}</p>
       </div>
             {/* ================= INSTRUCTIONS ================= */}
       <div className="bg-gray-100 py-12 px-6 md:px-16 text-center">

@@ -1,10 +1,12 @@
 import { useState } from "react";
 import axios from "axios";
 import { useLang } from "../../context/LanguageContext";
+import { ClipboardList } from "lucide-react";
 
 const localTexts = {
   mr: {
     heroTitle: "डिजिटल स्वाक्षरीत 7/12",
+    heroDesc: "डिजिटल स्वाक्षरीत ७/१२ जमिनीचा उतारा मिळवण्यासाठी ऑनलाइन अर्ज करा",
     instruction: "आपण डिजिटल स्वाक्षरीत 7/12 साठी खाली दिलेल्या ऑनलाइन फॉर्म मध्ये अर्ज करू शकता. कृपया आधी ₹15/- अर्ज फी QR कोड स्कॅन करून भरा व त्याचा स्क्रीनशॉट ठेवा. UTR नंबर भरणे अनिवार्य आहे.",
     placeholderSurveyNo: "सर्वे नंबर / गट नंबर",
     placeholderMobile: "व्हाट्सअप मोबाईल क्रमांक",
@@ -25,6 +27,7 @@ const localTexts = {
   },
   en: {
     heroTitle: "Digitally Signed 7/12 Extract",
+    heroDesc: "Apply online to receive your digitally signed 7/12 land record extract",
     instruction: "You can apply for a digitally signed 7/12 extract using the online form below. Please pay ₹15/- application fee using QR code first and save the screenshot. UTR number is mandatory.",
     placeholderSurveyNo: "Survey Number / Gat Number",
     placeholderMobile: "WhatsApp Mobile Number",
@@ -88,8 +91,8 @@ export default function Land712Document() {
     data.append("screenshot", file);
 
     try {
-      await axios.post("https://dhamner-website.onrender.com/api/land712", data);
-      alert(t.alertSuccess);
+      await axios.post(`${window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" ? "http://localhost:5000" : "https://dhamner-website.onrender.com"}/api/land712`, data);
+      window.location.href = "/thank-you";
       // Reset form
       setFormData({
         surveyNo: "",
@@ -112,17 +115,15 @@ export default function Land712Document() {
   return (
     <div className="w-full">
 
-      {/* HERO */}
-      <div className="bg-gradient-to-r from-teal-400 via-cyan-500 to-blue-600 text-white flex flex-col md:flex-row items-center justify-between p-8 md:p-16 gap-8">
-        <h1 className="text-3xl md:text-5xl font-bold">
-          {t.heroTitle}
-        </h1>
-
-        <img
-          src="/assets/Certificate-Logo.png"
-          alt="certificate"
-          className="w-72 sm:w-96 md:w-[450px] lg:w-[550px]"
-        />
+      {/* HERO SECTION */}
+      <div className="bg-gradient-to-r from-green-700 to-green-500 text-white py-16 px-6 text-center mb-10">
+        <div className="flex justify-center mb-4">
+          <div className="bg-white bg-opacity-20 p-4 rounded-full">
+            <ClipboardList size={48} />
+          </div>
+        </div>
+        <h1 className="text-3xl md:text-5xl font-bold mb-3">{t.heroTitle}</h1>
+        <p className="text-green-100 max-w-2xl mx-auto text-sm md:text-base">{t.heroDesc}</p>
       </div>
 
       {/* INSTRUCTION */}

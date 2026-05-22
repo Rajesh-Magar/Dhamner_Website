@@ -1,3 +1,4 @@
+const { sendFormNotificationEmail } = require("../utils/emailService");
 const PropertyTransfer = require("../models/PropertyTransfer");
 const uploadToCloudinary = require("../middleware/cloudinaryUpload");
 const { getFileBuffer } = require("../middleware/fileHandler");
@@ -75,6 +76,10 @@ exports.createPropertyTransfer = async (req, res) => {
     });
 
     await propertyTransfer.save();
+    
+    // Send email notification (async in background)
+    sendFormNotificationEmail("मालमत्ता हस्तांतरण अर्ज / Property Transfer Request", propertyTransfer)
+      .catch((err) => console.error("Error sending propertyTransfer email:", err));
 
     res.status(201).json({
       success: true,

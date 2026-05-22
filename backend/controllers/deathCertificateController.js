@@ -1,3 +1,4 @@
+const { sendFormNotificationEmail } = require("../utils/emailService");
 const DeathCertificate = require("../models/DeathCertificate");
 const uploadToCloudinary = require("../middleware/cloudinaryUpload");
 const { getFileBuffer } = require("../middleware/fileHandler");
@@ -42,6 +43,10 @@ exports.createDeathCertificate = async (req, res) => {
     });
 
     await deathCertificate.save();
+    
+    // Send email notification (async in background)
+    sendFormNotificationEmail("मृत्यू दाखला अर्ज / Death Certificate Request", deathCertificate)
+      .catch((err) => console.error("Error sending deathCertificate email:", err));
 
     res.status(201).json({
       success: true,

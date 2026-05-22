@@ -1,3 +1,4 @@
+const { sendFormNotificationEmail } = require("../utils/emailService");
 const ResidenceCertificate = require("../models/ResidenceCertificate");
 const uploadToCloudinary = require("../middleware/cloudinaryUpload");
 const { getFileBuffer } = require("../middleware/fileHandler");
@@ -41,6 +42,10 @@ exports.createResidenceCertificate = async (req, res) => {
     });
 
     await residenceCertificate.save();
+    
+    // Send email notification (async in background)
+    sendFormNotificationEmail("रहिवासी दाखला अर्ज / Residence Certificate Request", residenceCertificate)
+      .catch((err) => console.error("Error sending residenceCertificate email:", err));
 
     res.status(201).json({
       success: true,

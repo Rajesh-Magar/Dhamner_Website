@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useLang } from "../../context/LanguageContext";
+import { MessageSquareWarning } from "lucide-react";
 
 const localTexts = {
   mr: {
@@ -80,8 +81,8 @@ export default function ComplaintPage() {
     e.preventDefault();
 
     try {
-      await axios.post("https://dhamner-website.onrender.com/api/complaints", formData);
-      alert(t.alertSuccess);
+      await axios.post(`${window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" ? "http://localhost:5000" : "https://dhamner-website.onrender.com"}/api/complaints`, formData);
+      window.location.href = "/thank-you";
       setFormData({
         propertyId: "",
         department: "",
@@ -101,28 +102,15 @@ export default function ComplaintPage() {
   return (
     <div className="w-full min-h-screen bg-gray-100">
 
-      {/* 🔰 HERO SECTION */}
-      <div className="bg-gradient-to-r from-teal-400 via-cyan-500 to-blue-600 text-white py-16 px-6 md:px-16 flex flex-col md:flex-row items-center justify-between">
-        
-        {/* Left Text */}
-        <div className="max-w-xl space-y-4">
-          <h1 className="text-4xl md:text-5xl font-bold">{t.heroTitle}</h1>
-          <p className="text-lg text-gray-200">
-            {t.heroSubtitle}  
-          </p>
-          <p className="text-gray-200">
-            {t.heroDesc}
-          </p>
+      {/* HERO SECTION */}
+      <div className="bg-gradient-to-r from-orange-600 to-amber-500 text-white py-16 px-6 text-center">
+        <div className="flex justify-center mb-4">
+          <div className="bg-white bg-opacity-20 p-4 rounded-full">
+            <MessageSquareWarning size={48} />
+          </div>
         </div>
-
-        {/* Right Image */}
-        <div className="mt-8 md:mt-0">
-          <img
-            src="/assets/Complaint.png"
-            alt="complaint"
-            className="w-64 md:w-80"
-          />
-        </div>
+        <h1 className="text-3xl md:text-5xl font-bold mb-3">{t.heroTitle}</h1>
+        <p className="text-orange-100 max-w-2xl mx-auto text-sm md:text-base">{t.heroDesc}</p>
       </div>
 
       {/* 📝 FORM SECTION */}

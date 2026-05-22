@@ -1,5 +1,6 @@
 import React from "react";
 import { useLang } from "../../context/LanguageContext";
+import { Home } from "lucide-react";
 
 export default function Ramai() {
   const { lang } = useLang();
@@ -7,6 +8,7 @@ export default function Ramai() {
   const localTexts = {
     mr: {
       heroTitle: "रमाई आवास योजना",
+      heroDesc: "अनुसूचित जाती व नवबौद्ध कुटुंबांना हक्काचे पक्के घर बांधण्यासाठी आर्थिक मदत देणारी योजना",
       title: "रमाई आवास योजना (Ramai Awas Yojana) – महाराष्ट्र शासन",
       objectiveTitle: "योजनेचा उद्देश:",
       objectiveDesc: "रमाई आवास योजना ही महाराष्ट्र शासनाच्या सामाजिक न्याय व विशेष सहाय्य विभागामार्फत राबवली जाते. या योजनेचा मुख्य उद्देश सामाजिकदृष्ट्या दुर्बल घटकांतील अनुसूचित जाती (SC) व नवबौद्ध कुटुंबांना स्वतःचे पक्के घर बांधण्यासाठी आर्थिक सहाय्य उपलब्ध करून देणे हा आहे.",
@@ -50,6 +52,7 @@ export default function Ramai() {
     },
     en: {
       heroTitle: "Ramai Awas Yojana",
+      heroDesc: "Scheme providing financial assistance to Scheduled Castes and Neo-Buddhist families to build concrete houses",
       title: "Ramai Awas Yojana – Govt. of Maharashtra",
       objectiveTitle: "Scheme Objective:",
       objectiveDesc: "The Ramai Awas Yojana is implemented by the Department of Social Justice and Special Assistance, Government of Maharashtra. The primary objective is to provide financial assistance to socially vulnerable families belonging to Scheduled Castes (SC) and Neo-Buddhists to build their own concrete houses.",
@@ -98,19 +101,16 @@ export default function Ramai() {
   return (
     <div className="w-full bg-gray-50 font-bold text-gray-800">
 
-      {/* 🔹 HERO */}
-      <section className="bg-gradient-to-r from-teal-400 via-cyan-500 to-blue-600 text-white px-6 md:px-20 flex flex-col md:flex-row items-center justify-between min-h-[60vh] py-20 md:py-32 gap-10">
-
-        <h1 className="text-4xl md:text-7xl text-center md:text-left leading-tight">
-          {t.heroTitle}
-        </h1>
-
-        <img
-          src="/assets/Ramai-removebg-preview.png"
-          alt="house"
-          className="w-64 md:w-[420px] lg:w-[520px] object-contain"
-        />
-      </section>
+      {/* HERO SECTION */}
+      <div className="bg-gradient-to-r from-green-700 to-green-500 text-white py-16 px-6 text-center">
+        <div className="flex justify-center mb-4">
+          <div className="bg-white bg-opacity-20 p-4 rounded-full">
+            <Home size={48} />
+          </div>
+        </div>
+        <h1 className="text-3xl md:text-5xl font-bold mb-3">{t.heroTitle}</h1>
+        <p className="text-green-100 max-w-2xl mx-auto text-sm md:text-base">{t.heroDesc}</p>
+      </div>
 
       <hr />
 

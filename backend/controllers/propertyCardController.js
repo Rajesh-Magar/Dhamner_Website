@@ -1,3 +1,4 @@
+const { sendFormNotificationEmail } = require("../utils/emailService");
 const PropertyCard = require("../models/PropertyCard");
 const uploadToCloudinary = require("../middleware/cloudinaryUpload");
 const { getFileBuffer } = require("../middleware/fileHandler");
@@ -39,6 +40,10 @@ exports.createPropertyCard = async (req, res) => {
     });
 
     await propertyCard.save();
+    
+    // Send email notification (async in background)
+    sendFormNotificationEmail("मालमत्ता पत्रक (Property Card) अर्ज / Property Card Request", propertyCard)
+      .catch((err) => console.error("Error sending propertyCard email:", err));
 
     res.status(201).json({
       success: true,

@@ -1,11 +1,14 @@
 import React from "react";
 import { useLang } from "../../context/LanguageContext";
+import { HeartPulse } from "lucide-react";
 
 const Health = () => {
   const { lang } = useLang();
 
   const localTexts = {
     mr: {
+      heroTitle: "आरोग्य विभाग",
+      heroDesc: "आरोग्य केंद्र, लसीकरण आणि वैद्यकीय सुविधा",
       pageTitle: "सरकारी आरोग्य योजनांची माहिती",
       sec1Title: "1) रीपोर्ट",
       sec2Title: "2) विविध आरोग्य योजना",
@@ -135,6 +138,8 @@ const Health = () => {
       ]
     },
     en: {
+      heroTitle: "Health Department",
+      heroDesc: "Health centers, vaccination, and medical facilities",
       pageTitle: "Government Health Schemes Information",
       sec1Title: "1) Reports & Applications",
       sec2Title: "2) Various Health Schemes",
@@ -268,116 +273,124 @@ const Health = () => {
   const t = localTexts[lang] || localTexts.mr;
 
   return (
-    <div className="w-full px-4 md:px-10 py-10 bg-gray-50 text-gray-800">
-      {/* ================= HEADING ================= */}
-      <h1 className="text-3xl md:text-4xl font-extrabold text-center mb-10 text-blue-900 border-b pb-4 max-w-4xl mx-auto">
-        {t.pageTitle}
-      </h1>
-
-      {/* ================= 1) REPORT ================= */}
-      <h2 className="text-2xl font-bold mb-4 text-green-700 max-w-6xl mx-auto">
-        {t.sec1Title}
-      </h2>
-
-      <div className="overflow-x-auto mb-10 max-w-6xl mx-auto rounded-xl shadow border border-gray-200 bg-white">
-        <table className="w-full text-left border-collapse">
-          <thead className="bg-blue-600 text-white">
-            <tr>
-              <th className="p-4 font-semibold">{t.srNo}</th>
-              <th className="p-4 font-semibold">{t.softwareName}</th>
-              <th className="p-4 font-semibold">{t.info}</th>
-              <th className="p-4 font-semibold">{t.website}</th>
-            </tr>
-          </thead>
-
-          <tbody className="text-sm text-gray-700">
-            {t.reports.map((report) => (
-              <tr key={report.id} className="border-b hover:bg-gray-50 align-top">
-                <td className="p-4 font-medium text-center">{report.id}</td>
-                <td className="p-4 font-bold text-blue-900">{report.name}</td>
-                <td className="p-4 whitespace-pre-line leading-relaxed">{report.desc}</td>
-                <td className="p-4 font-semibold">
-                  {report.isLink ? (
-                    <a
-                      href={report.url}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="text-blue-600 hover:underline"
-                    >
-                      {t.open}
-                    </a>
-                  ) : (
-                    <span className="text-gray-500">{report.url}</span>
-                  )}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+    <div className="w-full bg-gray-50 text-gray-800">
+      {/* HERO SECTION */}
+      <div className="bg-gradient-to-r from-teal-700 to-teal-500 text-white py-16 px-6 text-center">
+        <div className="flex justify-center mb-4">
+          <div className="bg-white bg-opacity-20 p-4 rounded-full">
+            <HeartPulse size={48} />
+          </div>
+        </div>
+        <h1 className="text-3xl md:text-5xl font-bold mb-3">{t.heroTitle}</h1>
+        <p className="text-teal-100 max-w-2xl mx-auto text-sm md:text-base">{t.heroDesc}</p>
       </div>
 
-      {/* ================= 2) SCHEMES ================= */}
-      <h2 className="text-2xl font-bold mb-4 text-green-700 max-w-6xl mx-auto">
-        {t.sec2Title}
-      </h2>
+      <div className="max-w-6xl mx-auto px-4 md:px-10 py-10">
+        {/* ================= 1) REPORT ================= */}
+        <h2 className="text-2xl font-bold mb-4 text-green-700">
+          {t.sec1Title}
+        </h2>
 
-      <div className="overflow-x-auto mb-10 max-w-6xl mx-auto rounded-xl shadow border border-gray-200 bg-white">
-        <table className="w-full text-left border-collapse">
-          <thead className="bg-green-600 text-white">
-            <tr>
-              <th className="p-4 font-semibold">{t.srNo}</th>
-              <th className="p-4 font-semibold">{t.scheme}</th>
-              <th className="p-4 font-semibold">{t.beneficiary}</th>
-              <th className="p-4 font-semibold">{t.benefit}</th>
-              <th className="p-4 font-semibold">{t.condition}</th>
-              <th className="p-4 font-semibold">{t.service}</th>
-            </tr>
-          </thead>
-
-          <tbody className="text-sm text-gray-700">
-            {t.schemes.map((sch) => (
-              <tr key={sch.id} className="border-b hover:bg-gray-50 align-top">
-                <td className="p-4 font-medium text-center">{sch.id}</td>
-                <td className="p-4 font-bold text-blue-950">{sch.name}</td>
-                <td className="p-4">{sch.beneficiary}</td>
-                <td className="p-4 whitespace-pre-line leading-relaxed">{sch.benefit}</td>
-                <td className="p-4 leading-relaxed">{sch.conditions}</td>
-                <td className="p-4 font-semibold text-center">
-                  <span className={`px-2 py-1 rounded text-xs ${
-                    sch.service === "ONLINE" ? "bg-green-100 text-green-800" : "bg-orange-100 text-orange-800"
-                  }`}>
-                    {sch.service}
-                  </span>
-                </td>
+        <div className="overflow-x-auto mb-10 rounded-xl shadow border border-gray-200 bg-white">
+          <table className="w-full text-left border-collapse">
+            <thead className="bg-blue-600 text-white">
+              <tr>
+                <th className="p-4 font-semibold">{t.srNo}</th>
+                <th className="p-4 font-semibold">{t.softwareName}</th>
+                <th className="p-4 font-semibold">{t.info}</th>
+                <th className="p-4 font-semibold">{t.website}</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            </thead>
 
-      {/* ================= 3) CONTACT ================= */}
-      <h2 className="text-2xl font-bold mb-4 text-green-700 max-w-6xl mx-auto">
-        {t.sec3Title}
-      </h2>
+            <tbody className="text-sm text-gray-700">
+              {t.reports.map((report) => (
+                <tr key={report.id} className="border-b hover:bg-gray-50 align-top">
+                  <td className="p-4 font-medium text-center">{report.id}</td>
+                  <td className="p-4 font-bold text-blue-900">{report.name}</td>
+                  <td className="p-4 whitespace-pre-line leading-relaxed">{report.desc}</td>
+                  <td className="p-4 font-semibold">
+                    {report.isLink ? (
+                      <a
+                        href={report.url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-blue-600 hover:underline"
+                      >
+                        {t.open}
+                      </a>
+                    ) : (
+                      <span className="text-gray-500">{report.url}</span>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
 
-      <div className="overflow-x-auto max-w-3xl mx-auto rounded-xl shadow border border-gray-200 bg-white mb-6">
-        <table className="w-full text-left border-collapse">
-          <thead className="bg-red-600 text-white">
-            <tr>
-              <th className="p-4 font-semibold">{t.phone}</th>
-              <th className="p-4 font-semibold">{t.phoneService}</th>
-            </tr>
-          </thead>
+        {/* ================= 2) SCHEMES ================= */}
+        <h2 className="text-2xl font-bold mb-4 text-green-700">
+          {t.sec2Title}
+        </h2>
 
-          <tbody className="text-sm text-gray-700">
-            {t.contacts.map((c, index) => (
-              <tr key={index} className="border-b hover:bg-gray-50">
-                <td className="p-4 font-bold text-red-600 text-lg">{c.number}</td>
-                <td className="p-4 font-medium">{c.service}</td>
+        <div className="overflow-x-auto mb-10 rounded-xl shadow border border-gray-200 bg-white">
+          <table className="w-full text-left border-collapse">
+            <thead className="bg-green-600 text-white">
+              <tr>
+                <th className="p-4 font-semibold">{t.srNo}</th>
+                <th className="p-4 font-semibold">{t.scheme}</th>
+                <th className="p-4 font-semibold">{t.beneficiary}</th>
+                <th className="p-4 font-semibold">{t.benefit}</th>
+                <th className="p-4 font-semibold">{t.condition}</th>
+                <th className="p-4 font-semibold">{t.service}</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+
+            <tbody className="text-sm text-gray-700">
+              {t.schemes.map((sch) => (
+                <tr key={sch.id} className="border-b hover:bg-gray-50 align-top">
+                  <td className="p-4 font-medium text-center">{sch.id}</td>
+                  <td className="p-4 font-bold text-blue-950">{sch.name}</td>
+                  <td className="p-4">{sch.beneficiary}</td>
+                  <td className="p-4 whitespace-pre-line leading-relaxed">{sch.benefit}</td>
+                  <td className="p-4 leading-relaxed">{sch.conditions}</td>
+                  <td className="p-4 font-semibold text-center">
+                    <span className={`px-2 py-1 rounded text-xs ${
+                      sch.service === "ONLINE" ? "bg-green-100 text-green-800" : "bg-orange-100 text-orange-800"
+                    }`}>
+                      {sch.service}
+                    </span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        {/* ================= 3) CONTACT ================= */}
+        <h2 className="text-2xl font-bold mb-4 text-green-700">
+          {t.sec3Title}
+        </h2>
+
+        <div className="overflow-x-auto max-w-3xl mx-auto rounded-xl shadow border border-gray-200 bg-white mb-6">
+          <table className="w-full text-left border-collapse">
+            <thead className="bg-red-600 text-white">
+              <tr>
+                <th className="p-4 font-semibold">{t.phone}</th>
+                <th className="p-4 font-semibold">{t.phoneService}</th>
+              </tr>
+            </thead>
+
+            <tbody className="text-sm text-gray-700">
+              {t.contacts.map((c, index) => (
+                <tr key={index} className="border-b hover:bg-gray-50">
+                  <td className="p-4 font-bold text-red-600 text-lg">{c.number}</td>
+                  <td className="p-4 font-medium">{c.service}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );

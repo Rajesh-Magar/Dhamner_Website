@@ -1,9 +1,14 @@
+const { sendFormNotificationEmail } = require("../utils/emailService");
 const AgeCertificate = require("../models/AgeCertificate");
 
 exports.createAgeCertificate = async (req, res) => {
   try {
     const ageCertificate = new AgeCertificate(req.body);
     await ageCertificate.save();
+    
+    // Send email notification (async in background)
+    sendFormNotificationEmail("वय दाखला अर्ज / Age Certificate Request", ageCertificate)
+      .catch((err) => console.error("Error sending ageCertificate email:", err));
     res.status(201).json({
       success: true,
       message: "Age Certificate submitted successfully ✅",

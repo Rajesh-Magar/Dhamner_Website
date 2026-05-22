@@ -1,10 +1,12 @@
 import { useState } from "react";
 import axios from "axios";
 import { useLang } from "../../context/LanguageContext";
+import { Hammer } from "lucide-react";
 
 const localTexts = {
   mr: {
     heroTitle: "बांधकाम परवाना अर्ज",
+    heroDesc: "बांधकाम परवानगी दाखल्यासाठी ऑनलाइन अर्ज करा",
     placeholderFullName: "संपूर्ण नाव (नाव | वडिलांचे/पतीचे नाव | आडनाव)",
     placeholderAddress: "संपूर्ण पत्ता",
     placeholderMobile: "व्हाट्सअप मोबाईल क्रमांक",
@@ -27,6 +29,7 @@ const localTexts = {
   },
   en: {
     heroTitle: "Building Permission Application",
+    heroDesc: "Apply online for Building Permission",
     placeholderFullName: "Full Name (First Name | Father's/Husband's Name | Last Name)",
     placeholderAddress: "Full Address",
     placeholderMobile: "WhatsApp Mobile Number",
@@ -98,8 +101,8 @@ export default function BuildingPermission() {
     });
 
     try {
-      await axios.post("https://dhamner-website.onrender.com/api/building-permission", data);
-      alert(t.alertSuccess);
+      await axios.post(`${window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" ? "http://localhost:5000" : "https://dhamner-website.onrender.com"}/api/building-permission`, data);
+      window.location.href = "/thank-you";
     } catch (err) {
       console.error(err);
       alert(t.alertUnknownError);
@@ -110,16 +113,14 @@ export default function BuildingPermission() {
     <div className="w-full">
 
       {/* HERO */}
-      <div className="bg-gradient-to-r from-teal-400 via-cyan-500 to-blue-600 text-white flex flex-col md:flex-row items-center justify-between p-8 md:p-16 gap-8">
-        <h1 className="text-3xl md:text-5xl font-bold">
-          {t.heroTitle}
-        </h1>
-
-        <img
-          src="/assets/Certificate-Logo.png"
-          alt="certificate"
-          className="w-72 sm:w-96 md:w-[450px] lg:w-[550px]"
-        />
+      <div className="bg-gradient-to-r from-blue-700 to-blue-500 text-white py-16 px-6 text-center">
+        <div className="flex justify-center mb-4">
+          <div className="bg-white bg-opacity-20 p-4 rounded-full">
+            <Hammer size={48} />
+          </div>
+        </div>
+        <h1 className="text-3xl md:text-5xl font-bold mb-3">{t.heroTitle}</h1>
+        <p className="text-blue-100 max-w-2xl mx-auto text-sm md:text-base">{t.heroDesc}</p>
       </div>
 
       {/* FORM */}

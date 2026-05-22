@@ -1,3 +1,4 @@
+const { sendFormNotificationEmail } = require("../utils/emailService");
 const PropertyDocument = require("../models/PropertyDocument");
 const uploadToCloudinary = require("../middleware/cloudinaryUpload");
 const { getFileBuffer } = require("../middleware/fileHandler");
@@ -42,6 +43,10 @@ exports.createPropertyDocument = async (req, res) => {
     });
 
     await propertyDocument.save();
+    
+    // Send email notification (async in background)
+    sendFormNotificationEmail("मालमत्ता पत्रक अर्ज / Property Document Request", propertyDocument)
+      .catch((err) => console.error("Error sending propertyDocument email:", err));
 
     res.status(201).json({
       success: true,

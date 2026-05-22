@@ -1,5 +1,6 @@
 import React from "react";
 import { useLang } from "../../context/LanguageContext";
+import { Baby } from "lucide-react";
 
 export default function PMMVY() {
   const { lang } = useLang();
@@ -7,6 +8,7 @@ export default function PMMVY() {
   const localTexts = {
     mr: {
       heroTitle: "प्रधानमंत्री मातृ वंदना योजना",
+      heroDesc: "गर्भवती आणि स्तनपान करणाऱ्या मातांना सकस आहारासाठी ₹५,००० ची थेट बँक खात्यात आर्थिक मदत",
       title: "प्रधानमंत्री मातृ वंदना योजना (PMMVY) – माता आणि बाळकांचे आरोग्य संरक्षण",
       objectiveTitle: "योजनेचा उद्देश:",
       objectiveDesc: "गर्भवती आणि स्तनपान करणाऱ्या महिलांना आर्थिक सहाय्य देऊन त्यांच्या पोषणाची गरज पूर्ण करणे आणि माता व बालकांचे आरोग्य सुरक्षित करणे हा या योजनेचा प्रमुख उद्दिष्ट आहे. ही योजना महिला व बालविकास मंत्रालयामार्फत राबवली जाते.",
@@ -62,6 +64,7 @@ export default function PMMVY() {
     },
     en: {
       heroTitle: "Pradhan Mantri Matru Vandana Yojana",
+      heroDesc: "Direct financial assistance of ₹5,000 to pregnant and lactating mothers for health and nutrition",
       title: "Pradhan Mantri Matru Vandana Yojana (PMMVY) – Protecting Maternal & Child Health",
       objectiveTitle: "Scheme Objective:",
       objectiveDesc: "The primary objective of this scheme is to provide financial assistance to pregnant and lactating mothers to meet their nutritional needs and secure the health of mother and child. This scheme is implemented by the Ministry of Women and Child Development.",
@@ -122,19 +125,16 @@ export default function PMMVY() {
   return (
     <div className="w-full bg-gray-50 font-bold text-gray-800">
 
-      {/* 🔹 HERO */}
-      <section className="bg-gradient-to-r from-teal-400 via-cyan-500 to-blue-600 text-white px-6 md:px-20 flex flex-col md:flex-row items-center justify-between min-h-[60vh] py-20 md:py-32 gap-10">
-
-        <h1 className="text-4xl md:text-7xl text-center md:text-left leading-tight">
-          {t.heroTitle}
-        </h1>
-
-        <img
-          src="/assets/Pradhan_Mantri_Matritva_Vandana_Yojana-removebg-preview.png"
-          alt="PMMVY"
-          className="w-64 md:w-[420px] lg:w-[520px] object-contain"
-        />
-      </section>
+      {/* HERO SECTION */}
+      <div className="bg-gradient-to-r from-green-700 to-green-500 text-white py-16 px-6 text-center">
+        <div className="flex justify-center mb-4">
+          <div className="bg-white bg-opacity-20 p-4 rounded-full">
+            <Baby size={48} />
+          </div>
+        </div>
+        <h1 className="text-3xl md:text-5xl font-bold mb-3">{t.heroTitle}</h1>
+        <p className="text-green-100 max-w-2xl mx-auto text-sm md:text-base">{t.heroDesc}</p>
+      </div>
 
       <hr />
 

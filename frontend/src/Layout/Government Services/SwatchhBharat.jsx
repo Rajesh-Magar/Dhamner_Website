@@ -1,9 +1,11 @@
 import React from "react";
 import { useLang } from "../../context/LanguageContext";
+import { Leaf } from "lucide-react";
 
 const localTexts = {
   mr: {
     heroTitle: "स्वच्छ भारत मिशन",
+    heroDesc: "संपूर्ण देशात स्वच्छता वाढवणे, कचरा व्यवस्थापन करणे आणि खुले शौचमुक्त भारत घडवण्यासाठी राष्ट्रीय मोहीम",
     objectiveTitle: "स्वच्छ भारत मिशन – एक राष्ट्रीय स्वच्छता मोहिम",
     schemeObjectiveLabel: "योजनेचा उद्देश:",
     schemeObjectiveDesc: "स्वच्छ भारत मिशन ही भारत सरकारने सुरू केलेली महत्त्वाकांक्षी योजना आहे. या योजनेचा उद्देश संपूर्ण देशात स्वच्छता वाढवणे, स्वच्छ जीवनशैली निर्माण करणे, खुले शौचमुक्त भारत (ODF) घडवणे, कचरा व्यवस्थापन सुधारणे आणि पर्यावरणपूरक स्वच्छता प्रणाली विकसित करणे हा आहे.",
@@ -58,6 +60,7 @@ const localTexts = {
   },
   en: {
     heroTitle: "Swachh Bharat Mission",
+    heroDesc: "A national campaign to promote cleanliness, manage waste, and make India open defecation free",
     objectiveTitle: "Swachh Bharat Mission – A National Cleanliness Campaign",
     schemeObjectiveLabel: "Objective of the Scheme:",
     schemeObjectiveDesc: "Swachh Bharat Mission is an ambitious initiative launched by the Government of India. The objective of this mission is to promote cleanliness across the country, cultivate a clean lifestyle, build an Open Defecation Free (ODF) India, improve waste management, and develop eco-friendly sanitation systems.",
@@ -119,19 +122,16 @@ export default function SwachhBharat() {
   return (
     <div className="w-full bg-gray-50 font-bold text-gray-800">
 
-      {/* 🔹 HERO */}
-      <section className="bg-gradient-to-r from-teal-400 via-cyan-500 to-blue-600 text-white px-6 md:px-20 flex flex-col md:flex-row items-center justify-between min-h-[50vh] py-20 md:py-32 gap-10">
-
-        <h1 className="text-4xl md:text-7xl text-center md:text-left leading-tight">
-          {t.heroTitle}
-        </h1>
-
-        <img
-          src="/assets/Swachh_Bharat_Mission_Logo.svg.png"
-          alt="swachh bharat"
-          className="w-64 md:w-[420px] lg:w-[520px] object-contain"
-        />
-      </section>
+      {/* HERO SECTION */}
+      <div className="bg-gradient-to-r from-green-700 to-green-500 text-white py-16 px-6 text-center">
+        <div className="flex justify-center mb-4">
+          <div className="bg-white bg-opacity-20 p-4 rounded-full">
+            <Leaf size={48} />
+          </div>
+        </div>
+        <h1 className="text-3xl md:text-5xl font-bold mb-3">{t.heroTitle}</h1>
+        <p className="text-green-100 max-w-2xl mx-auto text-sm md:text-base">{t.heroDesc}</p>
+      </div>
 
       <hr />
 

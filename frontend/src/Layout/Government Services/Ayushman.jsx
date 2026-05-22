@@ -1,5 +1,6 @@
 import React from "react";
 import { useLang } from "../../context/LanguageContext";
+import { HeartPulse } from "lucide-react";
 
 export default function Ayushman() {
   const { lang } = useLang();
@@ -7,6 +8,7 @@ export default function Ayushman() {
   const localTexts = {
     mr: {
       heroTitle: "आयुष्मान भारत योजना",
+      heroDesc: "पात्र कुटुंबांना ५ लाख रुपयांपर्यंत मोफत वैद्यकीय उपचार मिळवण्यासाठी आयुष्मान भारत योजना",
       title: "आयुष्मान भारत योजना – जन आरोग्य अभियान (PM-JAY)",
       objectiveTitle: "योजनेचा उद्देश:",
       objectiveDesc: "आयुष्मान भारत योजना ही केंद्र सरकारची महत्त्वाकांक्षी आरोग्य योजना आहे. या योजनेचा मुख्य उद्देश म्हणजे गरीब आणि गरजू कुटुंबांना मोफत आरोग्य सेवा प्रदान करणे, विशेषतः जे उपचार घेऊ शकत नाहीत अशा गंभीर आजारांसाठी रुग्णालयीन उपचाराचा खर्च सरकारकडून उचलला जातो.",
@@ -65,6 +67,7 @@ export default function Ayushman() {
     },
     en: {
       heroTitle: "Ayushman Bharat Scheme",
+      heroDesc: "Ayushman Bharat scheme to provide free medical treatment up to ₹5 Lakhs for eligible families",
       title: "Ayushman Bharat Scheme – Jan Arogya Yojana (PM-JAY)",
       objectiveTitle: "Scheme Objective:",
       objectiveDesc: "Ayushman Bharat Yojana is an ambitious health insurance scheme of the Central Government. The primary objective is to provide free healthcare services to poor and vulnerable families, bearing the hospitalization cost for severe illnesses that they cannot afford.",
@@ -128,17 +131,16 @@ export default function Ayushman() {
   return (
     <div className="w-full bg-gray-50 font-bold text-gray-800">
 
-      {/* 🔹 HERO SECTION */}
-      <section className="bg-gradient-to-r from-teal-400 via-cyan-500 to-blue-600 text-white px-6 md:px-20 flex flex-col md:flex-row items-center justify-between min-h-[60vh] py-20 md:py-32 gap-10">
-        <h1 className="text-4xl md:text-7xl leading-tight text-center md:text-left">
-          {t.heroTitle}
-        </h1>
-        <img
-          src="/assets/Ayushman-Logo.png"
-          alt="pmjay"
-          className="w-64 md:w-[420px] lg:w-[520px] object-contain"
-        />
-      </section>
+      {/* HERO SECTION */}
+      <div className="bg-gradient-to-r from-green-700 to-green-500 text-white py-16 px-6 text-center">
+        <div className="flex justify-center mb-4">
+          <div className="bg-white bg-opacity-20 p-4 rounded-full">
+            <HeartPulse size={48} />
+          </div>
+        </div>
+        <h1 className="text-3xl md:text-5xl font-bold mb-3">{t.heroTitle}</h1>
+        <p className="text-green-100 max-w-2xl mx-auto text-sm md:text-base">{t.heroDesc}</p>
+      </div>
 
       <hr className="border-gray-300" />
 
