@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Mail, Phone, Clock, Menu, X, ChevronDown, Globe, Search } from "lucide-react";
+import { Mail, Phone, Clock, Menu, X, ChevronDown, Globe, Search, Network } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLang } from "../context/LanguageContext";
 import SearchModal from "../components/SearchModal";
@@ -32,7 +32,7 @@ export default function Navbar() {
       link: "/about",
       dropdown: [
         { name: t.aboutVillage, link: "/about" },
-        { name: t.officers, link: "/officers" },
+
         { name: t.photoGallery, link: "/gallery" },
         { name: t.achievements, link: "/yashogatha" },
       ],
@@ -41,11 +41,11 @@ export default function Navbar() {
       name: t.schemes,
       link: "/schemes",
       dropdown: [
-        { name: t.jalJeevan, link: "https://water.maharashtra.gov.in/" },
         { name: t.ayushman, link: "/ayushman" },
         { name: t.pesa, link: "/pesa" },
         { name: t.pmmvy, link: "/pmmvy" },
         { name: t.bhagyashree, link: "/ladki" },
+        { name: t.jalJeevan, link: "https://water.maharashtra.gov.in/" },
         { name: t.ramai, link: "/ramai" },
         { name: t.ladkiBahin, link: "/ladki-bahin" },
         { name: t.shabari, link: "/shabari" },
@@ -109,6 +109,7 @@ export default function Navbar() {
         { name: t.environment, link: "/environment" },
       ],
     },
+    { name: <Network size={18} />, link: "/sitemap" },
   ];
 
   return (

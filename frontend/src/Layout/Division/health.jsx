@@ -12,7 +12,6 @@ const Health = () => {
       pageTitle: "सरकारी आरोग्य योजनांची माहिती",
       sec1Title: "1) रीपोर्ट",
       sec2Title: "2) विविध आरोग्य योजना",
-      sec3Title: "3) महत्वाचे दूरध्वनी क्रमांक",
       srNo: "अनुक्रमांक",
       softwareName: "सॉफ्टवेअर नाव",
       info: "माहिती / तपशील",
@@ -143,7 +142,6 @@ const Health = () => {
       pageTitle: "Government Health Schemes Information",
       sec1Title: "1) Reports & Applications",
       sec2Title: "2) Various Health Schemes",
-      sec3Title: "3) Important Contact Numbers",
       srNo: "Sr.No",
       softwareName: "Software Name",
       info: "Information & Description",
@@ -361,31 +359,6 @@ const Health = () => {
                       {sch.service}
                     </span>
                   </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        {/* ================= 3) CONTACT ================= */}
-        <h2 className="text-2xl font-bold mb-4 text-green-700">
-          {t.sec3Title}
-        </h2>
-
-        <div className="overflow-x-auto max-w-3xl mx-auto rounded-xl shadow border border-gray-200 bg-white mb-6">
-          <table className="w-full text-left border-collapse">
-            <thead className="bg-red-600 text-white">
-              <tr>
-                <th className="p-4 font-semibold">{t.phone}</th>
-                <th className="p-4 font-semibold">{t.phoneService}</th>
-              </tr>
-            </thead>
-
-            <tbody className="text-sm text-gray-700">
-              {t.contacts.map((c, index) => (
-                <tr key={index} className="border-b hover:bg-gray-50">
-                  <td className="p-4 font-bold text-red-600 text-lg">{c.number}</td>
-                  <td className="p-4 font-medium">{c.service}</td>
                 </tr>
               ))}
             </tbody>

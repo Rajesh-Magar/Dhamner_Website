@@ -7,7 +7,7 @@ const getServices = (t) => [
   { title: t.schemes, desc: t.lang === "en" ? "Information on various government schemes" : "शासनाच्या विविध योजनांची माहिती", icon: FileText, link: "/schemes" },
   { title: t.photoGallery, desc: t.lang === "en" ? "Photos of various events" : "विविध कार्यक्रमांची छायाचित्रे", icon: Camera, link: "/gallery" },
   { title: t.aboutVillage, desc: t.lang === "en" ? "Collection of information about Gram Panchayat" : "ग्रामपंचायती विषयीची माहिती संकलन", icon: Building2, link: "/about" },
-  { title: t.officers, desc: t.lang === "en" ? "Dignitaries and moments of their visits" : "मान्यवर व त्यांच्या भेटीचे क्षण", icon: Image, link: "/officers" },
+  { title: t.officers, desc: t.lang === "en" ? "Dignitaries and moments of their visits" : "मान्यवर व त्यांच्या भेटीचे क्षण", icon: Image, link: "/about" },
   { title: t.documents, desc: t.lang === "en" ? "Various documents & online portal" : "विविध दाखले व ऑनलाईन पोर्टल", icon: LayoutDashboard, link: "/documents" },
   { title: t.health, desc: t.lang === "en" ? "Available health facilities & information" : "उपलब्ध आरोग्य सुविधा व माहिती", icon: Heart, link: "/health" },
   { title: t.map, desc: t.lang === "en" ? "Village map & information" : "गावचा नकाशा व माहिती", icon: MapPin, link: "/map" },

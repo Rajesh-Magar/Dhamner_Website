@@ -3,7 +3,7 @@ import SuvicharStrip from "./SuvicharStrip";
 import Member from "./Member";
 import AboutUs from "./AboutUs";
 import Population from "./Population";
-import Photos from "./Photos";
+
 import Services from "./Services";
 import News from "./News";
 import Review from "./Review";
@@ -18,7 +18,7 @@ export default function HomePage() {
             <Member/>
             <AboutUs/>
             <Population/>
-            <Photos/>
+
             <PanchayatProgress/>
             <Progress/>
             <Services/>

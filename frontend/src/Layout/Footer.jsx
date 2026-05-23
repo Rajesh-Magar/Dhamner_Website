@@ -98,7 +98,7 @@ export default function Footer() {
 
           <ul className="space-y-3 font-devanagari text-sm">
             <li><Link to="/about" className="hover:underline hover:text-amber-300 transition-colors">{t.aboutVillage}</Link></li>
-            <li><Link to="/officers" className="hover:underline hover:text-amber-300 transition-colors">{t.officers}</Link></li>
+
             <li><Link to="/gallery" className="hover:underline hover:text-amber-300 transition-colors">{t.photoGallery}</Link></li>
             <li><Link to="/dashboard" className="hover:underline hover:text-amber-300 transition-colors">{t.dashboard}</Link></li>
             <li><Link to="/projects" className="hover:underline hover:text-amber-300 transition-colors">{t.projects}</Link></li>

@@ -5,7 +5,6 @@ import { ArrowUp } from "lucide-react";
 import Navbar from "./Layout/Navbar";
 import Footer from "./Layout/Footer";
 import AboutVillage from "./Layout/Ourself/AboutVillage";
-import Members from "./Layout/Ourself/Members";
 import PhotoGallery from "./Layout/Ourself/photogallery";
 import HomePage from './Layout/HomePage/HomePage.jsx';
 import Ayushman from './Layout/Government Services/Ayushman.jsx';
@@ -105,7 +104,6 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutVillage />} />
-        <Route path="/officers" element={<Members />} />
         <Route path="/gallery" element={<PhotoGallery />} />
         <Route path="/ayushman" element={<Ayushman />} />
         <Route path="/pesa" element={<Pesa />} />
