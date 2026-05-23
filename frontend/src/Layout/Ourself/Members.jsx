@@ -6,7 +6,7 @@ const content = {
     title: "अधिकारी / पदाधिकारी",
     subtitle: "ग्रामपंचायत सदस्य व पदाधिकारी",
     members: [
-      { name: "श्री.चंद्रकांत शंकर व्होवाळे", role: "सरपंच", img: "/members/Sarpanch chandrakant howale.jpg.jpeg" },
+      { name: "श्री.चंद्रकांत शंकर व्होवाळे", role: "सरपंच/प्रशासक", img: "/members/Sarpanch chandrakant howale.jpg.jpeg" },
       { name: "श्री.प्रवीण वामन क्षीरसागर", role: "उपसरपंच", img: "/members/upsarpanch pravin kshirsagar.jpg.jpeg" },
       { name: "श्री.प्रशांत विठ्ठल फडतरे", role: "ग्रामसेवक अधिकारी", img: "/members/WhatsApp Image 2026-03-17 at 6.13.49 PM.jpeg" },
       { name: "सौ. शैलजा गजानना क्षीरसागर", role: "ग्राप सदस्य", img: "/members/shailaja.jpg.jpeg" },
@@ -22,7 +22,7 @@ const content = {
     title: "Officers / Office Bearers",
     subtitle: "Gram Panchayat Members & Officials",
     members: [
-      { name: "Shri. Chandrakant Shankar Vhovale", role: "Sarpanch", img: "/members/Sarpanch chandrakant howale.jpg.jpeg" },
+      { name: "Shri. Chandrakant Shankar Vhovale", role: "Sarpanch/Administrator", img: "/members/Sarpanch chandrakant howale.jpg.jpeg" },
       { name: "Shri. Pravin Vaman Kshirsagar", role: "Upsarpanch", img: "/members/upsarpanch pravin kshirsagar.jpg.jpeg" },
       { name: "Shri. Prashant Vitthal Phadtare", role: "Gram Sevak Officer", img: "/members/WhatsApp Image 2026-03-17 at 6.13.49 PM.jpeg" },
       { name: "Sau. Shailaja Gajanan Kshirsagar", role: "GP Member", img: "/members/shailaja.jpg.jpeg" },

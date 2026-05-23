@@ -57,6 +57,7 @@ import BudgetPage from "./Layout/Budget/BudgetPage.jsx";
 import EmploymentPage from "./Layout/Employment/EmploymentPage.jsx";
 import EducationPage from "./Layout/Education/EducationPage.jsx";
 import EnvironmentPage from "./Layout/Environment/EnvironmentPage.jsx";
+import Sitemap from "./Layout/Sitemap/Sitemap.jsx";
 
 import { Routes, Route, useLocation } from "react-router-dom";
 
@@ -145,8 +146,7 @@ function App() {
         <Route path='/yashogatha' element={<Yashogatha />} />
         <Route path='/information' element={<MahitichaAdhikar />} />
         <Route path='/thank-you' element={<ThankYou />} />
-
-
+        <Route path='/sitemap' element={<Sitemap />} />
         {/* ✅ New Framework Module Routes */}
         <Route path='/dashboard' element={<DashboardPage />} />
         <Route path='/projects' element={<ProjectsPage />} />

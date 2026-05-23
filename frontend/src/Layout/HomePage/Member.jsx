@@ -18,7 +18,7 @@ const content = {
       { id: 11, name: "शहाजी क्षीरसागर", role: "आदर्श सरपंच", image: "/members/शहाजी क्षीरसागर.png" },
     ],
     officialsData: [
-      { id: 1, name: "श्री.चंद्रकांत शंकर व्होवाळे", role: "सरपंच", image: "/members/Sarpanch chandrakant howale.jpg.jpeg" },
+      { id: 1, name: "श्री.चंद्रकांत शंकर व्होवाळे", role: "सरपंच/प्रशासक", image: "/members/Sarpanch chandrakant howale.jpg.jpeg" },
       { id: 2, name: "श्री.प्रविण वामन क्षीरसागर", role: "उपसरपंच", image: "/members/upsarpanch pravin kshirsagar.jpg.jpeg" },
       { id: 3, name: "श्री.प्रशांत फडतरे", role: "ग्रामपंचायत अधिकारी", image: "/members/WhatsApp Image 2026-03-17 at 6.13.49 PM.jpeg" },
     ],
@@ -40,7 +40,7 @@ const content = {
       { id: 11, name: "Shahaji Kshirsagar", role: "Ideal Sarpanch", image: "/members/शहाजी क्षीरसागर.png" },
     ],
     officialsData: [
-      { id: 1, name: "Shri. Chandrakant Shankar Vhovale", role: "Sarpanch", image: "/members/Sarpanch chandrakant howale.jpg.jpeg" },
+      { id: 1, name: "Shri. Chandrakant Shankar Vhovale", role: "Sarpanch/Administrator", image: "/members/Sarpanch chandrakant howale.jpg.jpeg" },
       { id: 2, name: "Shri. Pravin Vaman Kshirsagar", role: "Upsarpanch", image: "/members/upsarpanch pravin kshirsagar.jpg.jpeg" },
       { id: 3, name: "Shri. Prashant Phadtare", role: "Gram Panchayat Officer", image: "/members/WhatsApp Image 2026-03-17 at 6.13.49 PM.jpeg" },
     ],
