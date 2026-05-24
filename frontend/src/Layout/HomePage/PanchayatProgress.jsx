@@ -21,17 +21,17 @@ export default function PanchayatProgress() {
   }, []);
 
   const progressBars = [
-    { label: t.literacy || (lang === "mr" ? "साक्षरता दर" : "Literacy Rate"), value: 78, color: "bg-blue-500", textClass: "text-blue-500", icon: BookOpen },
-    { label: t.cleanliness || (lang === "mr" ? "स्वच्छता" : "Cleanliness"), value: 94, color: "bg-green-500", textClass: "text-green-500", icon: TrendingUp },
-    { label: t.powerSupply || (lang === "mr" ? "वीज पुरवठा" : "Power Supply"), value: 99, color: "bg-yellow-500", textClass: "text-yellow-500", icon: Zap },
-    { label: t.tapConnections || (lang === "mr" ? "नळ जोडणी" : "Tap Connections"), value: 86, color: "bg-cyan-500", textClass: "text-cyan-500", icon: Droplets },
-    { label: t.fundUtilization || (lang === "mr" ? "निधी वापर" : "Fund Utilization"), value: 72, color: "bg-orange-500", textClass: "text-orange-500", icon: Banknote },
+    { label: t.literacy || (lang === "mr" ? "साक्षरता दर" : "Literacy Rate"), value: 95, color: "bg-blue-500", textClass: "text-blue-500", icon: BookOpen },
+    { label: t.cleanliness || (lang === "mr" ? "स्वच्छता" : "Cleanliness"), value: 100, color: "bg-green-500", textClass: "text-green-500", icon: TrendingUp },
+    { label: t.powerSupply || (lang === "mr" ? "वीज पुरवठा" : "Power Supply"), value: 100, color: "bg-yellow-500", textClass: "text-yellow-500", icon: Zap },
+    { label: t.tapConnections || (lang === "mr" ? "नळ जोडणी" : "Tap Connections"), value: 100, color: "bg-cyan-500", textClass: "text-cyan-500", icon: Droplets },
+    { label: t.fundUtilization || (lang === "mr" ? "निधी वापर" : "Fund Utilization"), value: 100, color: "bg-orange-500", textClass: "text-orange-500", icon: Banknote },
   ];
 
   const wardData = [
-    { mr_name: "वार्ड १", en_name: "Ward 1", score: 88 },
-    { mr_name: "वार्ड २", en_name: "Ward 2", score: 75 },
-    { mr_name: "वार्ड ३", en_name: "Ward 3", score: 92 },
+    { mr_name: "वार्ड १", en_name: "Ward 1", score: 98 },
+    { mr_name: "वार्ड २", en_name: "Ward 2", score: 92 },
+    { mr_name: "वार्ड ३", en_name: "Ward 3", score: 98 },
   ];
 
   const achievements = [
