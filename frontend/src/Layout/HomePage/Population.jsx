@@ -65,7 +65,7 @@ const statsData = [
   { id: "male", target: 1407, suffix: "+", icon: User, mrLabel: "पुरुष", enLabel: "Male" },
   { id: "female", target: 1315, suffix: "+", icon: User, mrLabel: "महिला", enLabel: "Female" },
   { id: "children", target: 294, suffix: "+", icon: Baby, mrLabel: "बालके", enLabel: "Children" },
-  { id: "literacy", target: 78, suffix: "%", icon: BookOpen, mrLabel: "साक्षरता दर", enLabel: "Literacy Rate" },
+  { id: "literacy", target: 95, suffix: "%", icon: BookOpen, mrLabel: "साक्षरता दर", enLabel: "Literacy Rate" },
   { id: "area", target: 750, suffix: { mr: " हेक्टर", en: " Hectares" }, icon: Map, mrLabel: "एकूण क्षेत्र", enLabel: "Total Area" },
   { id: "households", target: 544, suffix: "", icon: Home, mrLabel: "घरे", enLabel: "Households" },
   { id: "wards", target: 3, suffix: "", icon: Layers, mrLabel: "वार्ड", enLabel: "Wards" },
