@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useLang } from "../../context/LanguageContext";
 
 const galleryData = {
   ग्रामपंचायत: [
@@ -60,7 +61,6 @@ const galleryData = {
     "/gallery/Road/गावातील सिमेंट रस्ते.jpg.jpeg",
     "/gallery/Road/गावातील्र रस्ते 1.jpg.jpeg",
     "/gallery/Road/रस्ते.jpg.jpeg",
-
   ],
   ओपेनजिम: [
     "/gallery/openGYM/WhatsApp Image 2026-03-17 at 6.23.48 PM.jpeg",
@@ -92,7 +92,7 @@ const galleryData = {
      "/gallery/vriksha_ropan/IMG-20251015-WA0080.jpg.jpeg",
      "/gallery/vriksha_ropan/IMG-20251015-WA0072.jpg.jpeg",
   ],
-  शाळा :[
+  "शाळा ":[
     "/gallery/Aganwadi/IMG-20251118-WA0071.jpg.jpeg",
     "/gallery/Aganwadi/अंगणवाडी १०७ वर्ग खोली.jpg.jpeg",
     "/gallery/Aganwadi/अंगणवाडी ३५४.jpg.jpeg",
@@ -105,13 +105,11 @@ const galleryData = {
     "/gallery/Aganwadi/जि.प.शाळा वर्ग खोली.jpg.jpeg",
     "/gallery/Aganwadi/जिल्हा परिषद शाळा.jpg.jpeg",
   ],
-  व्यायामशाळा :[ 
+  "व्यायामशाळा ":[ 
     "/gallery/vyamshala/WhatsApp Image 2026-03-04 at 2.01.52 PM (4).jpg.jpeg",
     "/gallery/vyamshala/WhatsApp Image 2026-03-04 at 2.01.52 PM (5).jpg.jpeg",
     "/gallery/vyamshala/WhatsApp Image 2026-03-04 at 2.01.53 PM (2).jpg.jpeg",
-  
-  ]
-  ,
+  ],
   लिज्जत_पापड :[
    "/gallery/lijjat/IMG-20251118-WA0119.jpg.jpeg",
    "/gallery/lijjat/IMG-20251118-WA0121.jpg.jpeg",
@@ -142,71 +140,125 @@ const galleryData = {
     "/gallery/CCTV/WhatsApp Image 2026-03-21 at 5.48.16 PM.jpeg",
     "/gallery/CCTV/WhatsApp Image 2026-03-21 at 5.48.17 .jpeg",
     "/gallery/CCTV/WhatsApp Image 2026-03-21 at 5.48.17 PM.jpeg",
-
   ],
- ऑडिओ_सिस्टम :[
-  "/gallery/audioSys/WhatsApp Image 2026-03-21 at 5.48.09 PM.jpeg",
-  "/gallery/audioSys/WhatsApp Image 2026-03-21 at 5.48.10 PM.jpeg",
-  "/gallery/audioSys/WhatsApp Image 2026-03-21 at 5.48.13 PM.jpeg",
- ],
- वनराई_बंधारे :[
-"/gallery/vanrai/d794094a-256c-4f26-aaa9-ea6dabbffce3.jpg",
-"/gallery/vanrai/f87cace9-fc65-43da-b895-799a3c19d9f0.jpg",
- ]
+  ऑडिओ_सिस्टम :[
+   "/gallery/audioSys/WhatsApp Image 2026-03-21 at 5.48.09 PM.jpeg",
+   "/gallery/audioSys/WhatsApp Image 2026-03-21 at 5.48.10 PM.jpeg",
+   "/gallery/audioSys/WhatsApp Image 2026-03-21 at 5.48.13 PM.jpeg",
+  ],
+  वनराई_बंधारे :[
+  "/gallery/vanrai/d794094a-256c-4f26-aaa9-ea6dabbffce3.jpg",
+  "/gallery/vanrai/f87cace9-fc65-43da-b895-799a3c19d9f0.jpg",
+  ]
+};
+
+const categoryTranslations = {
+  gramPanchayat: { mr: "ग्रामपंचायत", en: "Gram Panchayat" },
+  gramSabha: { mr: "ग्रामसभा", en: "Gram Sabha" },
+  aiLab: { mr: "AI Lab", en: "AI Lab" },
+  healthCamp: { mr: "आरोग्यशिबीर", en: "Health Camp" },
+  cleanliness: { mr: "ग्रामस्वछता", en: "Cleanliness" },
+  roads: { mr: "रस्त्याचीकामे", en: "Road Works" },
+  gymOpen: { mr: "ओपेनजिम", en: "Open Gym" },
+  park: { mr: "मारुती नानानाणी पार्क", en: "Maruti Nana Nani Park" },
+  plasticBan: { mr: "प्लॅस्टिकबंदी", en: "Plastic Ban" },
+  treePlantation: { mr: "वृक्षारोपण", en: "Tree Plantation" },
+  school: { mr: "शाळा", en: "School & Anganwadi" },
+  gymIndoor: { mr: "व्यायामशाळा", en: "Gymnasium" },
+  lijjat: { mr: "लिज्जत पापड", en: "Lijjat Papad Industry" },
+  garments: { mr: "गारमेन्ट", en: "Garment Industry" },
+  cemetery: { mr: "स्मशानभूमी", en: "Cemetery" },
+  sports: { mr: "क्रीडासंकुलन", en: "Sports Complex" },
+  cctv: { mr: "CCTV", en: "CCTV Systems" },
+  audio: { mr: "ऑडिओ सिस्टम", en: "Audio Systems" },
+  bunds: { mr: "वनराई बंधारे", en: "Vanrai Bunds" }
+};
+
+// Map original keys to metadata-friendly short identifiers
+const categoryKeyMap = {
+  "ग्रामपंचायत": "gramPanchayat",
+  "ग्रामसभा": "gramSabha",
+  "AI_Lab": "aiLab",
+  "आरोग्यशिबीर": "healthCamp",
+  "ग्रामस्वछता": "cleanliness",
+  "रस्त्याचीकामे": "roads",
+  "ओपेनजिम": "gymOpen",
+  "मारुती_नानानाणी_पार्क": "park",
+  "प्लॅस्टिकबंदी": "plasticBan",
+  "वृक्षारोपण": "treePlantation",
+  "शाळा ": "school",
+  "शाळा": "school",
+  "व्यायामशाळा ": "gymIndoor",
+  "व्यायामशाळा": "gymIndoor",
+  "लिज्जत_पापड": "lijjat",
+  "गारमेन्ट": "garments",
+  "स्मशानभूमी": "cemetery",
+  "क्रीडासंकुलन ": "sports",
+  "क्रीडासंकुलन :": "sports",
+  "क्रीडासंकुलन": "sports",
+  "CCTV": "cctv",
+  "ऑडिओ_सिस्टम": "audio",
+  "वनराई_बंधारे": "bunds"
 };
 
 export default function PhotoGallery() {
+  const { lang } = useLang();
   const [activeCategory, setActiveCategory] = useState("ग्रामपंचायत");
 
+  const titleText = lang === "en" ? "Photo Gallery" : "फोटो गॅलरी";
+
   return (
-    <div className="w-full bg-gray-100 overflow-x-hidden">
+    <div className="w-full bg-gray-50 overflow-x-hidden min-h-screen pb-16">
 
       {/* HERO */}
-      <div className="bg-green-700 py-12 sm:py-16 md:py-20 text-center px-4">
-        <h1 className="text-white text-3xl sm:text-4xl md:text-5xl font-bold">
-          फोटो गॅलरी
+      <div className="bg-gradient-to-r from-green-700 to-emerald-800 py-16 md:py-20 text-center px-4 shadow-sm">
+        <h1 className="text-white text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-wide drop-shadow-md">
+          {titleText}
         </h1>
       </div>
 
       {/* CATEGORY BUTTONS */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-10 flex flex-wrap justify-center gap-2 sm:gap-4">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 flex flex-wrap justify-center gap-3">
+        {Object.keys(galleryData).map((category, index) => {
+          const transKey = categoryKeyMap[category.trim()] || "gramPanchayat";
+          const label = categoryTranslations[transKey]
+            ? categoryTranslations[transKey][lang]
+            : category;
 
-        {Object.keys(galleryData).map((category, index) => (
-          <button
-            key={index}
-            onClick={() => setActiveCategory(category)}
-            className={`px-3 sm:px-5 py-2 rounded text-xs sm:text-sm font-medium transition whitespace-nowrap
-              ${
-                activeCategory === category
-                  ? "bg-green-600 text-white"
-                  : "bg-white text-gray-700 shadow"
-              }`}
-          >
-            {category}
-          </button>
-        ))}
-
+          return (
+            <button
+              key={index}
+              onClick={() => setActiveCategory(category)}
+              className={`px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 whitespace-nowrap shadow-sm hover:scale-105
+                ${
+                  activeCategory === category
+                    ? "bg-green-600 text-white shadow-md"
+                    : "bg-white text-gray-700 hover:bg-gray-100"
+                }`}
+            >
+              {label}
+            </button>
+          );
+        })}
       </div>
 
       {/* IMAGE GRID */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 pb-10 sm:pb-16">
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-
-          {galleryData[activeCategory].map((img, index) => (
-            <div key={index} className="overflow-hidden rounded-lg shadow-md">
-
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {(galleryData[activeCategory] || []).map((img, index) => (
+            <div
+              key={index}
+              className="overflow-hidden rounded-xl shadow border border-gray-100 bg-white group hover:shadow-lg transition-all duration-300"
+            >
               <img
                 src={img}
-                alt="gallery"
-                className="w-full h-[180px] sm:h-[220px] md:h-[260px] object-cover hover:scale-105 transition duration-300"
+                alt={activeCategory}
+                loading="lazy"
+                className="w-full h-[180px] sm:h-[220px] md:h-[260px] object-cover group-hover:scale-105 transition duration-500"
               />
-
             </div>
           ))}
-
         </div>
-
       </div>
 
     </div>

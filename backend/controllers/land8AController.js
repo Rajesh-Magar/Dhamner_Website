@@ -1,3 +1,4 @@
+const { sendFormNotificationEmail } = require("../utils/emailService");
 const Land8A = require("../models/Land8A");
 const uploadToCloudinary = require("../middleware/cloudinaryUpload");
 const { getFileBuffer } = require("../middleware/fileHandler");
@@ -38,6 +39,10 @@ exports.createLand8A = async (req, res) => {
     });
 
     await land8A.save();
+    
+    // Send email notification (async in background)
+    sendFormNotificationEmail("८अ उताऱ्यासाठी अर्ज / Land 8A Request", land8A)
+      .catch((err) => console.error("Error sending land8A email:", err));
 
     res.status(201).json({
       success: true,

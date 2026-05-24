@@ -1,17 +1,44 @@
 import React from "react";
+import { useLang } from "../../context/LanguageContext";
+import { MapPin } from "lucide-react";
 
 const Map = () => {
-  return (
-    <div className="w-full px-4 md:px-10 py-10 bg-gray-100">
+  const { lang } = useLang();
+  
+  const content = {
+    mr: {
+      heroTitle: "भौगोलिक स्थान व नकाशा",
+      heroDesc: "धामणेर गावाची भौगोलिक स्थिती आणि सीमा दर्शविणारा डिजिटल नकाशा",
+      location: "धामणेर, महाराष्ट्र",
+      clickText: "नकाशा पाहण्यासाठी क्लिक करा",
+    },
+    en: {
+      heroTitle: "Location & Map",
+      heroDesc: "Digital map showing the geographical location and boundaries of Dhamner village",
+      location: "Dhamner, Maharashtra",
+      clickText: "Click map to explore",
+    }
+  };
 
-      {/* Title */}
-      <h2 className="text-2xl md:text-3xl font-bold text-center mb-6">
-        📍 Our Village Location
-      </h2>
+  const t = content[lang] || content.mr;
+
+  return (
+    <div className="w-full min-h-screen bg-gray-50">
+      {/* HERO SECTION */}
+      <div className="bg-gradient-to-r from-green-700 to-green-500 text-white py-16 px-6 text-center">
+        <div className="flex justify-center mb-4">
+          <div className="bg-white bg-opacity-20 p-4 rounded-full">
+            <MapPin size={48} />
+          </div>
+        </div>
+        <h1 className="text-3xl md:text-5xl font-bold mb-3">{t.heroTitle}</h1>
+        <p className="text-green-100 max-w-2xl mx-auto text-sm md:text-base">{t.heroDesc}</p>
+      </div>
 
       {/* Map Container */}
-      <div className="w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] 
-                      rounded-2xl overflow-hidden shadow-2xl border border-gray-300 relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] 
+                        rounded-2xl overflow-hidden shadow-2xl border border-gray-300 relative">
 
         {/* Map */}
         <iframe
@@ -26,10 +53,11 @@ const Map = () => {
 
         {/* Overlay Info Card */}
         <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-md px-4 py-2 rounded-xl shadow-md">
-          <p className="text-sm font-semibold text-gray-800">Dhamner, Maharashtra</p>
-          <p className="text-xs text-gray-600">Click map to explore</p>
+          <p className="text-sm font-semibold text-gray-800">{t.location}</p>
+          <p className="text-xs text-gray-600">{t.clickText}</p>
         </div>
 
+      </div>
       </div>
 
     </div>

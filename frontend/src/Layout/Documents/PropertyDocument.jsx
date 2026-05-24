@@ -1,7 +1,62 @@
 import { useState } from "react";
 import axios from "axios";
+import { useLang } from "../../context/LanguageContext";
+import { Building } from "lucide-react";
+
+const localTexts = {
+  mr: {
+    heroTitle: "मालमत्ता प्रमाणपत्र (असेसमेंट उतारा)",
+    heroDesc: "मालमत्ता प्रमाणपत्रासाठी ऑनलाइन अर्ज करा",
+    instruction: "आपण मालमत्ता प्रमाणपत्रासाठी खाली दिलेल्या ऑनलाइन फॉर्म मध्ये अर्ज करू शकता. कृपया आधी ₹20/- अर्ज फी QR कोड स्कॅन करून भरा व त्याचा स्क्रीनशॉट ठेवा. UTR नंबर भरणे अनिवार्य आहे.",
+    placeholderWardNo: "वॉर्ड क्र.",
+    placeholderAddress: "रस्त्याचे नाव / गल्लीचा क्रमांक",
+    placeholderFullNameEng: "अर्जदाराचे पूर्ण नाव (English)",
+    placeholderFullNameMar: "अर्जदाराचे पूर्ण नाव (देवनागरी)",
+    placeholderMobile: "व्हाट्सअप मोबाईल क्रमांक",
+    placeholderEmail: "ई मेल आय डी",
+    placeholderYear: "आर्थिक वर्ष",
+    placeholderVillage: "गावाचे नाव",
+    placeholderOwnerName: "मालमत्ता धारकाचे नाव",
+    placeholderAadhar: "आधार कार्ड क्रमांक",
+    placeholderPropertyNo: "मालमत्ता क्रमांक",
+    paymentLabel: "₹20/- रुपये शुल्क भरल्यानंतर UTR नंबर टाका",
+    placeholderUtr: "UTR नंबर",
+    labelPaymentScreenshot: "आपण केलेल्या पेमेंटचा स्क्रीनशॉट अपलोड करा *",
+    maxSize: "Maximum file size: 10 MB",
+    btnSubmit: "अर्ज पाठवा",
+    alertNoScreenshot: "कृपया स्क्रीनशॉट अपलोड करा!",
+    alertSuccess: "अर्ज यशस्वीरित्या पाठवला गेला आहे ✅",
+    alertUnknownError: "अज्ञात त्रुटी"
+  },
+  en: {
+    heroTitle: "Property Certificate (Assessment Copy)",
+    heroDesc: "Apply online for Property Certificate",
+    instruction: "You can apply for the property certificate using the online form below. Please pay ₹20/- application fee using QR code first and save the screenshot. UTR number is mandatory.",
+    placeholderWardNo: "Ward No.",
+    placeholderAddress: "Road Name / Lane Number",
+    placeholderFullNameEng: "Applicant's Full Name (English)",
+    placeholderFullNameMar: "Applicant's Full Name (Devanagari)",
+    placeholderMobile: "WhatsApp Mobile Number",
+    placeholderEmail: "Email ID",
+    placeholderYear: "Financial Year",
+    placeholderVillage: "Village Name",
+    placeholderOwnerName: "Property Owner Name",
+    placeholderAadhar: "Aadhaar Card Number",
+    placeholderPropertyNo: "Property Number",
+    paymentLabel: "Pay ₹20 fee and enter UTR number",
+    placeholderUtr: "UTR Number",
+    labelPaymentScreenshot: "Upload a screenshot of the payment made *",
+    maxSize: "Maximum file size: 10 MB",
+    btnSubmit: "Submit Application",
+    alertNoScreenshot: "Please upload the screenshot!",
+    alertSuccess: "Form submitted successfully ✅",
+    alertUnknownError: "Unknown Error"
+  }
+};
 
 export default function MalmattaDocument() {
+  const { lang } = useLang();
+  const t = localTexts[lang] || localTexts.mr;
   const [formData, setFormData] = useState({
     wardNo: "",
     address: "",
@@ -32,7 +87,7 @@ export default function MalmattaDocument() {
 
     // Validate file is selected
     if (!file) {
-      alert("कृपया स्क्रीनशॉट अपलोड करा!");
+      alert(t.alertNoScreenshot);
       return;
     }
 
@@ -43,8 +98,8 @@ export default function MalmattaDocument() {
     data.append("screenshot", file);
 
     try {
-      await axios.post("https://dhamner-website.onrender.com/api/malmatta-form", data);
-      alert("Form submitted successfully ✅");
+      await axios.post(`${window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" ? "http://localhost:5000" : "https://dhamner-website.onrender.com"}/api/malmatta-form`, data);
+      window.location.href = "/thank-you";
       // Reset form
       setFormData({
         wardNo: "",
@@ -63,7 +118,7 @@ export default function MalmattaDocument() {
       setFile(null);
     } catch (err) {
       console.error("Full Error:", err.response?.data || err.message);
-      const errorMsg = err.response?.data?.message || err.message || "अज्ञात त्रुटी";
+      const errorMsg = err.response?.data?.message || err.message || t.alertUnknownError;
       alert(errorMsg);
     }
   };
@@ -72,24 +127,20 @@ export default function MalmattaDocument() {
     <div className="w-full">
 
       {/* HERO SECTION */}
-      <div className="bg-gradient-to-r from-teal-400 via-cyan-500 to-blue-600 text-white flex flex-col md:flex-row items-center justify-between p-8 md:p-16 gap-8">
-        <h1 className="text-3xl md:text-5xl font-bold">
-          मालमत्ता प्रमाणपत्र (असेसमेंट उतारा)
-        </h1>
-
-        <img
-          src="/assets/Certificate-Logo.png"
-          alt="certificate"
-          className="w-72 sm:w-96 md:w-[450px] lg:w-[550px]"
-        />
+      <div className="bg-gradient-to-r from-blue-700 to-blue-500 text-white py-16 px-6 text-center">
+        <div className="flex justify-center mb-4">
+          <div className="bg-white bg-opacity-20 p-4 rounded-full">
+            <Building size={48} />
+          </div>
+        </div>
+        <h1 className="text-3xl md:text-5xl font-bold mb-3">{t.heroTitle}</h1>
+        <p className="text-blue-100 max-w-2xl mx-auto text-sm md:text-base">{t.heroDesc}</p>
       </div>
 
       {/* INSTRUCTION */}
       <div className="max-w-4xl mx-auto p-4 text-gray-700 text-center">
         <p>
-          आपण मालमत्ता प्रमाणपत्रासाठी खाली दिलेल्या ऑनलाइन फॉर्म मध्ये अर्ज करू शकता.
-          कृपया आधी ₹20/- अर्ज फी QR कोड स्कॅन करून भरा व त्याचा स्क्रीनशॉट ठेवा.
-          UTR नंबर भरणे अनिवार्य आहे.
+          {t.instruction}
         </p>
       </div>
 
@@ -103,7 +154,7 @@ export default function MalmattaDocument() {
         <input
           type="text"
           name="wardNo"
-          placeholder="वॉर्ड क्र."
+          placeholder={t.placeholderWardNo}
           className="input"
           onChange={handleChange}
           required
@@ -112,7 +163,7 @@ export default function MalmattaDocument() {
         <input
           type="text"
           name="address"
-          placeholder="रस्त्याचे नाव / गल्लीचा क्रमांक"
+          placeholder={t.placeholderAddress}
           className="input"
           onChange={handleChange}
           required
@@ -122,7 +173,7 @@ export default function MalmattaDocument() {
         <input
           type="text"
           name="fullNameEng"
-          placeholder="अर्जदाराचे पूर्ण नाव (English)"
+          placeholder={t.placeholderFullNameEng}
           className="input"
           onChange={handleChange}
           required
@@ -131,7 +182,7 @@ export default function MalmattaDocument() {
         <input
           type="text"
           name="fullNameMar"
-          placeholder="अर्जदाराचे पूर्ण नाव (देवनागरी)"
+          placeholder={t.placeholderFullNameMar}
           className="input"
           onChange={handleChange}
           required
@@ -142,7 +193,7 @@ export default function MalmattaDocument() {
           <input
             type="text"
             name="mobile"
-            placeholder="व्हाट्सअप मोबाईल क्रमांक"
+            placeholder={t.placeholderMobile}
             className="input"
             onChange={handleChange}
             required
@@ -151,7 +202,7 @@ export default function MalmattaDocument() {
           <input
             type="email"
             name="email"
-            placeholder="ई मेल आय डी"
+            placeholder={t.placeholderEmail}
             className="input"
             onChange={handleChange}
           />
@@ -161,7 +212,7 @@ export default function MalmattaDocument() {
         <input
           type="text"
           name="year"
-          placeholder="आर्थिक वर्ष"
+          placeholder={t.placeholderYear}
           className="input"
           onChange={handleChange}
         />
@@ -169,7 +220,7 @@ export default function MalmattaDocument() {
         <input
           type="text"
           name="village"
-          placeholder="गावाचे नाव"
+          placeholder={t.placeholderVillage}
           className="input"
           onChange={handleChange}
           required
@@ -178,7 +229,7 @@ export default function MalmattaDocument() {
         <input
           type="text"
           name="ownerName"
-          placeholder="मालमत्ता धारकाचे नाव"
+          placeholder={t.placeholderOwnerName}
           className="input"
           onChange={handleChange}
           required
@@ -187,7 +238,7 @@ export default function MalmattaDocument() {
         <input
           type="text"
           name="aadhar"
-          placeholder="आधार कार्ड क्रमांक"
+          placeholder={t.placeholderAadhar}
           className="input"
           onChange={handleChange}
           required
@@ -196,7 +247,7 @@ export default function MalmattaDocument() {
         <input
           type="text"
           name="propertyNo"
-          placeholder="मालमत्ता क्रमांक"
+          placeholder={t.placeholderPropertyNo}
           className="input"
           onChange={handleChange}
           required
@@ -211,13 +262,13 @@ export default function MalmattaDocument() {
           />
 
           <p className="font-semibold text-gray-700">
-            ₹20/- रुपये शुल्क भरल्यानंतर UTR नंबर टाका
+            {t.paymentLabel}
           </p>
 
           <input
             type="text"
             name="utr"
-            placeholder="UTR नंबर"
+            placeholder={t.placeholderUtr}
             className="input"
             onChange={handleChange}
             required
@@ -226,7 +277,7 @@ export default function MalmattaDocument() {
           {/* Upload */}
           <div className="space-y-2">
             <label className="block font-semibold text-gray-700">
-              आपण केलेल्या पेमेंटचा स्क्रीनशॉट अपलोड करा *
+              {t.labelPaymentScreenshot}
             </label>
 
             <input
@@ -237,14 +288,14 @@ export default function MalmattaDocument() {
             />
 
             <p className="text-sm text-gray-500">
-              Maximum file size: 10 MB
+              {t.maxSize}
             </p>
           </div>
         </div>
 
         {/* BUTTON */}
         <button className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded w-full">
-          अर्ज पाठवा
+          {t.btnSubmit}
         </button>
       </form>
 

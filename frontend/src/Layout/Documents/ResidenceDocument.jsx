@@ -1,7 +1,58 @@
 import { useState } from "react";
 import axios from "axios";
+import { useLang } from "../../context/LanguageContext";
+import { FileText } from "lucide-react";
+
+const localTexts = {
+  mr: {
+    heroTitle: "रहिवासी प्रमाणपत्र",
+    heroDesc: "रहिवासी दाखल्यासाठी ऑनलाइन अर्ज करा",
+    placeholderMalmattaNo: "मालमत्ता क्रमांक",
+    placeholderWardNo: "वॉर्ड क्र",
+    placeholderStreet: "रस्त्याचे नाव / गल्लीचा क्रमांक",
+    placeholderMobile: "व्हाट्सअप मोबाईल क्रमांक",
+    placeholderEmail: "ई मेल आय डी",
+    placeholderFullNameEng: "अर्जदाराचे पूर्ण नाव (इंग्रजी)",
+    placeholderFullNameMar: "अर्जदाराचे पूर्ण नाव (देवनागरी)",
+    placeholderAadhar: "आधार कार्ड क्रमांक",
+    placeholderYear: "आर्थिक वर्ष",
+    placeholderAddress: "पूर्ण पत्ता",
+    paymentLabel: "₹20/- रुपये शुल्क भरल्यानंतर UTR नंबर टाका",
+    placeholderUtr: "UTR नंबर",
+    labelPaymentScreenshot: "आपण केलेल्या पेमेंटचा स्क्रीनशॉट अपलोड करा *",
+    maxSize: "Maximum file size: 10 MB",
+    btnSubmit: "अर्ज पाठवा",
+    alertNoScreenshot: "कृपया स्क्रीनशॉट अपलोड करा!",
+    alertSuccess: "अर्ज यशस्वीरित्या पाठवला गेला आहे ✅",
+    alertUnknownError: "अज्ञात त्रुटी"
+  },
+  en: {
+    heroTitle: "Residence Certificate",
+    heroDesc: "Apply online for Residence Certificate",
+    placeholderMalmattaNo: "Property Number",
+    placeholderWardNo: "Ward No.",
+    placeholderStreet: "Road Name / Lane Number",
+    placeholderMobile: "WhatsApp Mobile Number",
+    placeholderEmail: "Email ID",
+    placeholderFullNameEng: "Applicant's Full Name (English)",
+    placeholderFullNameMar: "Applicant's Full Name (Devanagari)",
+    placeholderAadhar: "Aadhaar Card Number",
+    placeholderYear: "Financial Year",
+    placeholderAddress: "Full Address",
+    paymentLabel: "Pay ₹20 fee and enter UTR number",
+    placeholderUtr: "UTR Number",
+    labelPaymentScreenshot: "Upload a screenshot of the payment made *",
+    maxSize: "Maximum file size: 10 MB",
+    btnSubmit: "Submit Application",
+    alertNoScreenshot: "Please upload the screenshot!",
+    alertSuccess: "Form submitted successfully ✅",
+    alertUnknownError: "Unknown Error"
+  }
+};
 
 export default function ResidenceDocument() {
+  const { lang } = useLang();
+  const t = localTexts[lang] || localTexts.mr;
   const [formData, setFormData] = useState({
     malmattaNo: "",
     wardNo: "",
@@ -31,7 +82,7 @@ export default function ResidenceDocument() {
 
     // Validate file is selected
     if (!file) {
-      alert("कृपया स्क्रीनशॉट अपलोड करा!");
+      alert(t.alertNoScreenshot);
       return;
     }
 
@@ -42,8 +93,8 @@ export default function ResidenceDocument() {
     data.append("screenshot", file);
 
     try {
-      await axios.post("https://dhamner-website.onrender.com/api/residence-form", data);
-      alert("Form submitted successfully ✅");
+      await axios.post(`${window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" ? "http://localhost:5000" : "https://dhamner-website.onrender.com"}/api/residence-form`, data);
+      window.location.href = "/thank-you";
       // Reset form
       setFormData({
         malmattaNo: "",
@@ -61,7 +112,7 @@ export default function ResidenceDocument() {
       setFile(null);
     } catch (err) {
       console.error("Full Error:", err.response?.data || err.message);
-      const errorMsg = err.response?.data?.message || err.message || "अज्ञात त्रुटी";
+      const errorMsg = err.response?.data?.message || err.message || t.alertUnknownError;
       alert(errorMsg);
     }
   };
@@ -69,15 +120,14 @@ export default function ResidenceDocument() {
   return (
     <div className="w-full">
       {/* HERO SECTION */}
-      <div className="bg-gradient-to-r from-teal-400 via-cyan-500 to-blue-600 text-white flex flex-col md:flex-row items-center justify-between p-8 md:p-16 gap-8">
-        <h1 className="text-3xl md:text-5xl font-bold">
-          रहिवासी प्रमाणपत्र
-        </h1>
-        <img
-          src="/assets/Certificate-Logo.png"
-          alt="certificate"
-          className="w-72 sm:w-96 md:w-[450px] lg:w-[550px]"
-        />
+      <div className="bg-gradient-to-r from-blue-700 to-blue-500 text-white py-16 px-6 text-center">
+        <div className="flex justify-center mb-4">
+          <div className="bg-white bg-opacity-20 p-4 rounded-full">
+            <FileText size={48} />
+          </div>
+        </div>
+        <h1 className="text-3xl md:text-5xl font-bold mb-3">{t.heroTitle}</h1>
+        <p className="text-blue-100 max-w-2xl mx-auto text-sm md:text-base">{t.heroDesc}</p>
       </div>
 
       {/* FORM */}
@@ -89,7 +139,7 @@ export default function ResidenceDocument() {
         <input
           type="text"
           name="malmattaNo"
-          placeholder="मालमत्ता क्रमांक"
+          placeholder={t.placeholderMalmattaNo}
           className="input"
           onChange={handleChange}
           required
@@ -98,7 +148,7 @@ export default function ResidenceDocument() {
         <input
           type="text"
           name="wardNo"
-          placeholder="वॉर्ड क्र"
+          placeholder={t.placeholderWardNo}
           className="input"
           onChange={handleChange}
         />
@@ -106,7 +156,7 @@ export default function ResidenceDocument() {
         <input
           type="text"
           name="street"
-          placeholder="रस्त्याचे नाव / गल्लीचा क्रमांक"
+          placeholder={t.placeholderStreet}
           className="input"
           onChange={handleChange}
         />
@@ -116,7 +166,7 @@ export default function ResidenceDocument() {
           <input
             type="text"
             name="mobile"
-            placeholder="व्हाट्सअप मोबाईल क्रमांक"
+            placeholder={t.placeholderMobile}
             className="input"
             onChange={handleChange}
             required
@@ -125,7 +175,7 @@ export default function ResidenceDocument() {
           <input
             type="email"
             name="email"
-            placeholder="ई मेल आय डी"
+            placeholder={t.placeholderEmail}
             className="input"
             onChange={handleChange}
           />
@@ -135,7 +185,7 @@ export default function ResidenceDocument() {
         <input
           type="text"
           name="fullNameEng"
-          placeholder="अर्जदाराचे पूर्ण नाव (इंग्रजी)"
+          placeholder={t.placeholderFullNameEng}
           className="input"
           onChange={handleChange}
           required
@@ -144,7 +194,7 @@ export default function ResidenceDocument() {
         <input
           type="text"
           name="fullNameMar"
-          placeholder="अर्जदाराचे पूर्ण नाव (देवनागरी)"
+          placeholder={t.placeholderFullNameMar}
           className="input"
           onChange={handleChange}
           required
@@ -153,7 +203,7 @@ export default function ResidenceDocument() {
         <input
           type="text"
           name="aadhar"
-          placeholder="आधार कार्ड क्रमांक"
+          placeholder={t.placeholderAadhar}
           className="input"
           onChange={handleChange}
           required
@@ -163,7 +213,7 @@ export default function ResidenceDocument() {
         <input
           type="text"
           name="year"
-          placeholder="आर्थिक वर्ष"
+          placeholder={t.placeholderYear}
           className="input"
           onChange={handleChange}
         />
@@ -171,7 +221,7 @@ export default function ResidenceDocument() {
         {/* Address */}
         <textarea
           name="address"
-          placeholder="पूर्ण पत्ता"
+          placeholder={t.placeholderAddress}
           className="input"
           onChange={handleChange}
           required
@@ -186,13 +236,13 @@ export default function ResidenceDocument() {
           />
 
           <p className="font-semibold text-gray-700">
-            ₹20/- रुपये शुल्क भरल्यानंतर UTR नंबर टाका
+            {t.paymentLabel}
           </p>
 
           <input
             type="text"
             name="utr"
-            placeholder="UTR नंबर"
+            placeholder={t.placeholderUtr}
             className="input"
             onChange={handleChange}
             required
@@ -201,7 +251,7 @@ export default function ResidenceDocument() {
           {/* Upload */}
           <div className="space-y-2">
             <label className="block font-semibold text-gray-700">
-              आपण केलेल्या पेमेंटचा स्क्रीनशॉट अपलोड करा *
+              {t.labelPaymentScreenshot}
             </label>
 
             <input
@@ -212,14 +262,14 @@ export default function ResidenceDocument() {
             />
 
             <p className="text-sm text-gray-500">
-              Maximum file size: 10 MB
+              {t.maxSize}
             </p>
           </div>
         </div>
 
         {/* BUTTON */}
         <button className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded w-full">
-          अर्ज पाठवा
+          {t.btnSubmit}
         </button>
       </form>
 

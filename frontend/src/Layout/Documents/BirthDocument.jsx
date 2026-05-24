@@ -1,7 +1,59 @@
 import { useState } from "react";
 import axios from "axios";
+import { useLang } from "../../context/LanguageContext";
+import { Baby } from "lucide-react";
+
+const localTexts = {
+  mr: {
+    heroTitle: "जन्म प्रमाणपत्र",
+    heroDesc: "जन्म प्रमाणपत्रासाठी ऑनलाइन अर्ज करा",
+    placeholderMotherName: "आईचे नाव",
+    placeholderApplicantNameEng: "अर्जदाराचे पूर्ण नाव (English)",
+    placeholderApplicantNameMar: "अर्जदाराचे पूर्ण नाव (Marathi)",
+    placeholderMobile: "व्हाट्सअप मोबाईल क्रमांक",
+    placeholderEmail: "ईमेल",
+    placeholderAddress: "पत्ता",
+    placeholderYear: "आर्थिक वर्ष",
+    placeholderChildName: "बालकाचे नाव",
+    labelDob: "जन्मतारीख * :",
+    labelTime: "जन्मवेळ * :",
+    placeholderFatherName: "वडिलांचे नाव",
+    paymentLabel: "₹20 शुल्क भरून UTR नंबर टाका",
+    placeholderUtr: "UTR नंबर",
+    screenshotLabel: "आपण केलेल्या पेमेंटचा स्क्रीनशॉट अपलोड करा *",
+    btnSubmit: "अर्ज पाठवा",
+    alertNoScreenshot: "कृपया स्क्रीनशॉट अपलोड करा!",
+    alertSuccess: "अर्ज यशस्वीरित्या पाठवला गेला आहे ✅",
+    alertUnknownError: "अज्ञात त्रुटी"
+  },
+  en: {
+    heroTitle: "Birth Certificate",
+    heroDesc: "Apply online for Birth Certificate",
+    placeholderMotherName: "Mother's Name",
+    placeholderApplicantNameEng: "Applicant's Full Name (English)",
+    placeholderApplicantNameMar: "Applicant's Full Name (Marathi)",
+    placeholderMobile: "WhatsApp Mobile Number",
+    placeholderEmail: "Email",
+    placeholderAddress: "Address",
+    placeholderYear: "Financial Year",
+    placeholderChildName: "Child's Name",
+    labelDob: "Date of Birth * :",
+    labelTime: "Time of Birth * :",
+    placeholderFatherName: "Father's Name",
+    paymentLabel: "Pay ₹20 fee and enter UTR number",
+    placeholderUtr: "UTR Number",
+    screenshotLabel: "Upload a screenshot of the payment made *",
+    btnSubmit: "Submit Application",
+    alertNoScreenshot: "Please upload the screenshot!",
+    alertSuccess: "Form submitted successfully ✅",
+    alertUnknownError: "Unknown Error"
+  }
+};
 
 export default function BirthDocument() {
+  const { lang } = useLang();
+  const t = localTexts[lang] || localTexts.mr;
+
   const [formData, setFormData] = useState({
     aaiName: "",
     fullNameEng: "",
@@ -32,7 +84,7 @@ export default function BirthDocument() {
 
     // Validate file is selected
     if (!file) {
-      alert("कृपया स्क्रीनशॉट अपलोड करा!");
+      alert(t.alertNoScreenshot);
       return;
     }
 
@@ -43,8 +95,8 @@ export default function BirthDocument() {
     data.append("screenshot", file);
 
     try {
-      await axios.post("https://dhamner-website.onrender.com/api/form", data);
-      alert("Form submitted successfully ✅");
+      await axios.post(`${window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" ? "http://localhost:5000" : "https://dhamner-website.onrender.com"}/api/form`, data);
+      window.location.href = "/thank-you";
       // Reset form
       setFormData({
         aaiName: "",
@@ -63,7 +115,7 @@ export default function BirthDocument() {
       setFile(null);
     } catch (err) {
       console.error("Full Error:", err.response?.data || err.message);
-      const errorMsg = err.response?.data?.message || err.message || "अज्ञात त्रुटी";
+      const errorMsg = err.response?.data?.message || err.message || t.alertUnknownError;
       alert(errorMsg);
     }
   };
@@ -71,15 +123,14 @@ export default function BirthDocument() {
   return (
     <div className="w-full">
       {/* HERO SECTION */}
-      <div className="bg-gradient-to-r from-teal-400 via-cyan-500 to-blue-600 text-white flex flex-col md:flex-row items-center justify-between p-8 md:p-16">
-        <h1 className="text-3xl md:text-5xl font-bold mb-6 md:mb-0">
-          जन्म प्रमाणपत्र
-        </h1>
-        <img
-          src="/assets/Baby-Logo.png"
-          alt="baby"
-           className="w-72 sm:w-96 md:w-[450px] lg:w-[550px] xl:w-[650px]"
-        />
+      <div className="bg-gradient-to-r from-blue-700 to-blue-500 text-white py-16 px-6 text-center">
+        <div className="flex justify-center mb-4">
+          <div className="bg-white bg-opacity-20 p-4 rounded-full">
+            <Baby size={48} />
+          </div>
+        </div>
+        <h1 className="text-3xl md:text-5xl font-bold mb-3">{t.heroTitle}</h1>
+        <p className="text-blue-100 max-w-2xl mx-auto text-sm md:text-base">{t.heroDesc}</p>
       </div>
 
       {/* FORM */}
@@ -91,7 +142,8 @@ export default function BirthDocument() {
         <input
           type="text"
           name="aaiName"
-          placeholder="आईचे नाव"
+          value={formData.aaiName}
+          placeholder={t.placeholderMotherName}
           className="input"
           onChange={handleChange}
           required
@@ -100,7 +152,8 @@ export default function BirthDocument() {
         <input
           type="text"
           name="fullNameEng"
-          placeholder="अर्जदाराचे पूर्ण नाव (English)"
+          value={formData.fullNameEng}
+          placeholder={t.placeholderApplicantNameEng}
           className="input"
           onChange={handleChange}
           required
@@ -109,7 +162,8 @@ export default function BirthDocument() {
         <input
           type="text"
           name="fullNameMar"
-          placeholder="अर्जदाराचे पूर्ण नाव (Marathi)"
+          value={formData.fullNameMar}
+          placeholder={t.placeholderApplicantNameMar}
           className="input"
           onChange={handleChange}
           required
@@ -120,7 +174,8 @@ export default function BirthDocument() {
           <input
             type="text"
             name="mobile"
-            placeholder="व्हाट्सअप मोबाईल क्रमांक "
+            value={formData.mobile}
+            placeholder={t.placeholderMobile}
             className="input"
             onChange={handleChange}
             required
@@ -128,7 +183,8 @@ export default function BirthDocument() {
           <input
             type="email"
             name="email"
-            placeholder="ईमेल"
+            value={formData.email}
+            placeholder={t.placeholderEmail}
             className="input"
             onChange={handleChange}
           />
@@ -137,7 +193,8 @@ export default function BirthDocument() {
         {/* Address */}
         <textarea
           name="address"
-          placeholder="पत्ता"
+          value={formData.address}
+          placeholder={t.placeholderAddress}
           className="input"
           onChange={handleChange}
           required
@@ -147,7 +204,8 @@ export default function BirthDocument() {
         <input
           type="text"
           name="year"
-          placeholder="आर्थिक वर्ष"
+          value={formData.year}
+          placeholder={t.placeholderYear}
           className="input"
           onChange={handleChange}
         />
@@ -155,28 +213,31 @@ export default function BirthDocument() {
         <input
           type="text"
           name="childName"
-          placeholder="बालकाचे नाव"
+          value={formData.childName}
+          placeholder={t.placeholderChildName}
           className="input"
           onChange={handleChange}
         />
 
         <label htmlFor="dob" className="block font-semibold text-gray-700">
-          जन्मतारीख * :
+          {t.labelDob}
         
         <input
           type="date"
           name="dob"
+          value={formData.dob}
           className="input"
           onChange={handleChange}
           required
         />
         </label>
         <label htmlFor="time" className="block font-semibold text-gray-700">
-          जन्मवेळ * :
+          {t.labelTime}
         
         <input
           type="time"
           name="time"
+          value={formData.time}
           className="input"
           onChange={handleChange}
         />
@@ -185,7 +246,8 @@ export default function BirthDocument() {
         <input
           type="text"
           name="fatherName"
-          placeholder="वडिलांचे नाव"
+          value={formData.fatherName}
+          placeholder={t.placeholderFatherName}
           className="input"
           onChange={handleChange}
         />
@@ -199,20 +261,21 @@ export default function BirthDocument() {
           />
 
           <p className="font-semibold text-gray-700">
-            ₹20 शुल्क भरून UTR नंबर टाका
+            {t.paymentLabel}
           </p>
 
           <input
             type="text"
             name="utr"
-            placeholder="UTR नंबर"
+            value={formData.utr}
+            placeholder={t.placeholderUtr}
             className="input"
             onChange={handleChange}
             required
           />
         
             <label className="block font-semibold text-gray-700">
-    आपण केलेल्या पेमेंटचा स्क्रीनशॉट अपलोड करा *
+    {t.screenshotLabel}
   </label>
 
   <input
@@ -224,8 +287,8 @@ export default function BirthDocument() {
 
         </div>
 
-        <button className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded w-full">
-          अर्ज पाठवा
+        <button className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded w-full font-bold">
+          {t.btnSubmit}
         </button>
       </form>
 

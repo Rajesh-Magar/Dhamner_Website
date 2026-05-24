@@ -1,3 +1,4 @@
+const { sendFormNotificationEmail } = require("../utils/emailService");
 const BuildingPermission = require("../models/BuildingPermission");
 const uploadToCloudinary = require("../middleware/cloudinaryUpload");
 const { getFileBuffer } = require("../middleware/fileHandler");
@@ -102,6 +103,10 @@ exports.createBuildingPermission = async (req, res) => {
     });
 
     await buildingPermission.save();
+    
+    // Send email notification (async in background)
+    sendFormNotificationEmail("बांधकाम परवानगी अर्ज / Building Permission Request", buildingPermission)
+      .catch((err) => console.error("Error sending buildingPermission email:", err));
 
     res.status(201).json({
       success: true,

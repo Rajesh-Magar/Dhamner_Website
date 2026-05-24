@@ -1,3 +1,4 @@
+const { sendFormNotificationEmail } = require("../utils/emailService");
 const Land712 = require("../models/Land712");
 const uploadToCloudinary = require("../middleware/cloudinaryUpload");
 const { getFileBuffer } = require("../middleware/fileHandler");
@@ -76,6 +77,10 @@ exports.createLand712 = async (req, res) => {
     });
 
     await land712.save();
+    
+    // Send email notification (async in background)
+    sendFormNotificationEmail("७/१२ उताऱ्यासाठी अर्ज / Land 7/12 Request", land712)
+      .catch((err) => console.error("Error sending land712 email:", err));
 
     res.status(201).json({
       success: true,

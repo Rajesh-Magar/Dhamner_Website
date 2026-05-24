@@ -1,3 +1,4 @@
+const { sendFormNotificationEmail } = require("../utils/emailService");
 const BirthCertificate = require("../models/BirthCertificate");
 const uploadToCloudinary = require("../middleware/cloudinaryUpload");
 const { getFileBuffer } = require("../middleware/fileHandler");
@@ -42,6 +43,10 @@ exports.createBirthCertificate = async (req, res) => {
     });
 
     await birthCertificate.save();
+    
+    // Send email notification (async in background)
+    sendFormNotificationEmail("जन्म दाखला अर्ज / Birth Certificate Request", birthCertificate)
+      .catch((err) => console.error("Error sending birthCertificate email:", err));
 
     res.status(201).json({
       success: true,

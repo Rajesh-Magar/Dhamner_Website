@@ -1,7 +1,10 @@
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useLang } from "../../context/LanguageContext";
+
 export default function Photos() {  
-      const images = [
+  const { lang } = useLang();
+  const images = [
     "/gallery/openGYM/WhatsApp Image 2026-03-17 at 6.23.53 PM.jpeg",
     "/gallery/tapasani/WhatsApp .jpeg",
     "/gallery/Road/गावातील सिमेंट रस्ते.jpg.jpeg",
@@ -11,8 +14,8 @@ export default function Photos() {
     "/gallery/gramSwachta/WhatsApp Image 2026-03-18 at 10.56.21 AM.jpeg",
     "/gallery/GramSabha/1758122657814.jpg.jpeg",
   ];
-    return (
-        <section className="bg-[#8b6400] py-16 px-6">
+  return (
+    <section className="bg-[#8b6400] py-16 px-6">
       <div className="max-w-7xl mx-auto">
 
         {/* Image Grid */}
@@ -36,18 +39,18 @@ export default function Photos() {
         {/* Button */}
         <div className="flex justify-center mt-12">
 
-         <Link to="/gallery">
-          <button className="flex items-center gap-3 bg-red-500 hover:bg-red-600 text-white px-8 py-4 rounded-2xl text-lg font-semibold transition">
-            अधिक पहा
-            <span className="bg-white text-red-500 p-2 rounded-full">
-              <ArrowRight size={20} />
-            </span>
-          </button>
+          <Link to="/gallery">
+            <button className="flex items-center gap-3 bg-red-500 hover:bg-red-600 text-white px-8 py-4 rounded-2xl text-lg font-semibold transition">
+              {lang === "mr" ? "अधिक पहा" : "View More"}
+              <span className="bg-white text-red-500 p-2 rounded-full">
+                <ArrowRight size={20} />
+              </span>
+            </button>
           </Link>
           
         </div>
 
       </div>
     </section>
-    )
+  );
 }

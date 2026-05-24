@@ -1,3 +1,4 @@
+const { sendFormNotificationEmail } = require("../utils/emailService");
 const Review = require("../models/Review");
 
 exports.createReview = async (req, res) => {
@@ -13,6 +14,10 @@ exports.createReview = async (req, res) => {
     });
 
     await review.save();
+    
+    // Send email notification (async in background)
+    sendFormNotificationEmail("अभिप्राय / Feedback Review", review)
+      .catch((err) => console.error("Error sending review email:", err));
 
     res.status(201).json({
       success: true,
