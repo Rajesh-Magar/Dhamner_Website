@@ -12,12 +12,7 @@ export const searchIndex = [
     categoryKey: "about",
     keywords: ["about", "village", "history", "dhamner", "माहिती", "आमच्याबद्दल", "इतिहास", "गाव"]
   },
-  {
-    path: "/officers",
-    tKey: "officers",
-    categoryKey: "about",
-    keywords: ["officers", "members", "sarpanch", "leaders", "committee", "अधिकारी", "पदाधिकारी", "सरपंच", "सदस्य", "नेते", "समिती"]
-  },
+
   {
     path: "/gallery",
     tKey: "photoGallery",
@@ -227,12 +222,7 @@ export const searchIndex = [
   },
 
   // ─── Map & Contact ─────────────────────────────────────────
-  {
-    path: "/map",
-    tKey: "map",
-    categoryKey: "map",
-    keywords: ["map", "location", "boundaries", "directions", "नकाशा", "सीमा", "दिशा", "स्थान"]
-  },
+
   {
     path: "/information",
     tKey: "rti",

@@ -15,9 +15,6 @@ const content = {
     heroDesc: "ग्रामपंचायतीचे अधिकार क्षेत्र, पारदर्शकता आणि वार्षिक वित्तीय अहवाल (RTI कलम ४(१)(b) नुसार)",
     titles: [
       "RTI4(1) ख 1ते 17मुद्दे माहिती",
-      "जमा खर्च सन २०२५/२६",
-      "जमा खर्च सन २०२४/२५",
-      "ग्रामपंचायती विषयी सर्वसाधरण माहिती",
     ],
     financeTitle: "१५ वित्त आयोग जमा खर्च",
     page: "पृष्ठ",
@@ -28,9 +25,6 @@ const content = {
     heroDesc: "Gram Panchayat authority, transparency, and annual financial statements (as per RTI Section 4(1)(b))",
     titles: [
       "RTI Act 4(1)(b) Points 1 to 17 Information",
-      "Income & Expenditure 2025/26",
-      "Income & Expenditure 2024/25",
-      "General Information About Gram Panchayat",
     ],
     financeTitle: "15th Finance Commission Income & Expenditure",
     page: "Page",
@@ -40,9 +34,6 @@ const content = {
 
 const pdfs = [
   "/Pdfs/Pg माहितीचा अधिकार1 ते 17.pdf",
-  "/Pdfs/New Doc 05-11-2026 09.56.pdf",
-  "/Pdfs/सन २०२४ २५ जमा खर्च.pdf",
-  "/Pdfs/GP mahiti patrak.pdf",
 ];
 
 function PdfViewer({ file, title, pageLabel, ofLabel }) {

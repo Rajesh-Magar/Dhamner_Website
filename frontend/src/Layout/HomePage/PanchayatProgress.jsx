@@ -29,13 +29,13 @@ export default function PanchayatProgress() {
   ];
 
   const wardData = [
-    { mr_name: "वार्ड १", en_name: "Ward 1", score: 98 },
-    { mr_name: "वार्ड २", en_name: "Ward 2", score: 92 },
-    { mr_name: "वार्ड ३", en_name: "Ward 3", score: 98 },
+    { mr_name: "वार्ड १", en_name: "Ward 1", score: 99 },
+    { mr_name: "वार्ड २", en_name: "Ward 2", score: 98 },
+    { mr_name: "वार्ड ३", en_name: "Ward 3", score: 96 },
   ];
 
   const achievements = [
-    { mr: "१०० टक्के शौचालय बांधणी पूर्ण", en: "100% Toilet Construction Completed", icon: "🏆" },
+    { mr: "पूर्ण गावात CCTV कॅमेरा", en: "Village-wide CCTV Camera", icon: "📹" },
     { mr: "जलजीवन मिशन अंतर्गत नळ जोडण्या", en: "Tap Connections under Jal Jeevan Mission", icon: "💧" },
     { mr: "डिजिटल ग्रामपंचायत सेवा सुरू", en: "Digital Gram Panchayat Services Launched", icon: "💻" },
     { mr: "सौर ऊर्जा प्रकल्प यशस्वी", en: "Solar Energy Project Successful", icon: "☀️" },
@@ -103,7 +103,7 @@ export default function PanchayatProgress() {
         <div className="mb-14">
           <h3 className="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2 font-devanagari">
             <MapPin className="text-blue-500 w-5 h-5" />
-            {lang === "en" ? "Wardwise Comparison" : "वार्डनिहाय तुलना"}
+            {lang === "en" ? "Wardwise Comparison" : "वार्डनिहाय विस्तारात्मक कामाची तुलना"}
           </h3>
           <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
             <div className="space-y-6">
@@ -151,7 +151,7 @@ export default function PanchayatProgress() {
                     {lang === "mr" ? ach.mr : ach.en}
                   </h4>
                   <span className="inline-block bg-green-100 text-green-800 text-[10px] font-black px-2 py-0.5 rounded mt-2 font-devanagari">
-                    {lang === "mr" ? "२०२४-२५" : "2024-25"}
+                    {lang === "mr" ? "२०२५-२६" : "2025-26"}
                   </span>
                 </div>
               </div>

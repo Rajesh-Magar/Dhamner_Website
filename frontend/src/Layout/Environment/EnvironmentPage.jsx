@@ -24,23 +24,23 @@ function GreenProgressBar({ label, value, color }) {
 }
 
 const initiatives = [
-  { emoji: "🌳", mr_title: "वृक्षारोपण मोहीम", en_title: "Tree Plantation Campaign", mr_desc: "२०२४-२५ मध्ये ५०० झाडे लावण्यात आली. नागरिकांनी सक्रिय सहभाग घेतला.", en_desc: "500 trees planted in 2024-25 with active citizen participation." },
+  { emoji: "🌳", mr_title: "वृक्षारोपण मोहीम", en_title: "Tree Plantation Campaign", mr_desc: "२०२४-२५ मध्ये 2,750 झाडे लावण्यात आली. नागरिकांनी सक्रिय सहभाग घेतला.", en_desc: "2,750 trees planted in 2024-25 with active citizen participation." },
   { emoji: "🚫", mr_title: "प्लास्टिकमुक्त गाव", en_title: "Plastic-Free Village", mr_desc: "एकल वापर प्लास्टिक बंदीची अंमलबजावणी व जनजागृती कार्यक्रम.", en_desc: "Implementation of single-use plastic ban and awareness programs." },
-  { emoji: "🗑️", mr_title: "कचरा वर्गीकरण", en_title: "Waste Segregation", mr_desc: "ओला व सुका कचरा वेगळा करण्याचे प्रशिक्षण व डस्टबिन वाटप.", en_desc: "Training on wet/dry waste segregation and dustbin distribution." },
-  { emoji: "☀️", mr_title: "सौर ऊर्जा प्रकल्प", en_title: "Solar Energy Project", mr_desc: "ग्रामपंचायत कार्यालयावर सौर पॅनेल बसवण्यात आले. मासिक ₹५,००० बचत.", en_desc: "Solar panels installed on GP office. Monthly saving of ₹5,000." },
+  { emoji: "🗑️", mr_title: "कचरा वर्गीकरण", en_title: "Waste Segregation", mr_desc: "ओला व सुका कचरा वेगळा करण्याचे प्रशिक्षण व घरगुती सेंद्रिय खत.", en_desc: "Training on wet/dry waste segregation and domestic organic fertilizer." },
+  { emoji: "☀️", mr_title: "सौर ऊर्जा प्रकल्प", en_title: "Solar Energy Project", mr_desc: "सर्व शासकीय कार्यालय व पाणीपुरवठा सौरऊर्जेवर करण्यात आले आहे, मासिक ₹४५,००० बचत", en_desc: "All govt offices and water supply on solar energy, monthly saving of ₹45,000." },
 ];
 
 const greenScores = [
-  { mr_label: "वृक्षाच्छादन वाढ", en_label: "Tree Cover Increase", value: 72, color: "bg-green-500" },
-  { mr_label: "प्लास्टिकमुक्तता", en_label: "Plastic-Free Score", value: 85, color: "bg-teal-500" },
-  { mr_label: "सौर ऊर्जा वापर", en_label: "Solar Energy Usage", value: 40, color: "bg-yellow-500" },
-  { mr_label: "कचरा पुनर्वापर", en_label: "Waste Recycled", value: 65, color: "bg-cyan-500" },
+  { mr_label: "वृक्षाच्छादन वाढ", en_label: "Tree Cover Increase", value: 85, color: "bg-green-500" },
+  { mr_label: "प्लास्टिकमुक्तता", en_label: "Plastic-Free Score", value: 100, color: "bg-teal-500" },
+  { mr_label: "सौर ऊर्जा वापर", en_label: "Solar Energy Usage", value: 55, color: "bg-yellow-500" },
+  { mr_label: "कचरा पुनर्वापर", en_label: "Waste Recycled", value: 100, color: "bg-cyan-500" },
 ];
 
 const adoptedTrees = [
-  { mr_name: "सुरेश पाटील", en_name: "Suresh Patil", tree: "🌳", mr_type: "आंबा", en_type: "Mango", ward: "वार्ड ३" },
-  { mr_name: "रेखा जाधव", en_name: "Rekha Jadhav", tree: "🌿", mr_type: "लिंब", en_type: "Neem", ward: "वार्ड १" },
-  { mr_name: "अमित शिंदे", en_name: "Amit Shinde", tree: "🌲", mr_type: "पिंपळ", en_type: "Peepal", ward: "वार्ड ५" },
+  { mr_name: "गजानन क्षीरसागर", en_name: "Gajanan Kshirsagar", tree: "🌳", mr_type: "आंबा", en_type: "Mango", ward: "वार्ड १" },
+  { mr_name: "अनिल साळुंखे", en_name: "Anil Salunkhe", tree: "🌿", mr_type: "लिंब", en_type: "Neem", ward: "वार्ड ३" },
+  { mr_name: "सुनील शिरसागर", en_name: "Sunil Shirsagar", tree: "🌲", mr_type: "पिंपळ", en_type: "Peepal", ward: "वार्ड २" },
 ];
 
 export default function EnvironmentPage() {

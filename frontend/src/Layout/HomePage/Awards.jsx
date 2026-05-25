@@ -38,10 +38,11 @@ export default function Awards() {
     { year: "2016-17", mr: "तालुका स्तरीय स्मार्ट ग्राम - प्रथम पुरस्कार", en: "Taluka Level Smart Village - First Prize" },
     { year: "2016-17", mr: "जिल्हा स्मार्ट ग्राम - प्रथम पुरस्कार", en: "District Smart Village - First Prize" },
     { year: "2016-17", mr: "डॉ. बाबासाहेब आंबेडकर वस्ती - जिल्हा प्रथम पुरस्कार", en: "Dr. Babasaheb Ambedkar Basti - District First Prize" },
-    { year: "2017-18", mr: "संत गाडगेबाबा ग्रामस्वच्छता अभियान - जिल्हा स्तरीय तृतीय क्रमांक", en: "Sant Gadgebaba Gram Swachata Abhiyan - District Level Third Prize" },
-    { year: "2018-19", mr: "तालुका स्मार्ट ग्राम - प्रथम पुरस्कार", en: "Taluka Smart Village - First Prize" },
-    { year: "2018-19", mr: "जिल्हा स्मार्ट ग्राम - प्रथम पुरस्कार", en: "District Smart Village - First Prize" },
-    { year: "2023", mr: "'ग्रीन व्हिलेज' प्रथम पुरस्कार भारत फोर्ज लि. पुणे", en: "'Green Village' First Prize Bharat Forge Ltd. Pune" },
+    { year: "2021-22", mr: "तालुका स्मार्ट ग्राम - प्रथम पुरस्कार", en: "Taluka Smart Village - First Prize" },
+    { year: "2021-22", mr: "जिल्हा स्मार्ट ग्राम - प्रथम पुरस्कार", en: "District Smart Village - First Prize" },
+    { year: "2023", mr: "ग्रीन व्हिलेज प्लॅटिनियम नामांकन आयसीबीसी हैदराबाद", en: "Green Village Platinum Nomination ICBC Hyderabad" },
+    { year: "2025-26", mr: "संत गाडगेबाबा ग्रामस्वच्छता अभियान तालुकास्तरीय प्रथम क्रमांक", en: "Sant Gadgebaba Gram Swachata Abhiyan Taluka Level First Rank" },
+    { year: "2025-26", mr: "मुख्यमंत्री समृद्ध पंचायत राज अभियान तालुकास्तरीय प्रथम क्रमांक", en: "Chief Minister Samruddha Panchayat Raj Abhiyan Taluka Level First Rank" },
   ];
 
   return (

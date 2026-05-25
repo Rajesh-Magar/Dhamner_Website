@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useLang } from "../../context/LanguageContext";
-import { Hammer, CheckCircle2, Clock, Lightbulb, IndianRupee, ArrowRight } from "lucide-react";
+import { Hammer, CheckCircle2, Clock, Lightbulb, IndianRupee, ArrowRight, Image, BookOpen } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const projects = [
   {
@@ -297,6 +298,24 @@ export default function ProjectsPage() {
               </div>
             );
           })}
+        </div>
+
+        {/* Action Buttons */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-12 pb-8">
+          <Link 
+            to="/gallery" 
+            className="flex items-center gap-2 px-6 py-3 bg-white border border-green-600 text-green-700 font-bold rounded-full hover:bg-green-50 transition-colors shadow-sm w-full sm:w-auto justify-center"
+          >
+            <Image className="w-5 h-5" />
+            {lang === "mr" ? "फोटो गॅलरी" : "Photo Gallery"}
+          </Link>
+          <Link 
+            to="/yashogatha" 
+            className="flex items-center gap-2 px-6 py-3 bg-green-600 text-white font-bold rounded-full hover:bg-green-700 transition-colors shadow-md w-full sm:w-auto justify-center"
+          >
+            <BookOpen className="w-5 h-5" />
+            {lang === "mr" ? "धामणेर यशोगाथा" : "Dhamner Success Story"}
+          </Link>
         </div>
       </div>
     </div>
