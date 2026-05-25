@@ -1,6 +1,40 @@
+import React, { useState } from "react";
 import { useLang } from "../../context/LanguageContext";
 import { Eye, Target, Star, Map, Users, HeartPulse, FileCheck, Landmark, MessageSquare, BookOpen, TreePine, PhoneCall, Image } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Document, Page, pdfjs } from "react-pdf";
+import worker from "pdfjs-dist/build/pdf.worker?url";
+
+import "react-pdf/dist/Page/AnnotationLayer.css";
+import "react-pdf/dist/Page/TextLayer.css";
+
+pdfjs.GlobalWorkerOptions.workerSrc = worker;
+
+function PdfViewer({ file, title, pageLabel, ofLabel }) {
+  const [numPages, setNumPages] = useState(0);
+  const [pageNumber, setPageNumber] = useState(1);
+  const pdfWidth = typeof window !== "undefined"
+    ? window.innerWidth < 640 ? window.innerWidth - 40 : window.innerWidth < 1024 ? 500 : 700
+    : 600;
+
+  return (
+    <>
+      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-green-700 mb-8 sm:mb-12 text-center">{title}</h2>
+      <div className="w-full flex flex-col items-center">
+        <div className="bg-white rounded-xl shadow-2xl p-2 sm:p-4">
+          <Document file={file} onLoadSuccess={({ numPages }) => setNumPages(numPages)}>
+            <Page pageNumber={pageNumber} width={pdfWidth} />
+          </Document>
+        </div>
+        <div className="flex items-center justify-center gap-6 mt-4">
+          <button onClick={() => setPageNumber(p => Math.max(p - 1, 1))} disabled={pageNumber <= 1} className="px-4 py-2 bg-gray-700 text-white rounded-lg disabled:opacity-40">⬅ Prev</button>
+          <div className="px-4 py-2 bg-white rounded-lg shadow font-semibold text-sm">{pageLabel} {pageNumber} {ofLabel} {numPages || "--"}</div>
+          <button onClick={() => setPageNumber(p => Math.min(p + 1, numPages))} disabled={pageNumber >= numPages} className="px-4 py-2 bg-gray-700 text-white rounded-lg disabled:opacity-40">Next ➡</button>
+        </div>
+      </div>
+    </>
+  );
+}
 
 const content = {
   mr: {
@@ -45,6 +79,9 @@ const content = {
     contactsCol2: "संपर्क क्रमांक",
     galleryBtn: "फोटो गॅलरी",
     yashogathaBtn: "धामणेर यशोगाथा",
+    pdfTitle: "ग्रामपंचायती विषयी सर्वसाधरण माहिती",
+    pdfPage: "पृष्ठ",
+    pdfOf: "पैकी",
     contacts: [
       { service: "ग्रामसेवक अधिकारी", number: "+91 98502 37563" },
       { service: "सरपंच/प्रशासक", number: "+91 9850032987" },
@@ -82,7 +119,7 @@ const content = {
     energyTitle: "ऊर्जा व पर्यावरण",
     energy: [
       { strong: "सोलर नेट मीटरिंग (शासकीय इमारती):", text: "सर्व शासकीय व निमशासकीय इमारतींवर सोलर नेट मीटरिंग प्रणाली बसवण्यात आली आहे." },
-      { strong: "सोलर सुविधा (घरांवर):", text: "गावातील प्रत्येक घरावर सोलर नेट मीटरिंग सुविधा उपलब्ध करून देण्यात आली आहे." },
+      { strong: "सोलर सुविधा (घरांवर):", text: "गावातील प्रत्येक घरावर सोलर नेट मीटरिंग सुविधा उपलब्ध करून देण्यात आली ভাগে आहे." },
       { strong: "होम कंपोस्टिंग सिस्टम:", text: "कचरा व्यवस्थापनासाठी घरगुती कंपोस्टिंग प्रणाली राबवण्यात आली आहे." },
       { strong: "बायोगॅस सुविधा:", text: "स्वच्छता व ऊर्जा निर्मितीसाठी मानवी विष्ठेवर आधारित बायोगॅस प्रकल्प राबवण्यात आला आहे." },
     ],
@@ -171,6 +208,9 @@ const content = {
     contactsCol2: "Contact Number",
     galleryBtn: "Photo Gallery",
     yashogathaBtn: "Dhamner Success Story",
+    pdfTitle: "General Information About Gram Panchayat",
+    pdfPage: "Page",
+    pdfOf: "of",
     contacts: [
       { service: "Gram Sevak Officer", number: "+91 98502 37563" },
       { service: "Sarpanch/Administrator", number: "+91 9850032987" },
@@ -256,8 +296,6 @@ const content = {
     ],
   },
 };
-
-
 
 export default function AboutVillage() {
   const { lang } = useLang();
@@ -419,6 +457,11 @@ export default function AboutVillage() {
               </table>
             </div>
           </div>
+        </div>
+
+        {/* PDF Section */}
+        <div className="mb-16 sm:mb-20 pb-10 border-b border-gray-100">
+          <PdfViewer file="/Pdfs/GP mahiti patrak.pdf" title={c.pdfTitle} pageLabel={c.pdfPage} ofLabel={c.pdfOf} />
         </div>
 
         {/* Action Buttons */}

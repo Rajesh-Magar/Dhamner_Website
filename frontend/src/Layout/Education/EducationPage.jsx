@@ -2,8 +2,8 @@ import { useLang } from "../../context/LanguageContext";
 import { GraduationCap, Star, Mic, BookOpen, Award, ExternalLink } from "lucide-react";
 
 const schools = [
-  { mr_name: "जिल्हा परिषद प्राथमिक शाळा धामणेर", en_name: "ZP Primary School Dhamner", mr_medium: "मराठी माध्यम", en_medium: "Marathi Medium", students: 320, mr_classes: "इ. १ ते ७", en_classes: "Std 1 to 7" },
-  { mr_name: "विद्यानिकेतन माध्यमिक शाळा", en_name: "Vidyaniketan Secondary School", mr_medium: "मराठी माध्यम", en_medium: "Marathi Medium", students: 580, mr_classes: "इ. ८ ते १२", en_classes: "Std 8 to 12" },
+  { mr_name: "जिल्हा परिषद प्राथमिक शाळा धामणेर", en_name: "ZP Primary School Dhamner", mr_medium: "मराठी माध्यम", en_medium: "Marathi Medium", students: 58, mr_classes: "इ. १ ते ४", en_classes: "Std 1 to 4" },
+  { mr_name: "कर्मवीर भाऊराव पाटील विद्यालय", en_name: "Karmaveer Bhaurao Patil Vidyalaya", mr_medium: "मराठी माध्यम", en_medium: "Marathi Medium", students: 55, mr_classes: "इ. ५ ते १०", en_classes: "Std 5 to 10" },
 ];
 
 const scholarships = [
@@ -13,13 +13,8 @@ const scholarships = [
 ];
 
 const studentOfMonth = [
-  { mr_name: "प्रिया जाधव", en_name: "Priya Jadhav", mr_ach: "राज्यस्तरीय विज्ञान स्पर्धेत प्रथम पुरस्कार", en_ach: "1st Prize in State Science Competition", class: "10th", img: "🎖️" },
-  { mr_name: "अर्जुन शिंदे", en_name: "Arjun Shinde", mr_ach: "जिल्हास्तरीय क्रीडा स्पर्धेत सुवर्णपदक", en_ach: "Gold Medal in District Sports", class: "8th", img: "🥇" },
-];
-
-const youthSpeak = [
-  { mr_title: "डिजिटल शेती: माझा अनुभव", en_title: "Digital Farming: My Experience", author_mr: "राहुल पाटील", author_en: "Rahul Patil", emoji: "🌱" },
-  { mr_title: "गावासाठी काय करता येईल?", en_title: "What Can We Do for Our Village?", author_mr: "अनिता माने", author_en: "Anita Mane", emoji: "💡" },
+  { mr_name: "सिद्धेश राजेंद्र शिरसागर", en_name: "Siddhesh Rajendra Shirsagar", percent: "94%", class: "10th", img: "🎖️" },
+  { mr_name: "श्रेया नामदेव शिरसागर", en_name: "Shreya Namdev Shirsagar", percent: "88%", class: "12th", img: "🥇" },
 ];
 
 export default function EducationPage() {
@@ -59,7 +54,7 @@ export default function EducationPage() {
 
         {/* Student of the Month */}
         <div>
-          <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2"><Star className="text-yellow-500" />{lang === "mr" ? "महिन्याचे यशस्वी विद्यार्थी" : "Student of the Month"}</h2>
+          <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2"><Star className="text-yellow-500" />{lang === "mr" ? "यशस्वी विद्यार्थी" : "Successful Students"}</h2>
           <div className="grid md:grid-cols-2 gap-5">
             {studentOfMonth.map((s, i) => (
               <div key={i} className="bg-gradient-to-br from-yellow-50 to-amber-50 border border-amber-200 rounded-2xl p-6 flex items-center gap-5 hover:shadow-lg transition-shadow">
@@ -67,7 +62,7 @@ export default function EducationPage() {
                 <div>
                   <p className="font-bold text-xl text-gray-800">{lang === "mr" ? s.mr_name : s.en_name}</p>
                   <p className="text-sm text-amber-700 font-semibold mb-1">{lang === "mr" ? "इ." : "Std"} {s.class}</p>
-                  <p className="text-sm text-gray-600">{lang === "mr" ? s.mr_ach : s.en_ach}</p>
+                  <p className="text-sm text-gray-600 font-bold">{lang === "mr" ? "टक्केवारी:" : "Percentage:"} {s.percent}</p>
                 </div>
               </div>
             ))}
@@ -89,25 +84,6 @@ export default function EducationPage() {
                 </a>
               </div>
             ))}
-          </div>
-        </div>
-
-        {/* Youth Speak */}
-        <div>
-          <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2"><Mic className="text-pink-500" />{lang === "mr" ? "युवा आवाज" : "Youth Speak"}</h2>
-          <div className="grid md:grid-cols-2 gap-5">
-            {youthSpeak.map((y, i) => (
-              <div key={i} className="bg-gradient-to-br from-pink-50 to-rose-50 border border-pink-200 rounded-2xl p-5 hover:shadow-lg transition-shadow cursor-pointer">
-                <span className="text-3xl mb-3 block">{y.emoji}</span>
-                <h3 className="font-bold text-gray-800 mb-1">{lang === "mr" ? y.mr_title : y.en_title}</h3>
-                <p className="text-sm text-pink-600 font-semibold">— {lang === "mr" ? y.author_mr : y.author_en}</p>
-              </div>
-            ))}
-          </div>
-          <div className="mt-4 text-center">
-            <button className="bg-pink-600 hover:bg-pink-700 text-white px-6 py-3 rounded-xl font-semibold transition-colors">
-              {lang === "mr" ? "+ आपला अनुभव शेअर करा" : "+ Share Your Experience"}
-            </button>
           </div>
         </div>
 

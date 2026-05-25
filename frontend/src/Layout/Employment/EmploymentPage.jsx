@@ -3,18 +3,16 @@ import { useLang } from "../../context/LanguageContext";
 import { Briefcase, Search, ExternalLink, Star } from "lucide-react";
 
 const talentDirectory = [
-  { mr_name: "रामचंद्र पाटील", en_name: "Ramchandra Patil", mr_skill: "इलेक्ट्रिशियन", en_skill: "Electrician", phone: "98765-43210", experience: 10 },
-  { mr_name: "सुनीता जाधव", en_name: "Sunita Jadhav", mr_skill: "शिंपी (दर्जी)", en_skill: "Tailor", phone: "87654-32109", experience: 8 },
-  { mr_name: "प्रकाश शिंदे", en_name: "Prakash Shinde", mr_skill: "सुतार", en_skill: "Carpenter", phone: "76543-21098", experience: 15 },
-  { mr_name: "मनीषा कदम", en_name: "Manisha Kadam", mr_skill: "सौंदर्य तज्ञ", en_skill: "Beauty Specialist", phone: "65432-10987", experience: 5 },
-  { mr_name: "संजय माने", en_name: "Sanjay Mane", mr_skill: "प्लंबर", en_skill: "Plumber", phone: "54321-09876", experience: 12 },
-  { mr_name: "विमल पवार", en_name: "Vimal Pawar", mr_skill: "वेल्डर", en_skill: "Welder", phone: "43210-98765", experience: 7 },
+  { mr_name: "संतोष रोकडे", en_name: "Santosh Rokade", mr_skill: "इलेक्ट्रिशन", en_skill: "Electrician", phone: "9665446965", experience: 10 },
+  { mr_name: "संदीप कणसे", en_name: "Sandeep Kanse", mr_skill: "शिंपी (दर्जी)", en_skill: "Tailor", phone: "7219499210", experience: 8 },
+  { mr_name: "दत्तात्रय सुतार", en_name: "Dattatray Sutar", mr_skill: "सुतार", en_skill: "Carpenter", phone: "9766573828", experience: 15 },
+  { mr_name: "रेश्मा देशमुख", en_name: "Reshma Deshmukh", mr_skill: "सौंदर्य तज्ञ", en_skill: "Beauty Specialist", phone: "7387962399", experience: 5 },
+  { mr_name: "भरत पवार", en_name: "Bharat Pawar", mr_skill: "प्लंबर", en_skill: "Plumber", phone: "9766054079", experience: 12 },
+  { mr_name: "सचिन माने", en_name: "Sachin Mane", mr_skill: "वेल्डर", en_skill: "Welder", phone: "7709616401", experience: 7 },
 ];
 
 const jobs = [
-  { mr_title: "ग्रामपंचायत डेटा एंट्री ऑपरेटर", en_title: "GP Data Entry Operator", mr_org: "यशवंत ग्रामपंचायत", en_org: "Yashwant Gram Panchayat", deadline: "2025-06-30", mr_type: "शासकीय", en_type: "Government" },
-  { mr_title: "आशा कार्यकर्त्या", en_title: "ASHA Worker", mr_org: "प्राथमिक आरोग्य केंद्र", en_org: "Primary Health Centre", deadline: "2025-06-15", mr_type: "आरोग्य", en_type: "Health" },
-  { mr_title: "स्वयंसहायता गट प्रशिक्षण", en_title: "Self Help Group Training", mr_org: "महाराष्ट्र SHG प्रकल्प", en_org: "Maharashtra SHG Project", deadline: "2025-07-01", mr_type: "SHG", en_type: "SHG" },
+  { mr_title: "स्वयंसहायता गट प्रशिक्षण", en_title: "Self Help Group Training", mr_org: "महाराष्ट्र SHG प्रकल्प", en_org: "Maharashtra SHG Project", mr_type: "SHG", en_type: "SHG" },
 ];
 
 const portals = [
@@ -50,9 +48,11 @@ export default function EmploymentPage() {
                 <span className="inline-block text-xs bg-teal-100 text-teal-700 px-2 py-0.5 rounded-full font-bold mb-2">{lang === "mr" ? j.mr_type : j.en_type}</span>
                 <h3 className="font-bold text-gray-800 mb-1">{lang === "mr" ? j.mr_title : j.en_title}</h3>
                 <p className="text-sm text-gray-500 mb-3">{lang === "mr" ? j.mr_org : j.en_org}</p>
-                <div className="flex items-center justify-between text-xs text-gray-400">
-                  <span>{lang === "mr" ? "अंतिम तारीख:" : "Deadline:"} {new Date(j.deadline).toLocaleDateString(lang === "mr" ? "mr-IN" : "en-IN", { day: "numeric", month: "short", year: "numeric" })}</span>
-                </div>
+                {j.deadline && (
+                  <div className="flex items-center justify-between text-xs text-gray-400">
+                    <span>{lang === "mr" ? "अंतिम तारीख:" : "Deadline:"} {new Date(j.deadline).toLocaleDateString(lang === "mr" ? "mr-IN" : "en-IN", { day: "numeric", month: "short", year: "numeric" })}</span>
+                  </div>
+                )}
                 <button className="mt-3 w-full bg-teal-600 hover:bg-teal-700 text-white text-sm py-2 rounded-lg transition-colors font-semibold">
                   {lang === "mr" ? "अर्ज करा" : "Apply Now"}
                 </button>

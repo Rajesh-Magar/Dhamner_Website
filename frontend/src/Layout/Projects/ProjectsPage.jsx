@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useLang } from "../../context/LanguageContext";
-import { Hammer, CheckCircle2, Clock, Lightbulb, IndianRupee, ArrowRight } from "lucide-react";
+import { Hammer, CheckCircle2, Clock, Lightbulb, IndianRupee, ArrowRight, Image, BookOpen } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const projects = [
   {
@@ -9,10 +10,10 @@ const projects = [
     en_title: "Gram Panchayat Office Renovation",
     mr_desc: "ग्रामपंचायत कार्यालयाचे संपूर्ण नूतनीकरण करण्यात आले. डिजिटल सेवा केंद्र स्थापन केले.",
     en_desc: "Complete renovation of the Gram Panchayat office. A digital service center was established.",
-    cost: "₹12,50,000",
+    cost: "₹25,00,000",
     year: "2023-24",
     before: "🏚️", after: "🏢",
-    impact_mr: "५०० नागरिकांना लाभ", impact_en: "500 citizens benefited",
+    impact_mr: "2722 नागरिकांना लाभ", impact_en: "500 citizens benefited",
   },
   {
     status: "completed",
@@ -21,9 +22,9 @@ const projects = [
     mr_desc: "गावातील पिण्याच्या पाण्याच्या टाकीचे बांधकाम पूर्ण झाले. सर्व घरांना नळ जोडणी.",
     en_desc: "Construction of drinking water tank completed. Tap connections provided to all households.",
     cost: "₹28,00,000",
-    year: "2023-24",
+    year: "2021-22",
     before: "🚶", after: "🚰",
-    impact_mr: "१,१२० घरे लाभार्थी", impact_en: "1,120 households benefited",
+    impact_mr: "600 घरे लाभार्थी", impact_en: "1,120 households benefited",
   },
   {
     status: "completed",
@@ -31,8 +32,8 @@ const projects = [
     en_title: "Farm Roads",
     mr_desc: "गावातील सर्व पाणंद रस्ते अतिक्रमणमुक्त करून खुले करण्यात आले.",
     en_desc: "All rural roads in the village have been cleared of encroachments and opened.",
-    cost: "₹10,00,000",
-    year: "2023-24",
+    cost: "₹2,20,000",
+    year: "2025-26",
     before: "🚧", after: "🛣️",
     impact_mr: "शेतकऱ्यांची सोय", impact_en: "Convenience for farmers",
   },
@@ -42,8 +43,8 @@ const projects = [
     en_title: "Modern Roads",
     mr_desc: "सिमेंट-काँक्रीट रस्ते आणि वृक्षारोपणामुळे गावाचा विकास वेगाने झाला.",
     en_desc: "The village has developed rapidly with cement-concrete roads and tree plantation.",
-    cost: "₹50,00,000",
-    year: "2023-24",
+    cost: "₹1,48,00,000",
+    year: "2024-26",
     before: "🛤️", after: "🛣️",
     impact_mr: "गावाचा कायापालट", impact_en: "Village transformed",
   },
@@ -53,8 +54,8 @@ const projects = [
     en_title: "LED Street Lights",
     mr_desc: "गावातील सर्व रस्त्यांवर एलईडी दिवे बसवण्यात आले आहेत.",
     en_desc: "LED lights have been installed on all roads in the village.",
-    cost: "₹15,00,000",
-    year: "2023-24",
+    cost: "₹7,20,000",
+    year: "2025-26",
     before: "🌑", after: "💡",
     impact_mr: "रात्रीची सुरक्षितता", impact_en: "Night safety",
   },
@@ -64,8 +65,8 @@ const projects = [
     en_title: "Village-wide CCTV",
     mr_desc: "गावाची सुरक्षा वाढवण्यासाठी सर्वत्र CCTV कॅमेरे बसवण्यात आले आहेत.",
     en_desc: "CCTV cameras have been installed throughout the village to enhance security.",
-    cost: "₹12,00,000",
-    year: "2023-24",
+    cost: "₹4,20,000",
+    year: "2025-26",
     before: "👁️", after: "📹",
     impact_mr: "गुन्हेगारीवर नियंत्रण", impact_en: "Crime control",
   },
@@ -75,8 +76,8 @@ const projects = [
     en_title: "Village-wide Audio System",
     mr_desc: "सार्वजनिक सूचना व माहिती देण्यासाठी संपूर्ण गावात ऑडिओ सिस्टम बसवण्यात आली आहे.",
     en_desc: "An audio system has been installed throughout the village for public announcements.",
-    cost: "₹8,00,000",
-    year: "2023-24",
+    cost: "₹3,60,000",
+    year: "2025-26",
     before: "🔇", after: "📢",
     impact_mr: "जलद माहिती प्रसार", impact_en: "Fast information spread",
   },
@@ -84,10 +85,10 @@ const projects = [
     status: "completed",
     mr_title: "पाणी व जलसंधारण",
     en_title: "Water Conservation",
-    mr_desc: "वॉटर एटीएम, तलाव/विहिरी पुनरुज्जीवन, आणि वनराई व गॅबियन बंधारे बांधण्यात आले आहेत.",
-    en_desc: "Water ATM, lake/well revival, and construction of Vanrai & gabion dams.",
-    cost: "₹25,00,000",
-    year: "2023-24",
+    mr_desc: "वॉटर एटीएम शुद्ध पाणी पुरवठा",
+    en_desc: "Water ATM pure water supply.",
+    cost: "₹4,80,000",
+    year: "2025-26",
     before: "🏜️", after: "💧",
     impact_mr: "पाणीटंचाई मुक्त गाव", impact_en: "Water scarcity free village",
   },
@@ -95,9 +96,8 @@ const projects = [
     status: "completed",
     mr_title: "ऊर्जा व पर्यावरण",
     en_title: "Energy & Environment",
-    mr_desc: "शासकीय इमारती व घरांवर सोलर नेट मीटरिंग, होम कंपोस्टिंग आणि बायोगॅस प्रकल्प.",
-    en_desc: "Solar net metering on buildings/houses, home composting, and biogas projects.",
-    cost: "₹45,00,000",
+    mr_desc: "शासकीय इमारती व घरांवर सोलर नेट मीटरिंग आणि बायोगॅस प्रकल्प.",
+    en_desc: "Solar net metering on buildings/houses and biogas projects.",
     year: "2023-24",
     before: "🔌", after: "☀️",
     impact_mr: "विजेची बचत व स्वच्छता", impact_en: "Energy savings & Sanitation",
@@ -106,9 +106,8 @@ const projects = [
     status: "completed",
     mr_title: "आरोग्य व तंत्रज्ञान",
     en_title: "Health & Technology",
-    mr_desc: "आधुनिक आरोग्य केंद्र, टेलीमेडिसीन सेंटर आणि ग्रामपंचायत अँब्युलन्स सेवा.",
-    en_desc: "Modern health center, telemedicine center, and Gram Panchayat ambulance service.",
-    cost: "₹30,00,000",
+    mr_desc: "ऍम्ब्युलन्स सेवा उपलब्ध",
+    en_desc: "Ambulance service available.",
     year: "2023-24",
     before: "🤒", after: "🏥",
     impact_mr: "उत्तम आरोग्य सेवा", impact_en: "Better healthcare",
@@ -119,8 +118,8 @@ const projects = [
     en_title: "Smart & Digital Facilities",
     mr_desc: "गावात मोफत WiFi आणि GIS आधारित डिजिटल मॅपिंग प्रणाली.",
     en_desc: "Free WiFi in the village and GIS-based digital mapping system.",
-    cost: "₹15,00,000",
-    year: "2023-24",
+    cost: "₹9,00,000",
+    year: "2025-26",
     before: "📵", after: "🌐",
     impact_mr: "डिजिटल साक्षरता", impact_en: "Digital literacy",
   },
@@ -128,10 +127,10 @@ const projects = [
     status: "completed",
     mr_title: "शिक्षण व विद्यार्थी सुविधा",
     en_title: "Education & Student Facilities",
-    mr_desc: "डिजिटल शाळा, वातानुकूलित अभ्यासिका, AI लॅब आणि मोफत सायकल सेवा.",
-    en_desc: "Digital school, AC study room, AI lab, and free bicycle service.",
-    cost: "₹20,00,000",
-    year: "2023-24",
+    mr_desc: "डिजिटल शाळा आणि AI लॅब.",
+    en_desc: "Digital school and AI lab.",
+    cost: "₹7,69,000",
+    year: "2025-26",
     before: "📚", after: "🎓",
     impact_mr: "शैक्षणिक विकास", impact_en: "Educational development",
   },
@@ -141,8 +140,8 @@ const projects = [
     en_title: "Agriculture Development",
     mr_desc: "शेतकऱ्यांसाठी माती परीक्षण आणि महिला व पुरुष शेतकरी उत्पादक संस्था (FPO).",
     en_desc: "Soil testing and separate Farmer Producer Organizations (FPO) for men and women.",
-    cost: "₹10,00,000",
-    year: "2023-24",
+    cost: "₹2,90,000",
+    year: "2025-26",
     before: "🌱", after: "🌾",
     impact_mr: "शेतकऱ्यांचे सक्षमीकरण", impact_en: "Farmer empowerment",
   },
@@ -150,10 +149,10 @@ const projects = [
     status: "completed",
     mr_title: "रोजगार व उद्योग",
     en_title: "Employment & Industry",
-    mr_desc: "युवक-युवतींसाठी गारमेंट सेंटर आणि महिलांसाठी लिज्जत पापड उद्योग.",
-    en_desc: "Garment center for youth and Lijjat Papad industry for women's self-reliance.",
-    cost: "₹12,00,000",
-    year: "2023-24",
+    mr_desc: "युवक-युवतींसाठी गारमेंट सेंटर आणि महिलांसाठी लिज्जत पापड उद्योग सुरु आहे.",
+    en_desc: "Garment center for youth and Lijjat Papad industry for women's self-reliance is ongoing.",
+    cost: "₹25,00,000",
+    year: "2021-22",
     before: "🏘️", after: "💼",
     impact_mr: "रोजगार निर्मिती", impact_en: "Employment generation",
   },
@@ -163,41 +162,20 @@ const projects = [
     en_title: "Sports & Health",
     mr_desc: "इंडोर जिम, ओपन जिम आणि सुसज्ज क्रीडासंकुल उभारण्यात आले आहे.",
     en_desc: "Indoor gym, open gym, and a fully equipped sports complex have been built.",
-    cost: "₹35,00,000",
-    year: "2023-24",
+    cost: "₹6,50,000",
+    year: "2025-26",
     before: "🏃", after: "🏅",
     impact_mr: "युवकांना संधी", impact_en: "Opportunities for youth",
   },
   {
-    status: "ongoing",
-    mr_title: "मुख्य रस्त्याचे सिमेंटीकरण",
-    en_title: "Main Road Cementation",
-    mr_desc: "गावातील मुख्य रस्त्याचे सिमेंटीकरण सुरू आहे. ८०% काम पूर्ण.",
-    en_desc: "Cementation of the village main road is underway. 80% work completed.",
-    cost: "₹45,00,000",
-    year: "2024-25",
-    progress: 80,
-    impact_mr: "सर्व वार्डांना फायदा", impact_en: "All wards to benefit",
-  },
-  {
-    status: "ongoing",
-    mr_title: "सौर ऊर्जा स्ट्रीट लाइटिंग",
-    en_title: "Solar Street Lighting",
-    mr_desc: "सौर ऊर्जाचलित पथदिवे बसवण्याचे काम प्रगतीपथावर आहे.",
-    en_desc: "Installation of solar-powered street lights is in progress.",
-    cost: "₹18,50,000",
-    year: "2024-25",
-    progress: 60,
-    impact_mr: "रात्रीची सुरक्षा वाढली", impact_en: "Enhanced night safety",
-  },
-  {
+
     status: "ongoing",
     mr_title: "गटर बांधकाम",
     en_title: "Gutter Construction",
     mr_desc: "वॉर्ड क्रमांक ३ मध्ये गटर बांधकाम काम सुरू आहे.",
     en_desc: "Gutter construction work started in Ward No. 3.",
-    cost: "₹20,00,000",
-    year: "2024-25",
+    cost: "₹3,00,000",
+    year: "2025-26",
     progress: 40,
     impact_mr: "स्वच्छता व आरोग्य", impact_en: "Sanitation & Health",
   },
@@ -207,30 +185,41 @@ const projects = [
     en_title: "Water Tank (Homeless Colony)",
     mr_desc: "बेघर वसाहत मध्ये पाण्याची टाकी बांधण्याचे काम सुरू आहे.",
     en_desc: "Construction of water tank started in homeless colony.",
-    cost: "₹15,00,000",
-    year: "2024-25",
+    cost: "₹2,50,000",
+    year: "2025-26",
     progress: 30,
     impact_mr: "पाण्याची सोय", impact_en: "Water availability",
   },
+
   {
     status: "proposed",
-    mr_title: "डिजिटल ग्रंथालय",
-    en_title: "Digital Library",
-    mr_desc: "युवकांसाठी डिजिटल ग्रंथालय उभारण्याचा प्रस्ताव मंजूर झाला आहे.",
-    en_desc: "Proposal for a digital library for youth has been approved.",
-    cost: "₹8,00,000",
+    mr_title: "इतर शिल्लक रस्त्याचे काँक्रिटीकरण",
+    en_title: "Concreting of Remaining Roads",
+    mr_desc: "गावातील इतर सर्व शिल्लक राहिलेल्या रस्त्यांचे सिमेंट काँक्रिटीकरण करण्याचा प्रस्ताव आहे.",
+    en_desc: "Proposal to concretize all remaining roads in the village.",
+    cost: "₹1,50,00,000",
     year: "2025-26",
-    impact_mr: "५०० युवकांना लाभ", impact_en: "500 youth to benefit",
+    impact_mr: "सुधारित दळणवळण", impact_en: "Improved transportation",
   },
   {
     status: "proposed",
-    mr_title: "शेतकरी सेवा केंद्र",
-    en_title: "Farmer Service Center",
-    mr_desc: "शेतकऱ्यांसाठी एकात्मिक सेवा केंद्र उभारण्याचे नियोजन.",
-    en_desc: "Planning an integrated service center for farmers.",
-    cost: "₹15,00,000",
+    mr_title: "टर्फ ग्राउंड बांधणी",
+    en_title: "Turf Ground Construction",
+    mr_desc: "तरुणांच्या क्रीडा विकासासाठी गावात नवीन टर्फ ग्राउंड बांधण्याचा प्रस्ताव आहे.",
+    en_desc: "Proposal to construct a new turf ground in the village for youth sports development.",
+    cost: "₹25,00,000",
     year: "2025-26",
-    impact_mr: "३०० शेतकऱ्यांना लाभ", impact_en: "300 farmers to benefit",
+    impact_mr: "क्रीडा विकास", impact_en: "Sports development",
+  },
+  {
+    status: "proposed",
+    mr_title: "रिंग रोड बांधकाम",
+    en_title: "Ring Road Construction",
+    mr_desc: "वाहतूक कोंडी टाळण्यासाठी गावाभोवती रिंग रोड तयार करण्याचा प्रस्ताव आहे.",
+    en_desc: "Proposal to construct a ring road around the village to avoid traffic congestion.",
+    cost: "₹30,00,000",
+    year: "2025-26",
+    impact_mr: "वाहतूक सुविधा", impact_en: "Traffic convenience",
   },
 ];
 
@@ -298,7 +287,7 @@ export default function ProjectsPage() {
                   )}
                   <div className="flex items-center justify-between pt-3 border-t border-gray-100">
                     <div className="flex items-center gap-1 text-green-600 font-bold text-sm">
-                      <IndianRupee size={14} />{p.cost.replace("₹", "")}
+                      {p.cost && <><IndianRupee size={14} />{p.cost.replace("₹", "")}</>}
                     </div>
                     <span className="text-xs text-gray-400">{p.year}</span>
                   </div>
@@ -309,6 +298,24 @@ export default function ProjectsPage() {
               </div>
             );
           })}
+        </div>
+
+        {/* Action Buttons */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-12 pb-8">
+          <Link 
+            to="/gallery" 
+            className="flex items-center gap-2 px-6 py-3 bg-white border border-green-600 text-green-700 font-bold rounded-full hover:bg-green-50 transition-colors shadow-sm w-full sm:w-auto justify-center"
+          >
+            <Image className="w-5 h-5" />
+            {lang === "mr" ? "फोटो गॅलरी" : "Photo Gallery"}
+          </Link>
+          <Link 
+            to="/yashogatha" 
+            className="flex items-center gap-2 px-6 py-3 bg-green-600 text-white font-bold rounded-full hover:bg-green-700 transition-colors shadow-md w-full sm:w-auto justify-center"
+          >
+            <BookOpen className="w-5 h-5" />
+            {lang === "mr" ? "धामणेर यशोगाथा" : "Dhamner Success Story"}
+          </Link>
         </div>
       </div>
     </div>

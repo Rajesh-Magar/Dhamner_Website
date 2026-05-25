@@ -23,7 +23,7 @@ export const translations = {
     employment: "रोजगार",
     education: "शिक्षण",
     environment: "पर्यावरण",
-    newFeatures: "नवीन वैशिष्ट्ये",
+    newFeatures: "इतर वैशिष्ट्ये",
     // ─── Navbar Dropdown ─────────────────────────────────────
     aboutVillage: "आमच्याबद्दल",
     officers: "अधिकारी/पदाधिकारी",
@@ -130,7 +130,7 @@ export const translations = {
     employment: "Employment",
     education: "Education",
     environment: "Environment",
-    newFeatures: "New Features",
+    newFeatures: "Other Features",
     // ─── Navbar Dropdown ─────────────────────────────────────
     aboutVillage: "About Village",
     officers: "Officers",

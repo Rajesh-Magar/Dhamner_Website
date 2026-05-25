@@ -1,4 +1,4 @@
-import { BookOpen, Dumbbell, Trophy, Leaf, Building2, Library } from "lucide-react";
+import { HeartHandshake, Dumbbell, Trophy, Leaf, Building2, Library } from "lucide-react";
 import { useLang } from "../../context/LanguageContext";
 
 const content = {
@@ -8,7 +8,7 @@ const content = {
     facilities: [
       { icon: Trophy, title: "हिराजी अप्पाजी धामणेकर क्रीडांगण", desc: "सार्वजनिक कार्यक्रमांचे स्टेज व खेळांचे मैदान" },
       { icon: Library, title: "जागृती वाचनालय धामणेर", desc: "कादंबरी व मासिके, सर्व वर्तमानपत्रे" },
-      { icon: BookOpen, title: "कै. इंदुमती पवार गुणवत्ता विकास वर्ग", desc: "एम. पी. एस. सी. व यू. पी. एस. सी. अभ्यासासाठी लागणारी सर्व पुस्तके" },
+      { icon: HeartHandshake, title: "माणुसकीची भिंत", desc: "गरीब गरजूंना कपडे व इतर वापरलेल्या गोष्टी मोफत मिळण्याची सुविधा केंद्र" },
       { icon: Dumbbell, title: "व्यायाम शाळा धामणेर", desc: "व्यायामाचे सर्व साहित्य आहे" },
       { icon: Building2, title: "रमनलाल वाडीलाल शाह बालउद्यान", desc: "घसरगुंडी, झोपाळा" },
       { icon: Leaf, title: "मारुती नाना-नानी पार्क धामणेर", desc: "ज्येष्ठ नागरिक आणि चिमुकल्यांसाठी गावामध्ये विकसित केलेले हे नाना-नानी पार्क म्हणजे विरंगुळ्याचे एक सुंदर ठिकाण आहे." },
@@ -20,7 +20,7 @@ const content = {
     facilities: [
       { icon: Trophy, title: "Hiraji Appaji Dhamnekar Sports Ground", desc: "Stage for public events and playground for sports" },
       { icon: Library, title: "Jagruti Reading Room Dhamner", desc: "Novels, magazines and all newspapers" },
-      { icon: BookOpen, title: "Late Indumati Pawar Merit Development Class", desc: "All books required for MPSC and UPSC preparation" },
+      { icon: HeartHandshake, title: "Wall of Humanity (Manuski Chi Bhint)", desc: "A facility center to provide free clothes and other used items to the poor and needy" },
       { icon: Dumbbell, title: "Vyayam Shala Dhamner", desc: "All exercise equipment available" },
       { icon: Building2, title: "Ramanlal Vadilal Shah Children's Garden", desc: "Slides, swings for children" },
       { icon: Leaf, title: "Maruti Nana-Nani Park Dhamner", desc: "This Nana-Nani Park developed in the village for senior citizens and young children is a beautiful recreational place." },

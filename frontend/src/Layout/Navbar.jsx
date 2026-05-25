@@ -92,10 +92,8 @@ export default function Navbar() {
         { name: t.propertyTransfer, link: "/transfer" },
       ],
     },
-    { name: t.gis, link: "https://gis.grampanchayatdhamner.in/admin/login" },
-    { name: t.map, link: "/map" },
     { name: t.rti, link: "/information" },
-    { name: t.contact, link: "/help" },
+    { name: t.gis, link: "https://gis.grampanchayatdhamner.in/admin/login" },
     {
       name: t.newFeatures,
       link: "#",
@@ -109,6 +107,7 @@ export default function Navbar() {
         { name: t.environment, link: "/environment" },
       ],
     },
+    { name: t.contact, link: "/help" },
     { name: <Network size={18} />, link: "/sitemap" },
   ];
 

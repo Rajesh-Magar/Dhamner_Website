@@ -1,23 +1,81 @@
+import React, { useState, useEffect } from "react";
 import { useLang } from "../../context/LanguageContext";
 import { Banknote, PieChart, TrendingDown, TrendingUp, Info } from "lucide-react";
+import { Document, Page, pdfjs } from "react-pdf";
+import worker from "pdfjs-dist/build/pdf.worker?url";
+
+import "react-pdf/dist/Page/AnnotationLayer.css";
+import "react-pdf/dist/Page/TextLayer.css";
+
+pdfjs.GlobalWorkerOptions.workerSrc = worker;
 
 const incomeData = [
-  { mr: "मालमत्ता कर", en: "Property Tax", amount: 850000, color: "#f97316", pct: 28 },
-  { mr: "पाणी कर", en: "Water Tax", amount: 420000, color: "#3b82f6", pct: 14 },
-  { mr: "१५वा वित्त आयोग", en: "15th Finance Commission", amount: 1200000, color: "#8b5cf6", pct: 40 },
-  { mr: "राज्य अनुदान", en: "State Grant", amount: 540000, color: "#10b981", pct: 18 },
+  { mr: "मालमत्ता कर", en: "Property Tax", amount: 2640000, color: "#f97316", pct: 30 },
+  { mr: "पाणी कर", en: "Water Tax", amount: 2288000, color: "#3b82f6", pct: 26 },
+  { mr: "१५वा वित्त आयोग", en: "15th Finance Commission", amount: 2288000, color: "#8b5cf6", pct: 26 },
+  { mr: "CSR", en: "CSR", amount: 1584000, color: "#10b981", pct: 18 },
 ];
 
 const expenditureData = [
-  { mr: "रस्ते व पायाभूत", en: "Roads & Infrastructure", amount: 950000, color: "#f97316", pct: 32 },
-  { mr: "पाणी पुरवठा", en: "Water Supply", amount: 580000, color: "#3b82f6", pct: 19 },
-  { mr: "स्वच्छता", en: "Sanitation", amount: 420000, color: "#10b981", pct: 14 },
-  { mr: "शिक्षण", en: "Education", amount: 360000, color: "#8b5cf6", pct: 12 },
-  { mr: "आरोग्य", en: "Health", amount: 300000, color: "#ec4899", pct: 10 },
-  { mr: "इतर", en: "Others", amount: 390000, color: "#6b7280", pct: 13 },
+  { mr: "रस्ते व पायाभूत", en: "Roads & Infrastructure", amount: 1320000, color: "#f97316", pct: 15 },
+  { mr: "पाणी पुरवठा", en: "Water Supply", amount: 1672000, color: "#3b82f6", pct: 19 },
+  { mr: "स्वच्छता", en: "Sanitation", amount: 1232000, color: "#10b981", pct: 14 },
+  { mr: "शिक्षण", en: "Education", amount: 1056000, color: "#8b5cf6", pct: 12 },
+  { mr: "आरोग्य", en: "Health", amount: 880000, color: "#ec4899", pct: 10 },
+  { mr: "मागासवर्गीय", en: "Backward Classes", amount: 1320000, color: "#f43f5e", pct: 15 },
+  { mr: "महिला व बालकल्याण", en: "Women & Child Welfare", amount: 880000, color: "#06b6d4", pct: 10 },
+  { mr: "दिव्यांग", en: "Disabled", amount: 440000, color: "#eab308", pct: 5 },
 ];
 
+const pdfs = [
+  "/Pdfs/New Doc 05-11-2026 09.56.pdf",
+  "/Pdfs/सन २०२४ २५ जमा खर्च.pdf",
+];
+
+const pdfTitles = {
+  mr: [
+    "जमा खर्च सन २०२५/२६",
+    "जमा खर्च सन २०२४/२५",
+  ],
+  en: [
+    "Income & Expenditure 2025/26",
+    "Income & Expenditure 2024/25",
+  ],
+};
+
+function PdfViewer({ file, title, pageLabel, ofLabel }) {
+  const [numPages, setNumPages] = useState(0);
+  const [pageNumber, setPageNumber] = useState(1);
+  const pdfWidth = typeof window !== "undefined"
+    ? window.innerWidth < 640 ? window.innerWidth - 40 : window.innerWidth < 1024 ? 500 : 700
+    : 600;
+
+  return (
+    <>
+      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-green-700 mb-8 sm:mb-12 text-center mt-12">{title}</h2>
+      <div className="w-full flex flex-col items-center mb-10">
+        <div className="bg-white rounded-xl shadow-2xl p-2 sm:p-4 border border-gray-100">
+          <Document file={file} onLoadSuccess={({ numPages }) => setNumPages(numPages)}>
+            <Page pageNumber={pageNumber} width={pdfWidth} />
+          </Document>
+        </div>
+        <div className="flex items-center justify-center gap-6 mt-4">
+          <button onClick={() => setPageNumber(p => Math.max(p - 1, 1))} disabled={pageNumber <= 1} className="px-4 py-2 bg-green-700 text-white rounded-lg disabled:opacity-40 hover:bg-green-800 transition">⬅ Prev</button>
+          <div className="px-4 py-2 bg-white rounded-lg shadow font-semibold text-sm border border-gray-100">{pageLabel} {pageNumber} {ofLabel} {numPages || "--"}</div>
+          <button onClick={() => setPageNumber(p => Math.min(p + 1, numPages))} disabled={pageNumber >= numPages} className="px-4 py-2 bg-green-700 text-white rounded-lg disabled:opacity-40 hover:bg-green-800 transition">Next ➡</button>
+        </div>
+      </div>
+    </>
+  );
+}
+
 function DonutChart({ data, total, centerLabel }) {
+  const [animated, setAnimated] = useState(false);
+  useEffect(() => {
+    const timer = setTimeout(() => setAnimated(true), 100);
+    return () => clearTimeout(timer);
+  }, []);
+
   let offset = 0;
   const r = 60, cx = 80, cy = 80, strokeW = 24;
   const circ = 2 * Math.PI * r;
@@ -28,7 +86,9 @@ function DonutChart({ data, total, centerLabel }) {
         const dash = (d.pct / 100) * circ;
         const el = (
           <circle key={i} cx={cx} cy={cy} r={r} fill="none" stroke={d.color} strokeWidth={strokeW}
-            strokeDasharray={`${dash} ${circ}`} strokeDashoffset={-offset}
+            strokeDasharray={animated ? `${dash} ${circ}` : `0 ${circ}`} 
+            strokeDashoffset={-offset}
+            className="transition-all duration-1000 ease-out"
             transform={`rotate(-90 ${cx} ${cy})`} />
         );
         offset += dash;
@@ -36,7 +96,7 @@ function DonutChart({ data, total, centerLabel }) {
       })}
       <text x={cx} y={cy - 6} textAnchor="middle" fontSize="10" fill="#6b7280">{centerLabel}</text>
       <text x={cx} y={cy + 10} textAnchor="middle" fontSize="13" fontWeight="bold" fill="#1f2937">
-        ₹{(total / 100000).toFixed(1)}L
+        ₹{(total / 100000).toFixed(2)}L
       </text>
     </svg>
   );
@@ -53,7 +113,7 @@ export default function BudgetPage() {
       <div className="bg-gradient-to-r from-green-700 to-emerald-500 text-white py-16 px-6 text-center">
         <div className="flex justify-center mb-4"><div className="bg-white bg-opacity-20 p-4 rounded-full"><Banknote size={48} /></div></div>
         <h1 className="text-3xl md:text-5xl font-bold mb-3">{lang === "mr" ? "वित्त व बजेट पारदर्शकता" : "Finance & Budget Transparency"}</h1>
-        <p className="text-green-100">{lang === "mr" ? "आर्थिक वर्ष २०२४-२५" : "Financial Year 2024-25"}</p>
+        <p className="text-green-100">{lang === "mr" ? "आर्थिक वर्ष २०२५-२६" : "Financial Year 2025-26"}</p>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 py-12 space-y-10">
@@ -111,13 +171,17 @@ export default function BudgetPage() {
           </div>
         </div>
 
-        {/* Surplus */}
-        <div className="bg-green-50 border border-green-200 rounded-2xl p-6 flex items-center gap-4">
-          <Info size={24} className="text-green-600 shrink-0" />
-          <div>
-            <p className="font-bold text-green-800">{lang === "mr" ? "वार्षिक शिल्लक" : "Annual Surplus"}: ₹{((totalIncome - totalExp) / 100000).toFixed(2)}L</p>
-            <p className="text-sm text-green-600">{lang === "mr" ? "हा निधी येत्या वर्षातील विकास कामांसाठी राखीव आहे." : "This fund is reserved for next year's development works."}</p>
-          </div>
+        {/* PDFs Section */}
+        <div className="w-full flex flex-col items-center pb-12">
+          {pdfs.map((file, i) => (
+            <PdfViewer 
+              key={i} 
+              file={file} 
+              title={pdfTitles[lang]?.[i] || pdfTitles.mr[i]} 
+              pageLabel={lang === "mr" ? "पृष्ठ" : "Page"} 
+              ofLabel={lang === "mr" ? "पैकी" : "of"} 
+            />
+          ))}
         </div>
 
       </div>
