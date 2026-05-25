@@ -10,7 +10,7 @@ const getServices = (t) => [
   { title: t.lang === "en" ? "Right to Information" : "माहितीचा अधिकार", desc: t.lang === "en" ? "RTI applications and information" : "ग्रामपंचायतीशी संबंधित माहितीचा अधिकार अर्ज व माहिती", icon: Info, link: "/rti" },
   { title: t.documents, desc: t.lang === "en" ? "Various documents & online portal" : "विविध दाखले व ऑनलाईन पोर्टल", icon: LayoutDashboard, link: "/documents" },
   { title: t.health, desc: t.lang === "en" ? "Available health facilities & information" : "उपलब्ध आरोग्य सुविधा व माहिती", icon: Heart, link: "/health" },
-  { title: t.lang === "en" ? "GIS Portal" : "GIS पोर्टल", desc: t.lang === "en" ? "Geographic Information System (GIS) and village maps" : "गावाचे भौगोलिक माहिती प्रणाली (GIS) व नकाशे", icon: Globe, link: "/gis" },
+  { title: t.lang === "en" ? "GIS Portal" : "GIS पोर्टल", desc: t.lang === "en" ? "Geographic Information System (GIS) and village maps" : "गावाचे भौगोलिक माहिती प्रणाली (GIS) व नकाशे", icon: Globe, link: "https://gis.grampanchayatdhamner.in/admin/login" },
 ];
 
 const content = {
@@ -41,38 +41,44 @@ export default function Services() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {services.map((item, index) => {
             const Icon = item.icon;
-            return (
-              <Link to={item.link} key={index} className="group">
-                <div
-                  className="
-                    h-full
-                    bg-white 
-                    p-6 
-                    rounded-xl 
-                    border border-gray-100
-                    shadow-sm 
-                    hover:bg-gradient-to-br hover:from-green-700 hover:to-green-800 
-                    transition-all duration-300 hover:shadow-lg hover:-translate-y-1
-                    cursor-pointer
-                  "
-                >
-                  <div className="flex items-start gap-4">
-
-                    <div className="p-3 rounded-lg bg-green-50 text-green-700 group-hover:bg-white/20 group-hover:text-white transition-all duration-300 shrink-0">
-                      <Icon size={24} />
-                    </div>
-
-                    <div>
-                      <h3 className="text-lg font-bold text-gray-900 group-hover:text-white transition-colors duration-300 font-devanagari">
-                        {item.title}
-                      </h3>
-
-                      <p className="text-gray-500 mt-1.5 group-hover:text-green-50 transition-colors duration-300 text-sm leading-relaxed">
-                        {item.desc}
-                      </p>
-                    </div>
+            
+            const cardContent = (
+              <div
+                className="
+                  h-full
+                  bg-white 
+                  p-6 
+                  rounded-xl 
+                  border border-gray-100
+                  shadow-sm 
+                  hover:bg-gradient-to-br hover:from-green-700 hover:to-green-800 
+                  transition-all duration-300 hover:shadow-lg hover:-translate-y-1
+                  cursor-pointer
+                "
+              >
+                <div className="flex items-start gap-4">
+                  <div className="p-3 rounded-lg bg-green-50 text-green-700 group-hover:bg-white/20 group-hover:text-white transition-all duration-300 shrink-0">
+                    <Icon size={24} />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-gray-900 group-hover:text-white transition-colors duration-300 font-devanagari">
+                      {item.title}
+                    </h3>
+                    <p className="text-gray-500 mt-1.5 group-hover:text-green-50 transition-colors duration-300 text-sm leading-relaxed">
+                      {item.desc}
+                    </p>
                   </div>
                 </div>
+              </div>
+            );
+
+            return item.link.startsWith("http") ? (
+              <a href={item.link} target="_blank" rel="noopener noreferrer" key={index} className="group">
+                {cardContent}
+              </a>
+            ) : (
+              <Link to={item.link} key={index} className="group">
+                {cardContent}
               </Link>
             );
           })}
